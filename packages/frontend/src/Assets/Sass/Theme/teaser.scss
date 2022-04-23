@@ -1,0 +1,22 @@
+.section-teaser {
+  background-color: $blue-darker;
+  color: $white;
+  height: 50vh;
+  background-repeat: no-repeat;
+  background-position: 100% 15vh;
+  min-height: 250px;
+
+  @include media-breakpoint-down(sm) {
+    background-position: 200% 15vh;
+  }
+}
+
+.teaser {
+  height: 100%;
+
+  .container,
+  .container-fluid,
+  .row {
+    height: 100%;
+  }
+}

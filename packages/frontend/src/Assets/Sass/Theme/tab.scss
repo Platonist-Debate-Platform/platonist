@@ -1,0 +1,180 @@
+$tab-height: 80vh;
+
+.tab {
+  &-content {
+    height: $tab-height;
+  }
+
+  &-pane {
+    height: $tab-height;
+  }
+
+  &-section {
+    position: relative;
+    padding: 0;
+
+    &-nav {
+      width: 75%;
+      position: absolute;
+      top: 10%;
+      left: 0;
+      z-index: 60;
+      transition: width2s ease;
+
+      @include media-breakpoint-up(md) {
+        width: 45vw;
+        transition: 1s ease;
+      }
+
+      .nav {
+        &-icon {
+          font-size: calculateRem($font-size-base, $font-size-base-px, 44);
+
+          @include media-breakpoint-down(sm) {
+            font-size: calculateRem($font-size-base, $font-size-base-px, 34);
+          }
+
+          padding-right: ($grid-gutter-width * 2 - 1);
+        }
+
+        &-text {
+          overflow: hidden;
+          visibility: hidden;
+          line-height: 68px;
+          transition: 0.45s ease-out;
+
+          @include media-breakpoint-down(sm) {
+            line-height: 52px;
+          }
+
+          > .icon {
+            display: none;
+            position: absolute;
+            right: 11px;
+          }
+        }
+
+        &-item {
+          width: 95px;
+          max-height: 100px;
+          position: relative;
+          background-color: $blue-darker;
+          font-size: $font-size-lg;
+          color: $white;
+          transition: 0.45s ease-out;
+          cursor: pointer;
+
+          @include media-breakpoint-up(md) {
+            width: 240px;
+          }
+
+          @include media-breakpoint-between(md, lg) {
+            width: 150px;
+          }
+          @include media-breakpoint-down(sm) {
+            font-size: $font-size-base;
+          }
+
+          & + .nav-item {
+            margin-top: 2px;
+          }
+
+          &:hover {
+            width: 70%;
+            max-width: 70%;
+          }
+
+          &.active {
+            width: 100%;
+            max-width: 100%;
+
+            .nav-text {
+              width: 65%;
+              visibility: visible;
+            }
+          }
+        }
+
+        &-link {
+          display: flex;
+          padding-top: 16px;
+          padding-right: 0;
+          padding-bottom: 16px;
+          padding-left: $grid-gutter-width / 2;
+          transition: 0.45s ease-out;
+
+          @include media-breakpoint-up(md) {
+            padding-left: $grid-gutter-width * 4.5;
+          }
+
+          @include media-breakpoint-between(md, lg) {
+            padding-left: $grid-gutter-width * 1.5;
+          }
+
+          &:hover:not(.active),
+          &:focus:not(.active) {
+            color: $white;
+            .nav-text {
+              width: 50%;
+              visibility: visible;
+            }
+          }
+          &.active {
+            color: $white;
+            cursor: default;
+            .nav-text {
+              > .icon {
+                display: inline-block;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    &-content {
+      max-height: $tab-height;
+      overflow: hidden;
+    }
+
+    &-text {
+      width: calc(100% / 3);
+      position: absolute;
+      right: $container-padding-y;
+      bottom: calculateRem($font-size-base, $font-size-base-px, 75);
+      color: $white;
+      z-index: 60;
+
+      @include media-breakpoint-down(sm) {
+        width: 100%;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        padding: 0 $grid-gutter-width / 2;
+      }
+    }
+
+    &-background {
+      @extend .jumbotron-bg;
+
+      > img,
+      > figure,
+      > figure > img {
+        height: 100%;
+        width: 100%;
+      }
+
+      &::before {
+        display: none;
+      }
+
+      &:after {
+        background: linear-gradient(
+          -10deg,
+          #131e36 10%,
+          rgba(33, 51, 91, 0) 100%
+        );
+      }
+    }
+  }
+}

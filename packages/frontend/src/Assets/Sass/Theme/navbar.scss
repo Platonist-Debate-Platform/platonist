@@ -1,0 +1,543 @@
+.navbar {
+  font-size: calculateRem($font-size-base, $font-size-base-px, 14);
+  border-bottom: 1px solid transparent;
+  transition: $transition-base;
+  width: 100vw;
+
+  @include media-breakpoint-up(md) {
+    padding-top: calculateRem($font-size-base, $font-size-base-px, 35);
+    padding-bottom: calculateRem($font-size-base, $font-size-base-px, 27);
+
+    .scrolled & {
+      padding-top: calculateRem($font-size-base, $font-size-base-px, 15);
+      padding-bottom: calculateRem($font-size-base, $font-size-base-px, 13);
+    }
+  }
+
+  &-light {
+    color: $body-color;
+
+    .nav-link {
+      color: $body-color;
+    }
+
+    .navbar-nav {
+      .nav-item {
+        &.active,
+        &:hover,
+        &:focus {
+          color: $blue-light;
+
+          > .nav-link {
+            color: $blue-light;
+          }
+        } 
+      }
+    }
+
+    @include media-breakpoint-down(sm) {
+      &.navbar-expand-md {
+        color: $white;
+
+        .nav-link {
+          color: $white;
+        }
+      }
+    }
+  }
+
+  &-brand {
+    position: relative;
+    z-index: $zindex-fixed + 2;
+
+    > img, 
+    > figure, 
+    > figure > img {
+      max-width: calculateRem($font-size-base, $font-size-base-px, 80);
+      height: auto;
+
+      @include media-breakpoint-up(md) {
+        max-width: calculateRem($font-size-base, $font-size-base-px, 118);
+      }
+    }
+
+    &-bw {
+      .scrolled &, 
+      .navbar-regular & {
+        display: none;
+
+        @include media-breakpoint-down(sm) {
+          display: inline;
+        }
+      }
+
+      .scrolled .nav-toggled & {
+        display: inline;
+      }
+    }
+
+    &-regular {
+      .header-home &,
+      .nav-toggled & {
+        display: none;
+      }
+
+      .header-home.scrolled & {
+        display: inline;
+        @include media-breakpoint-down(sm) {
+          display: none;
+        }
+      }
+
+      .header-home.scrolled .nav-toggled & {
+        display: none;
+      }
+
+      @include media-breakpoint-down(sm) {
+        display: none;
+      }
+    }
+  }
+
+  &-light, .scrolled & {
+    background-color: $white;
+    border-bottom: 1px solid $gray-200;
+
+    @include media-breakpoint-down(sm) {
+      background-color: $blue-darker;
+      border-color: transparent;
+    }
+  }
+
+  .scrolled.hovered & {
+    border-color: transparent;
+  }
+
+  &-nav {
+    letter-spacing: 1px;
+    line-height: calculateLineHeight(14, 18);
+    font-weight: 700;
+
+    // > .nav-item {
+    //   &:hover,
+    //   &:active {} 
+    // }
+  }
+
+  &.navbar-expand-md {
+    .nav {
+      &-link { 
+        padding-left: $nav-link-padding-x;
+        padding-right: $nav-link-padding-x;
+      }
+    }
+  }
+
+  &-sandwich {
+    position: absolute;
+    top: 18px;
+    right: 15px;
+    z-index: $zindex-fixed + 1 !important;
+
+    &-toggle {
+
+      @extend .btn;
+      
+      display: block;
+      width: 26px;
+      height: 22px;
+      padding: 0;
+
+      > span {
+        display: block;
+        width: 100%;
+        height: 2px;
+        position: relative;
+        background-color: $white;
+        transition: $transition-base;
+
+        // .navbar-light &,
+        // .scrolled & {
+        //   background-color: $body-color;
+
+        //   @include media-breakpoint-down(sm) {
+        //     bac
+        //   }
+        // }
+
+        & + span {
+          margin-top: 6px;
+        }
+
+        &:nth-child(1),
+        &:nth-child(3) {
+          transform: rotate(0deg);
+          top: 0;
+          left: 0;
+        }
+
+        &:nth-child(2) {
+          opacity: 1;
+          visibility: visible;
+        }
+      }
+
+      &.active {
+        > span {
+          background-color: $white;
+
+          &:nth-child(1) {
+            transform: rotate(225deg);
+            top: 8px;
+            // left: 0;
+          }
+
+          &:nth-child(2) {
+            opacity: 0;
+            visibility: hidden;
+          }
+
+          
+          &:nth-child(3) {
+            transform: rotate(-225deg);
+            top: -8px;
+          }
+        }
+      }
+    }
+  }
+}
+
+.nav {
+  &-item {
+    position: relative;
+    transition: unset;
+
+    > a:hover,
+    > a:focus,
+    > a:active,
+    &.active > a,
+    &.show > a {
+      color: $blue-light;
+    }
+
+    &-title {
+      @include media-breakpoint-down(sm) {
+        .navbar & {
+          font-size: $font-size-lg;
+          border-bottom: 1px solid $white;
+          padding: 8px 10px;
+          opacity: 0.5;
+        }
+
+        .navbar .navbar-nav > & {
+          padding-left: 0;
+          padding-right: 0;
+        }
+  
+        .navbar .nav-sub & {
+          opacity: 1;
+        }
+
+        > a:hover,
+        > a:focus,
+        > a:active,
+        &.active > a,
+        &.show > a {
+          color: $white;
+        }
+      }
+    }
+
+    &:hover,
+    &:focus,
+    &:active {
+      .navbar & {
+        > .nav-sub {
+          @include media-breakpoint-up(md) {
+            visibility: visible;
+            z-index: $zindex-fixed;
+            opacity: 1;
+          }
+
+          @include media-breakpoint-down(sm) {
+            // &:before {
+            //   content: ' ';
+            //   display: block;
+            //   height: 1px;
+            //   width: 50%;
+            //   background-color: $blue-light;
+            //   position: absolute;
+            //   left: -60%;
+            //   top: 16px;
+            // }
+          }
+        }
+      }
+    }
+
+    @include media-breakpoint-down(sm) {
+      &:not(.nav-item-title) {
+        .navbar .nav-sub & {
+          margin-left: 70px;
+          margin-top: 27px;
+        }
+      }
+      & + .nav-item {
+        .navbar-nav > & {
+          margin-top: 35px;
+        }
+      }
+    }
+  }
+
+  &-link {
+    color: $white;
+    text-transform: uppercase;
+    transition:  unset;
+    position: relative;
+
+    > .icon:not(.icon-arrow-left) {
+      position: absolute;
+      right: 0;
+    }
+
+    > .icon:not(.icon-arrow-right) {
+      margin-right: 23px;
+    }
+
+    .scrolled & {
+      color: $body-color;
+
+      @include media-breakpoint-down(sm) {
+        color: $white;
+      }
+    }
+
+    @include media-breakpoint-down(sm) {
+      .navbar.navbar-expand-md & {
+        padding-left: 0;
+        padding-right: 0; 
+      }
+    }
+  }
+
+  &-sub {
+    
+    .navbar & {
+      position: absolute;
+      left: 0;
+      z-index: -1;  
+      padding-top: $grid-gutter-width;
+      padding-bottom: $grid-gutter-width * 3;
+      opacity: 0;
+      transition: $transition-base;
+
+      @include media-breakpoint-up(md) {
+        visibility: hidden;
+        min-width: 200%;
+        transition-property: opacity;
+        padding-top: calculateRem($font-size-base, $font-size-base-px, 40);
+      }
+
+      @include media-breakpoint-down(sm) {
+        height: 100%;
+        width: calc((100% * (100 / 3) / 100) * 2);
+        position: fixed;
+        right: -600px;
+        left: auto;
+        top: 60px;
+        padding-left: $grid-gutter-width * 2;
+        padding-right: $grid-gutter-width * 2;
+        padding-bottom: 60px;
+        z-index: 1050;
+        background-color: $blue-darker;
+        transition-property: right;
+        opacity: 1;
+        
+        @include media-breakpoint-down(xs) {
+          width: 100%;
+          right: -100%;
+          padding-right: $grid-gutter-width / 2;
+          padding-left: $grid-gutter-width / 2;
+        }
+
+        &.show {
+          // visibility: visible;
+          right: 0;
+        }
+      }
+    }
+
+    .nav-link {
+      text-transform: unset;
+      font-weight: normal;
+    }
+  }
+
+  &-footer {
+    > .nav-item {
+      width: calc(100% / 3);
+      margin-bottom: $spacer * 3;
+
+      @include media-breakpoint-down(sm) {
+        width: calc(100% / 2);
+      }
+    }
+
+    .nav-link {
+      padding-left: 0;
+      font-weight: 600;
+    }
+
+    .nav-sub {
+      display: inherit;
+
+      .nav-link {
+        font-weight: 400;
+        padding-top: 0;
+        padding-bottom: 0;
+        line-height: 1.72;
+      }
+    }
+  }
+
+  &-social {
+    font-size: calculateRem($font-size-base, $font-size-base-px, 24);
+    > .nav-item {
+      display: inline;
+
+      > .nav-link {
+        display: inline;
+      }
+    }
+  }
+
+  &-copy {
+    @include media-breakpoint-down(sm) {
+      justify-content: center;
+      padding-bottom: $grid-gutter-width / 2;
+    }
+
+    .nav-link {
+      padding: 0;
+      color: $body-color;
+      text-transform: unset;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    .nav-item {
+      & + .nav-item {
+        margin-left: calculateRem($font-size-base, $font-size-base-px, 30);
+      }
+    }
+  }
+
+  &-admin {
+    > .nav-item {
+      width: 100%;
+    }
+
+    .nav-link {
+      color: inherit;
+      text-transform: inherit;
+    }
+  }
+}
+
+.header-sub-bg {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: $white;
+  z-index: -1;
+  visibility: hidden;
+  opacity: 0;
+  transition: $transition-base;
+  height: 0px;
+  border-bottom: 1px solid transparent;
+
+  .header-home & {
+    background-color: $blue-darker;
+  }
+
+  .scrolled & {
+    background-color: $gray-200;
+    border-color: $gray-200;
+  }
+  
+  &.hovered {
+    z-index: $zindex-fixed - 10;
+    opacity: 1;
+    visibility: visible;
+  }
+} 
+
+/* Position and sizing of burger button */
+.bm {
+  &-burger {
+    &-button {
+      display: none;
+      position: fixed;
+      width: 26px;
+      height: 17px;
+      right: 15px;
+      top: 24px;
+      z-index: $zindex-fixed + 1 !important;
+      padding: 10px 5px
+    }
+
+    /* Color/shape of burger icon bars */
+    &-bars {
+      background: $white;
+
+      &-hover {
+        background: $blue-light;
+      }
+    }
+  }
+
+  &-cross {
+    display: none;
+    background: $white;
+
+    &-button {
+      height: 24px;
+      width: 24px;
+    }
+  }
+
+  &-menu-wrap {
+    position: fixed;
+    height: 100%;
+    top: 0;
+    z-index: $zindex-fixed !important;
+  }
+
+  &-menu {
+    background: $blue-darker;
+    padding: $grid-gutter-width * 3 $grid-gutter-width * 2;
+    // font-size: 1.15em;
+
+    @include media-breakpoint-down(xs) {
+      padding-right: $grid-gutter-width / 2;
+      padding-left: $grid-gutter-width / 2;
+    }
+  }
+
+  &-morph-shape {
+    fill: $blue-darker;
+  }
+
+  &-item {
+    display: inline-block;
+  }
+
+  &-overlay {
+    background: rgba(0, 0, 0, 0) !important;
+    left: 0;
+    top: 0;
+    z-index: $zindex-fixed - 1 !important;
+  }
+}

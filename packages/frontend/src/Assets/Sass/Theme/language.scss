@@ -1,0 +1,41 @@
+.dd-language {
+  float: right;
+
+  &.show > .btn-secondary.dropdown-toggle {
+    background-color: $blue-darker;
+    border: $blue-darker;
+
+    &:focus {
+      box-shadow: none;
+    }
+  }
+
+  .toggle {
+    background-color: unset;
+    border: 0px;
+
+    &:hover,
+    &:active {
+      background-color: $blue-darker;
+      border: $blue-darker;
+    }
+
+    &:focus,
+    &:active {
+      box-shadow: none;
+    }
+  }
+
+  & .show {
+    background-color: $blue-darker;
+    border: $blue-darker;
+
+    .dropdown-item {
+      color: white;
+      &:hover {
+        background-color: $blue-dark;
+        border: $blue-dark;
+      }
+    }
+  }
+}

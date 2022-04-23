@@ -1,0 +1,242 @@
+.jumbotron {
+  position: relative;
+  background-color: $blue-darker;
+
+  & + .page-content-text,
+  & + .page-content-text-lead,
+  & + .page-content-text-with-image {
+      padding-top: $section-padding-y;
+  
+    @include media-breakpoint-down(sm) {
+      padding-top: ($section-padding-y / 2);
+    };
+  }
+
+  h1, .h1,
+  h2, .h2 {
+    > small {
+      display: block;
+      font-size: $h4-font-size;
+      color: $blue;
+      text-transform: uppercase;
+      font-family: $font-family-base;
+      font-weight: $font-weight-bolder;
+    }
+    
+    @include media-breakpoint-down(md) {
+      font-size: $mobile-h1-font-size;
+
+      > small {
+        font-size: $mobile-h4-font-size;
+      }
+    }
+
+    @include media-breakpoint-down(sm) {
+      font-size: calculateRem($font-size-base, $font-size-base-px, 32);
+      
+      > small {
+        font-size: calculateRem($font-size-base, $font-size-base-px, 14)
+      }
+    }
+
+  }
+
+  .lead + .btn {
+    margin-top: $headings-margin-bottom;
+  }
+
+  &-fullscreen, 
+  &-small {
+    > div:not(.jumbotron-shade) {
+      display: flex;
+      align-items: flex-end;
+      height: 100%;
+    }
+
+    &.jumbotron-404 {
+      > div {
+        align-items: center;
+      }
+
+      .jumbotron-teaser-text {
+        margin-bottom: 0;
+
+        h1, .h1,
+        h2, .h2 {
+          font-size: 19vh;
+        }
+      }
+
+      .row > div {
+        width: 100%;
+        margin: auto;
+      }
+    }
+
+    .btn {
+      // display: none;
+    }
+
+    p {
+      margin: 0;
+    }
+  }
+
+  &-fullscreen {
+    height: 100vh;
+    min-height: calculateRem($font-size-base, $font-size-base-px, 600);
+    margin-top: -60px;
+    margin-bottom: 0;
+    padding-bottom: 0;
+    padding-top: 0;
+    background-color: $blue-darker;
+    overflow: hidden;
+
+    @include media-breakpoint-up(md) {
+      margin-top: -$navbar-height;
+    }
+  }
+
+  &-small {
+    height: 65vh;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+
+  &-inner {
+    width: 100%;
+  }
+
+  &-teaser {
+    display: flex;
+    align-items: flex-end;
+
+    &-text {
+      margin-bottom: 15.5%;
+
+      &.text-center {
+        width: 100%;
+      }
+
+      .jumbotron-small & {
+        margin-bottom: 10%;
+      }
+
+      &.text-full {
+        width: 100%;
+        margin-bottom: $grid-gutter-width * 3;
+        
+        > div {
+          align-items: center;
+        }
+      }
+    }
+  }
+
+  &-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 50;
+    opacity: 0.88;
+
+    > figure {
+      height: 100%;
+      > img {
+        min-height: 100%;
+      }
+    }
+
+    > img, 
+    > figure, 
+    > figure > img {
+      object-fit: cover;
+      object-position: top;
+    }
+
+    &:after, &:before {
+      content: '';
+      display: block;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 51;
+    }
+    
+    &:before {
+      height: 23%;
+      background: linear-gradient(180deg, rgba(19,30,54,1) 0%,rgba(0,24,59,0) 80%);
+    }
+    
+    &-left {
+      &:after {
+        background: linear-gradient(45deg, rgba(19,30,54,1) 0%,rgba(33,51,91,0) 100%);
+      }
+    }
+
+    &-center {
+      &:after {
+        background: linear-gradient(0deg, rgba(19,30,54,1) 0%,rgba(33,51,91,0) 100%);
+      }
+    }
+
+    &-right {
+      &:after {
+        background: linear-gradient(-45deg, rgba(19,30,54,1) 0%,rgba(33,51,91,0) 100%);
+      }
+    }
+    &.no-background {
+      &:after,
+      &:before {
+        opacity: 0.3;
+      }
+    }
+  }
+
+  &-content {
+    position: relative;
+    z-index: 53;
+  }
+
+  &-shade {
+    width: 120%;
+    height: 75%;
+    position: absolute;
+    z-index: 51;
+
+    @include media-breakpoint-up(md) {
+      width: 70%;
+      height: 75%;
+    }
+
+    @include media-breakpoint-up(lg) {
+      width: 60%;
+      height: 65%;
+    }
+    
+    @include media-breakpoint-up(xl) { 
+      width: 50%;
+      height: 55%;
+    }
+
+    > img {
+      position: absolute;
+      bottom: 0;
+    }
+    
+    &-left {
+      left: -1px;
+      bottom: -1px;
+    }
+
+    &-right {
+      right: -1px;
+      bottom: -1px;
+    }
+  }
+}

@@ -1,0 +1,10 @@
+.compat-object-fit {
+  width: 100%;
+  background-size: 100% auto !important;
+  background-repeat: no-repeat;
+
+  > img {
+    width: 100%;
+    opacity: 0;
+  }
+}

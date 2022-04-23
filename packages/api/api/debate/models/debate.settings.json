@@ -1,0 +1,57 @@
+{
+  "kind": "collectionType",
+  "collectionName": "debates",
+  "info": {
+    "name": "Debate",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true,
+      "minLength": 5,
+      "maxLength": 255,
+      "unique": true
+    },
+    "subTitle": {
+      "type": "string"
+    },
+    "shortDescription": {
+      "type": "text",
+      "required": true,
+      "minLength": 5
+    },
+    "articleA": {
+      "model": "article"
+    },
+    "articleB": {
+      "model": "article"
+    },
+    "page": {
+      "model": "page"
+    },
+    "comments": {
+      "via": "debate",
+      "collection": "comment"
+    },
+    "published": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    },
+    "archiveDate": {
+      "type": "datetime",
+      "required": true
+    },
+    "archived": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    }
+  }
+}

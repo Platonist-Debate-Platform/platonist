@@ -1,0 +1,15 @@
+.input-group-text {
+  &[role="button"] {
+    cursor: pointer;
+  }
+}
+
+.form-group {
+  .was-validated :invalid ~ .invalid-feedback, 
+  .was-validated :invalid ~ .invalid-tooltip, 
+  .is-invalid ~ .invalid-feedback, 
+  .is-invalid ~ .invalid-tooltip {
+    display: inline-block;
+    width: auto;
+  }
+}

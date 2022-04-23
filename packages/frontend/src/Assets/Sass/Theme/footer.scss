@@ -1,0 +1,24 @@
+.section{
+  &-footer {
+    color: $white;
+    background-color: $blue-dark;
+
+    font-size: $font-size-md;
+
+    padding-bottom: calculateRem($font-size-base, $font-size-base-px, 12);
+  }
+
+  &-copyright {
+    padding-top: calculateRem($font-size-base, $font-size-base-px, 35);
+    padding-bottom: calculateRem($font-size-base, $font-size-base-px, 37);
+    background-color: $gray-200;
+
+    font-size: $font-size-sm;
+
+    @include media-breakpoint-down(sm) {
+      .text-right {
+        text-align: center !important;
+      }
+    }
+  }
+}

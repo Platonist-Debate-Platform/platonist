@@ -1,0 +1,48 @@
+{
+  "kind": "collectionType",
+  "collectionName": "comments",
+  "info": {
+    "name": "comment",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "comment": {
+      "type": "text",
+      "maxLength": 1000,
+      "minLength": 3,
+      "required": true
+    },
+    "debate": {
+      "model": "debate",
+      "via": "comments"
+    },
+    "moderator": {
+      "plugin": "admin",
+      "model": "user"
+    },
+    "user": {
+      "plugin": "users-permissions",
+      "model": "user"
+    },
+    "parent": {
+      "model": "comment",
+      "via": "replies"
+    },
+    "replies": {
+      "collection": "comment",
+      "via": "parent"
+    },
+    "moderationComment": {
+      "type": "text"
+    },
+    "moderation": {
+      "model": "moderation",
+      "via": "comment"
+    }
+  }
+}

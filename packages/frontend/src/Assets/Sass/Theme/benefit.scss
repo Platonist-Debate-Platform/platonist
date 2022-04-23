@@ -1,0 +1,34 @@
+.section-benefit {
+  &-list {
+    background-color: $blue-darker;
+    color: $white;
+  }
+}
+
+.benefit {
+  &-list {
+    text-align: center;
+
+    &-item {
+      display: inline-block;
+      font-size: 400%;
+      opacity: 0.4;
+      text-align: center;
+      padding: $spacer * 3.5;
+      transition: 0.45s ease;
+
+      @include media-breakpoint-down(md) {
+        font-size: 300%;
+        padding: $spacer * 3 0;
+      }
+
+      &:hover {
+        opacity: 1;
+      }
+    }
+
+    &-item-text {
+      font-size: 0.325em;
+    }
+  }
+}

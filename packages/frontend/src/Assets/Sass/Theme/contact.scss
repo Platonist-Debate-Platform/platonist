@@ -1,0 +1,60 @@
+.section-contact {
+  color: $white;
+  background-color: $blue-darker;
+  padding-bottom: 0;
+}
+
+.contact {
+  &-text {
+    width: 100%;
+    padding-bottom: calculateRem($font-size-base, $font-size-base-px, 90);
+    // padding-right: $spacer * 4.375;
+
+    @include media-breakpoint-down(sm) {
+      text-align: center;
+      padding-right: ($grid-gutter-width / 2);
+      padding-left: ($grid-gutter-width / 2);
+    }
+
+    h3, .h3 {
+      > small {
+        display: block;
+        font-size: $font-size-base;
+        color: $blue-light;
+      }
+    }
+
+    a {
+      color: $white;
+
+      &:hover, &:focus {
+        color: $blue-light;;
+      }
+    }
+  }
+
+  &-img {
+    background-color: $blue-darker;
+    height: 70vh;
+    overflow: hidden;
+
+    @include media-breakpoint-down(sm) {
+      margin-bottom: ($section-padding-y / 2);
+      padding-right: ($grid-gutter-width / 2);
+      padding-left: ($grid-gutter-width / 2);
+      height: auto;
+      overflow: initial;
+    }
+
+    > figure {
+      opacity: 0.6;
+    }
+
+    > img, 
+    > figure, 
+    > figure > img {
+      position: relative;
+      z-index: 52;
+    }
+  }
+}

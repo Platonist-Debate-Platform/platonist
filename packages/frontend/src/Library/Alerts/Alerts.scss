@@ -1,0 +1,20 @@
+.alerts-wrap {
+  position: fixed; 
+  bottom: 0.75rem ;
+  right: 0.75rem;
+  width: calc(100% / 4);
+  z-index: 1100;
+}
+
+.alert {
+  .progress {
+    height: 0.4rem;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    background-color: transparent;
+  }
+}

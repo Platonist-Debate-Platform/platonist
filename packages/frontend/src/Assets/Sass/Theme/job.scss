@@ -1,0 +1,56 @@
+.section-job{
+  &-latest {
+    background-color: $gray-200;
+  }
+}
+
+.job {
+  &-latest {
+    
+    &-item {
+     
+      & + .job-latest-item {
+        margin-top: 1px;
+      }
+    }
+
+    &-btn, &-title {
+      padding: ($grid-gutter-width / 1.5) $grid-gutter-width;
+      font-family: $headings-font-family;
+      font-size: $font-size-lg;
+      letter-spacing: 0.3;
+      background-color: $white;
+      position: relative;
+
+      > i {
+        position: absolute;
+        top: 50%;
+        right: $grid-gutter-width / 1.5;
+        margin-top: -(32px / 2);
+        text-align: right;
+        transform: rotate(0deg);
+        transition: .3s ease;;
+      }
+
+      &.active {
+        > i {
+          transform: rotate(90deg);
+        }
+      }
+    }
+
+    &-btn {
+      cursor: pointer;
+    }
+
+    &-title {
+      color: $white;
+      background-color: $blue-darker;
+    }
+
+    &-content {
+      padding: $grid-gutter-width $grid-gutter-width $grid-gutter-width * 2;
+      background-color: $white;
+    }
+  }
+}

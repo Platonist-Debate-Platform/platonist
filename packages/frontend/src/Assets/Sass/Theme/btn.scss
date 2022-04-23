@@ -1,0 +1,32 @@
+.btn {
+  letter-spacing: calculateRem($font-size-base, $font-size-base-px, 1);
+
+  &-sized {
+    min-width: calculateRem($font-size-base, $font-size-base-px, 240);
+  }
+
+  &-ghost {
+    background-color: transparent;
+    color: $white;
+    border-color: $white;
+
+    &:hover,
+    &:focus,
+    &:active {
+      color: $body-color;
+      background-color: $white;
+    }
+
+    &.btn-blue {
+      color: $body-color;
+      border-color: $body-color;
+
+      &:hover,
+      &:focus,
+      &:active {
+        color: $white;
+        background-color: $body-color;
+      }
+    }
+  }
+}

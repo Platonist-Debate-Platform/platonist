@@ -1,0 +1,8 @@
+.container-fluid,
+.navbar {
+  
+  @include media-breakpoint-up(md) {
+    padding-right: $container-padding-y;
+    padding-left: $container-padding-y;
+  }
+}

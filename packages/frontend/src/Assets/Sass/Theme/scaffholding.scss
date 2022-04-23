@@ -1,0 +1,61 @@
+body {
+  // overflow-y: scroll;
+  padding-top: 60px;
+  
+  @include media-breakpoint-up(md) {
+    padding-top: $navbar-height;
+  }
+
+  @include media-breakpoint-down(sm) {
+    font-size: $mobile-font-size-base;
+  }
+}
+
+main {
+  min-height: 100vh;
+}
+
+section {
+  padding: $section-padding-y 0;
+  overflow-y: hidden;
+
+  @include media-breakpoint-down(sm) {
+    padding: ($section-padding-y / 2) 0;
+  }
+
+  .emoji-mart-scroll &,
+  &.emoji-mart {
+    padding: 0;
+  }
+
+  &.emoji-mart {
+    width: 100% !important;
+  }
+
+  &.section-branches-relevant {
+    padding: 0;
+  }
+
+  &.section-admin {
+    padding: 0;
+    > .container-fluid {
+      padding: 0;
+      > .row {
+        margin: 0;
+        > div {
+          padding: 0;
+        }
+      }
+    }
+  }
+}
+
+figure {
+  margin: 0;
+}
+
+.mb-section {
+  @include media-breakpoint-down(sm) {
+    margin-bottom: ($section-padding-y / 2) !important;
+  }
+}

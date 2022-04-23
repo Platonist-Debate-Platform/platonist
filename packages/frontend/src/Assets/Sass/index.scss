@@ -1,0 +1,19 @@
+@import './Vendors/bootstrap.scss';
+@import 'bootstrap/scss/bootstrap';
+
+@import 'slick-carousel/slick/slick.scss';
+@import 'slick-carousel/slick/slick-theme.scss';
+
+@import 'react-datepicker/src/stylesheets/datepicker.scss';
+
+@import './Theme/index.scss';
+
+// .form-group {
+//   .was-validated :invalid ~ .invalid-feedback,
+//   .was-validated :invalid ~ .invalid-tooltip,
+//   .is-invalid ~ .invalid-feedback,
+//   .is-invalid ~ .invalid-tooltip {
+//     display: inline-block;
+//     width: auto;
+//   }
+// }

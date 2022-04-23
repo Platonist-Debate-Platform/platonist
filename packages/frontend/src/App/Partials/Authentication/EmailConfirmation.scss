@@ -1,0 +1,11 @@
+@import '../../../Assets/Sass/Vendors/bootstrap.scss';
+
+.authentication-email-confirmation {
+  width: 100%;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  padding: $grid-gutter-width / 2;
+  padding-bottom: 0;
+  z-index: $zindex-modal - 1;
+}

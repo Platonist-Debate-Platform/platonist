@@ -1,0 +1,240 @@
+.service-slider {
+  margin-bottom: $grid-gutter-width;
+
+  &-img {
+    height: 100%;
+    overflow: hidden;
+
+    &:after {
+      content: '';
+      display: block;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 51;
+      background: linear-gradient(45deg, rgba(19,30,54,0.4) 0%,rgba(19,30,54,0) 100%);
+    }
+
+    > img, 
+    > figure, 
+    > figure > img {
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+      opacity: 0.95;
+      transition: $transition-base;
+    }
+  }
+
+  &-text {
+    width: 100%;
+    position: absolute;
+    // top: calc(100% / 3 * 2);
+    bottom: 0;
+    left: 0;
+    padding: calculateRem($font-size-base, $font-size-base-px, 50);
+    color: $white;
+    z-index: 52;
+    transition: $transition-base;
+
+    > h3 {
+      margin: 0;
+    }
+
+    > p {
+      visibility: hidden;
+      height: 0.001px;
+      margin: 0;
+      transition: $transition-base;
+      overflow: hidden;
+    }
+  }
+
+  &-item {
+    display: block;
+    height: 100%;
+    position: relative;
+    margin-right: $grid-gutter-width /2;
+    margin-left: $grid-gutter-width / 2;
+    background-color: $blue-darker;
+
+
+
+    &:hover,
+    &:focus {
+      .service-slider-img {
+        > img, 
+        > figure, 
+        > figure > img {
+          opacity: 0.65;
+        }
+      }
+    }
+
+    .collapse-hover {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 52;
+
+      &-inner {
+        p {
+          margin-top: $spacer * 1.8;
+          @include media-breakpoint-up(md) {
+            width: 75%;
+          }
+        }
+      }
+
+      &-inner {
+        @extend .service-slider-text;
+      }
+    }
+  }
+
+  &-wrap {
+    overflow-x: hidden;
+    margin-bottom: $section-padding-y;
+
+    @include media-breakpoint-down(sm) {
+      margin-bottom: ($section-padding-y / 2);
+    }
+    
+    > .container-fluid {
+      padding-right: 0;
+      padding-left: 0;
+    }
+
+    @include media-breakpoint-up(sm) {
+      > .container-fluid {
+        padding-right: $container-padding-y;
+        padding-left: $container-padding-y;
+      }
+    }
+    
+    @include media-breakpoint-up(xs) {
+      > .container-fluid {
+        padding-right: $container-padding-y / 1.5;
+        padding-left: $container-padding-y / 1.5;
+      }
+    }
+  }
+}
+
+.carousel {
+  &-wrap {
+    height: 100%;
+    
+    > div {
+      overflow: visible;
+    }
+  }
+
+  &-item {
+    > div {
+      transition: .5s ease;
+      overflow: hidden;
+    }
+  }
+
+  &-slide {
+    z-index: 50;
+  }
+
+  &-prev, &-next {
+    position: absolute;
+    top: 50%;
+    z-index: 51;
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    font-size: calculateRem($font-size-base, $font-size-base-px, 50);
+    color: $white;
+    margin-top: -35px;
+    transition: $transition-base;
+
+    &:hover {
+      color: $blue-light;
+    }
+  }
+
+  &-prev {
+    left: -96px;
+  } 
+  
+  &-next {
+    right: -96px;
+  }
+}
+
+.slick {
+  &-list {
+    z-index: 50;
+    .service-slider & {
+      overflow: visible;
+    }
+  }
+  &-slide {
+    > div {
+      height: 70vh;
+    }
+  }
+
+  &-next, 
+  &-prev {
+    .slick-slider & {
+      @extend [class^="icon-"];
+      width: 50px;
+      height: 50px;
+      z-index: 55;
+      text-align: center;
+  
+      &:before {
+        margin: 0;
+        font-size: calculateRem($font-size-base, $font-size-base-px, 50);
+        opacity: 1;
+        transition: $transition-base;
+      }
+
+      &:hover {
+        &:before {
+          color: $body-color;
+        }
+      }
+    }
+  }
+  &-next {
+    right: 15px;
+
+    .slick-slider & {
+      @extend .icon-arrow-right;
+    }
+
+    @include media-breakpoint-up(xs) {
+      right: -64px;
+    }
+    @include media-breakpoint-up(sm) {
+      right: -76px;
+    }
+  }
+
+  &-prev {
+    left: 15px;
+
+    .slick-slider & {
+      @extend .icon-arrow-left;
+    }
+
+    @include media-breakpoint-up(xs) {
+      left: -64px;
+    }
+
+    @include media-breakpoint-up(sm) {
+      left: -76px;
+    }
+  }
+}

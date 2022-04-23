@@ -1,0 +1,124 @@
+@import '../../../../Assets/Sass/Vendors/bootstrap.scss';
+
+.jumbotron {
+  position: relative;
+
+  h1, .h1,
+  h2, .h2 {
+    > small {
+      display: block;
+      font-size: $h4-font-size;
+      color: $blue;
+      text-transform: uppercase;
+      font-size: 600;
+      font-family: $font-family-base;
+      font-weight: $font-weight-bolder;
+    }
+  }
+
+  .lead + .btn {
+    margin-top: $headings-margin-bottom;
+  }
+
+  &-fullscreen {
+    height: 100vh;
+    min-height: calculateRem($font-size-base, $font-size-base-px, 600);
+    margin-top: -$navbar-height;
+    margin-bottom: 0;
+    padding-bottom: 0;
+    padding-top: 0;
+    background-color: $blue-darker;
+    overflow: hidden;
+
+    > div:not(.jumbotron-shade) {
+      display: flex;
+      align-items: flex-end;
+      height: 100%;
+    }
+  }
+
+  &-inner {
+    width: 100%;
+  }
+
+  &-teaser {
+    display: flex;
+    align-items: flex-end;
+
+    &-text {
+      margin-bottom: 15.5%;
+    }
+  }
+
+  &-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 50;
+    opacity: 0.88;
+
+    > img {
+      object-fit: cover;
+      object-position: top;
+    }
+
+    &:after, &:before {
+      content: '';
+      display: block;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 51;
+    }
+
+    &:before {
+      height: 23%;
+      background: linear-gradient(180deg, rgba(19,30,54,1) 0%,rgba(0,24,59,0) 80%);
+    }
+    
+    &-left {
+      &:after {
+        background: linear-gradient(45deg, rgba(19,30,54,1) 0%,rgba(33,51,91,0) 100%);
+      }
+    }
+
+    &-center {
+      &:after {
+        background: linear-gradient(0deg, rgba(19,30,54,1) 0%,rgba(33,51,91,0) 100%);
+      }
+    }
+
+    &-right {
+      &:after {
+        background: linear-gradient(-45deg, rgba(19,30,54,1) 0%,rgba(33,51,91,0) 100%);
+      }
+    }
+
+  }
+
+  &-content {
+    position: relative;
+    z-index: 53;
+  }
+
+  &-shade {
+    width: 50%;
+    height: 55%;
+    position: absolute;
+    z-index: 51;
+    
+    &-left {
+      left: 0;
+      bottom: 0;
+    }
+
+    &-right {
+      right: 0;
+      bottom: 0;
+    }
+  }
+}

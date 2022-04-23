@@ -1,0 +1,66 @@
+
+$ampleSoft: (
+    'bold': (
+      'family': 'AmpleSoft',
+      'style': 'normal',
+      'weight': 700,
+      'type': 'bold',
+    ),
+    'extralight': (
+      'family': 'AmpleSoft',
+      'style': 'normal',
+      'weight': 200,
+      'type': 'extralight',
+    ),
+    'light': (
+      'family': 'AmpleSoft',
+      'style': 'normal',
+      'weight': 300,
+      'type': 'light',
+    ),
+    'medium': (
+      'family': 'AmpleSoft',
+      'style': 'normal',
+      'weight': 600,
+      'type': 'medium',
+    ),
+    'regular': (
+      'family': 'AmpleSoft',
+      'style': 'normal',
+      'weight': 400,
+      'type': 'regular',
+    ),
+    'thin': (
+      'family': 'AmpleSoft',
+      'style': 'normal',
+      'weight': 500,
+      'type': 'thin',
+    ),
+  );
+  
+  @mixin font-face (
+    $family,
+    $style,
+    $weight,
+    $type
+  ) {
+    @font-face {
+      font-family: $family;
+      font-style: $style;
+      font-weight: $weight;
+      font-display: swap;
+      src: local('amplesoft-#{$family}');
+      src: url('./amplesoft-#{$type}.eot#iefix') format('embedded-opentype'),
+        url('./amplesoft-#{$type}.woff2') format('woff2'),
+        url('./amplesoft-#{$type}.woff') format('woff'),
+        url('./amplesoft-#{$type}.ttf') format('truetype');
+    }
+  }
+  
+  @each $key, $item in $ampleSoft {
+    $family: map-get($item, 'family');
+    $style: map-get($item, 'style');
+    $weight: map-get($item, 'weight');
+    $type: map-get($item, 'type');
+    @include font-face($family, $style, $weight, $type);
+  }

@@ -1,0 +1,22 @@
+@function calculateRem($defaul-rem, $default-px, $desired) {
+  @return ($defaul-rem * $desired / $default-px );
+}
+
+@function calculateMobileFontSize($defaul-rem, $desired) {
+  @return ($defaul-rem * $desired / 100);
+}
+
+@function calculateLineHeight($size, $desired) {
+  @return ($desired / $size);
+}
+
+/// Remove the unit of a length
+/// @param {Number} $number - Number to remove unit from
+/// @return {Number} - Unitless number
+@function strip-unit($number) {
+  @if type-of($number) == 'number' and not unitless($number) {
+    @return $number / ($number * 0 + 1);
+  }
+
+  @return $number;
+}

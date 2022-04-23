@@ -1,0 +1,37 @@
+{
+  "name": "platonist",
+  "packageManager": "yarn@3.2.0",
+  "workspaces": [
+    "packages/*"
+  ],
+  "author": {
+    "name": "Daniel Pfisterer",
+    "email": "info@daniel-pfisterer.de"
+  },
+  "maintainers": [
+    {
+      "name": "Vu Minh Le",
+      "email": "m.le@globalct.com"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Platonist-Debate-Platform/platonist.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Platonist-Debate-Platform/platonist/issues"
+  },
+  "prettier": {
+    "printWidth": 80,
+    "tabWidth": 2,
+    "singleQuote": true,
+    "trailingComma": "all",
+    "semi": true,
+    "arrowParents": "avoid",
+    "endOfLine": "auto"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "engineStrict": true
+}

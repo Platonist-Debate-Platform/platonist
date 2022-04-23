@@ -1,0 +1,48 @@
+.branches {
+  &-item {
+
+    &:last-child {
+      @include media-breakpoint-down(sm) {
+        margin-bottom: $section-padding-y / 2;
+      }
+    }
+
+    &-text {
+      @include media-breakpoint-up(md) {
+        padding: 0 calculateRem($font-size-base, $font-size-base-px, 70) calculateRem($font-size-base, $font-size-base-px, 90);
+      }
+    }
+
+    &-img {
+      background-color: $blue-darker;
+      height: 75vh;
+      max-height: 75vh;
+      overflow: hidden;
+
+      @include media-breakpoint-down(sm) {
+        margin: $section-padding-y / 2 0;
+      }
+
+      > figure {
+        opacity: 0.6;
+      }
+
+      > img, 
+      > figure, 
+      > figure > img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+        min-height: 100%;
+      }
+    }
+  }
+
+  &-relevant {
+    &-header {
+      padding-top: $section-padding-y;
+      background-color: $blue-darker;
+      color: $white;
+    }
+  }
+}
