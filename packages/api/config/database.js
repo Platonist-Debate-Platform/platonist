@@ -4,8 +4,13 @@ module.exports = ({ env }) => ({
     default: {
       connector: 'bookshelf',
       settings: {
-        client: 'sqlite',
-        filename: env('DATABASE_FILENAME', '.tmp/data.db'),
+        client: 'mysql',
+        host: '0.0.0.0',
+        port: 3306,
+        username: 'root',
+        password: 'password',
+        database: 'platonist_staging',
+        charset: 'utf8mb4',
       },
       options: {
         useNullAsDefault: true,

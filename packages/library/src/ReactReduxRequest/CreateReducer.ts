@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 /* eslint-disable default-param-last */
 
 import { isArray, merge, unionBy } from 'lodash';
@@ -79,16 +80,17 @@ export const createReducer = <
         };
 
       case createRequestActionType(RequestActionType.Receive, id):
-        const newAction = action;
+        console.log(action);
+
         const stateValue =
           state.result &&
-          (state.result as Payload & { value: object | Array<unknown> }).value;
+          (state.result as Payload & { value: object | Array<unknown> })?.value;
         const payloadValue =
-          newAction.payload &&
-          (state.result as Payload & { value: object | Array<unknown> }).value;
+          action.payload &&
+          (state.result as Payload & { value: object | Array<unknown> })?.value;
         const hasValue = !!stateValue;
 
-        let result: Object = newAction.payload || {};
+        let result: Object = action.payload || {};
 
         if (hasValue) {
           (result as Payload & { value: object | Array<unknown> }).value =
@@ -99,22 +101,22 @@ export const createReducer = <
           result =
             (!state.result && isArray(result)) || isArray(state.result)
               ? unionBy<Payload>(
-                  (newAction.payload as []) || [],
+                  (action.payload as []) || [],
                   state.result || [],
                   'id',
                 )
-              : merge(state.result || {}, newAction.payload || {});
+              : merge(state.result || {}, action.payload || {});
         }
 
-        if (newAction.meta && (newAction.meta as any).update) {
-          delete (newAction.meta as any).update;
+        if (action.meta && (action.meta as any).update) {
+          delete (action.meta as any).update;
         }
 
         return {
           ...state,
           hash: randomHash(32),
           error: undefined,
-          meta: newAction.meta as Meta,
+          meta: action.meta as Meta,
           result: result as Payload,
           status: RequestStatus.Loaded,
         };

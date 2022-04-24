@@ -76,9 +76,7 @@ export const ScrollPager: FunctionComponent<
     windowScroll,
   ]);
 
-  return useWindow ? (
-    <div ref={parentRef}>{children}</div>
-  ) : (
+  return (
     <div ref={parentRef}>
       <div ref={childRef}>{children}</div>
     </div>

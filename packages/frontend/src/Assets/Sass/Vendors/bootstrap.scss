@@ -52,9 +52,9 @@ $grays: map-merge(
   $grays
 );
 
-$blue-darker: #1f2535;
-$blue-dark: #444b51;
-$blue: #3d2831;
+$blue-darker: #25163c;
+$blue-dark: #4f2c77;
+$blue: #721e54;
 $blue-light: lighten($blue, 25%);
 $indigo: #6610f2 !default;
 $purple: #6f42c1 !default;
@@ -65,6 +65,7 @@ $yellow: #ffc107 !default;
 $green: #5db77a !default;
 $teal: #20c997 !default;
 $cyan: #17a2b8 !default;
+$body-color: #00001b;
 
 $colors: () !default;
 // stylelint-disable-next-line scss/dollar-variable-default
@@ -233,7 +234,7 @@ $body-color: $blue-darker !default;
 //
 // Style anchor elements.
 
-$link-color: theme-color('orange') !default;
+$link-color: theme-color('blue') !default;
 $link-decoration: none !default;
 $link-hover-color: darken($link-color, 15%) !default;
 $link-hover-decoration: none !default;
@@ -830,8 +831,8 @@ $navbar-dark-toggler-icon-bg: url("data:image/svg+xml,<svg xmlns='http://www.w3.
 $navbar-dark-toggler-border-color: rgba($white, 0.1) !default;
 
 $navbar-light-color: $blue-dark !default;
-$navbar-light-hover-color: $green !default;
-$navbar-light-active-color: $green !default;
+$navbar-light-hover-color: $blue !default;
+$navbar-light-active-color: $blue !default;
 $navbar-light-disabled-color: rgba($black, 0.3) !default;
 $navbar-light-toggler-icon-bg: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'><path stroke='#{$navbar-light-color}' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/></svg>") !default;
 $navbar-light-toggler-border-color: rgba($black, 0.1) !default;

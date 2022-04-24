@@ -1,17 +1,10 @@
 import { parse } from 'qs';
-import React, {
-  Dispatch,
-  FunctionComponent,
-  useCallback,
-  useEffect,
-  useState,
-} from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
 import {
   alertAction,
-  AlertActions,
   AlertTypes,
   Debate,
   GlobalState,
@@ -29,7 +22,7 @@ export interface DebateDeleteProps {
   to: string;
 }
 
-export const DebateDelete: FunctionComponent<DebateDeleteProps> = ({
+export const DebateDelete: React.FunctionComponent<DebateDeleteProps> = ({
   debate,
   ...props
 }) => {

@@ -15,7 +15,7 @@ import {
   ConnectedRouterProps,
 } from 'connected-react-router';
 import { FunctionComponent } from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import { IntlProvider } from 'react-intl';
 import { connect, Provider } from 'react-redux';
 
@@ -71,7 +71,14 @@ export const BaseApp: FunctionComponent = () => (
 );
 
 if (!isTest) {
-  ReactDOM.render(<BaseApp />, document.getElementById('root'));
+  Object.keys(window).forEach((key) => console.log(key));
+  const container = document.getElementById('root');
+  console.log(container);
+
+  if (container) {
+    const root = createRoot(container);
+    root.render(<BaseApp />);
+  }
 
   // If you want your app to work offline and load faster, you can change
   // unregister() to register() below. Note this comes with some pitfalls.

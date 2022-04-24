@@ -1,10 +1,11 @@
-import { Logo } from '@platonist/library';
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import logoBw from '../../../Assets/Images/Logo/platonist-logo-full-white.svg';
-import logoPos from '../../../Assets/Images/Logo/platonist-logo.svg';
+import { Logo } from '@platonist/library';
+
 import { useConfig } from '../../../Library';
+
+console.log(process.env);
 
 export interface NavbarBrandProps extends Logo {
   title: string;
@@ -19,6 +20,9 @@ export const NavbarBrand: React.FC<NavbarBrandProps> = ({
   const config = useConfig();
   const url = config.createApiUrl(config.api.config);
   url.pathname = (image.formats && image.formats.thumbnail.url) || '';
+
+  const logoBw = `${process.env.PUBLIC_URL}/images/logo/platonist-logo-full-white.svg`;
+  const logoPos = `${process.env.PUBLIC_URL}/images/logo/platonist-logo.svg`;
 
   return (
     <Link className="navbar-brand" to="/" title={title}>
