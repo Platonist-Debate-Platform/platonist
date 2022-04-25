@@ -73,7 +73,7 @@ set +x
 echo "";
 echo "#### STARTING THE API INSTANCE ####"
 set -x
-yarn stop:api api-"$NODE_ENV" || echo "Process was not running."
+yarn stop:api --name api-"$NODE_ENV" || echo "Process was not running."
 set +x
 set -x
 yarn serve:api --name api-"$NODE_ENV"
