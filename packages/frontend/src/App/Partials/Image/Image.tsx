@@ -3,9 +3,9 @@ import './Image.scss';
 import classNames from 'classnames';
 import React from 'react';
 
-import { Image as ImageProps } from '@platonist/library';
+import { Image as ImageProps, useConfig } from '@platonist/library';
+
 import { createSrcSet } from './Utils';
-import { useConfig } from '../../../Library';
 
 export interface ImageDefaultProps {
   className?: string;

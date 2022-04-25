@@ -77,7 +77,7 @@
     "redux-devtools-extension": "^2.13.9"
   },
   "scripts": {
-    "build": "tsc",
+    "build": "tsc --build --clean && eslint --ignore-path .gitignore --ext .ts src/ && tsc",
     "lint:fix": "npm run lint --fix",
     "lint": "eslint --ignore-path .gitignore --ext .ts src/",
     "postversion": "git push && git push --tags",
@@ -87,17 +87,5 @@
     "start": "tsc --watch",
     "version": "git add -A src",
     "watch": "nodemon --inspect --watch build ./build/index.js"
-  },
-  "prettier": {
-    "printWidth": 80,
-    "tabWidth": 2,
-    "singleQuote": true,
-    "trailingComma": "all",
-    "semi": true,
-    "arrowParents": "avoid"
-  },
-  "resolutions": {
-    "react": "18.0.0",
-    "react-dom": "18.0.0"
   }
 }

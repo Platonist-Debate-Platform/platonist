@@ -1,7 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 
-import { apiConfig, createApiUrl } from '../Config';
+import { apiConfig, createApiUrl } from '@platonist/library';
 // import { Position } from 'react-markdown';
 
 export interface MarkdownFilRendererNode {

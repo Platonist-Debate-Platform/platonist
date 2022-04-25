@@ -1,13 +1,14 @@
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
 import {
   GlobalState,
   PrivateRequestKeys,
   ReactReduxRequestDispatch,
   requestAction,
   RequestStatus,
+  useConfig,
 } from '@platonist/library';
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useConfig } from '../../../Library';
 
 import { useAuthentication } from './useAuthentication';
 

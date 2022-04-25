@@ -17,11 +17,14 @@ import {
   PublicRequestKeys,
   ReactReduxRequestDispatch,
   RequestStatus,
+  withConfig,
+  WithConfigProps,
 } from '@platonist/library';
+
+import {} from '../../../../Library';
 import { RequestSendProps, useDebates } from '../../../Hooks';
 import { ArticleItem } from '../../Article';
 import { CommentList } from '../../Comment';
-import { withConfig, WithConfigProps } from '../../../../Library';
 
 export interface DebateDetailProps extends WithConfigProps {
   [PublicRequestKeys.DebateLink]: GlobalState[PublicRequestKeys.DebateLink];

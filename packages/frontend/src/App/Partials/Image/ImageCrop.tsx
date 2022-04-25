@@ -3,8 +3,12 @@
 import React from 'react';
 import ReactCrop, { Crop } from 'react-image-crop';
 
-import { Image, randomHash } from '@platonist/library';
-import { withConfig, WithConfigProps } from '../../../Library';
+import {
+  Image,
+  randomHash,
+  withConfig,
+  WithConfigProps,
+} from '@platonist/library';
 
 export interface ImageCropProps extends WithConfigProps {
   file?: File;

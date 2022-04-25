@@ -1,13 +1,15 @@
+import React, { FunctionComponent } from 'react';
+import { connect, useDispatch } from 'react-redux';
+import { Form } from 'reactstrap';
+
 import {
   GlobalState,
   PublicRequestKeys,
   ReactReduxRequestDispatch,
   requestAction,
   RequestStatus,
+  useConfig,
 } from '@platonist/library';
-import React, { FunctionComponent } from 'react';
-import { connect, useDispatch } from 'react-redux';
-import { Form } from 'reactstrap';
 
 import {
   AutocompleteKeys,
@@ -16,7 +18,6 @@ import {
   FormInputTypes,
   FormProvider,
   FormValidationTypes,
-  useConfig,
 } from '../../../Library';
 import { Input, SubmitButton } from '../../../Library/Form/Fields';
 

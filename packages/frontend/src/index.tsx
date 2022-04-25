@@ -19,21 +19,21 @@ import { createRoot } from 'react-dom/client';
 import { IntlProvider } from 'react-intl';
 import { connect, Provider } from 'react-redux';
 
-import App from './App/App';
-import { AvailableLanguage, GlobalState } from '@platonist/library';
-import { configureStore, history } from './Library/Redux/Store';
-import { Alerts } from './Library/Alerts';
-import reportWebVitals from './reportWebVitals';
-import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import {
+  AvailableLanguage,
   ConfigProvider,
   defaultConfig,
+  GlobalState,
   isProduction,
   isStaging,
   isTest,
-} from './Library';
+} from '@platonist/library';
 
-// initGTM();
+import App from './App/App';
+import { Alerts } from './Library/Alerts';
+import { configureStore, history } from './Library/Redux/Store';
+import reportWebVitals from './reportWebVitals';
+import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 
 const store = configureStore();
 
@@ -71,9 +71,7 @@ export const BaseApp: FunctionComponent = () => (
 );
 
 if (!isTest) {
-  Object.keys(window).forEach((key) => console.log(key));
   const container = document.getElementById('root');
-  console.log(container);
 
   if (container) {
     const root = createRoot(container);

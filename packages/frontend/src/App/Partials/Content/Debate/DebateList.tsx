@@ -16,12 +16,14 @@ import {
   RequestWithPager,
   RestMethodKeys,
   ScrollPager,
+  withConfig,
+  WithConfigProps,
 } from '@platonist/library';
+
 import { useDebates, useDebateSocket } from '../../../Hooks';
 import { DebateListItem } from './DebateListItem';
 import { DebateFormEdit } from './FormEdit';
 import { DebateSettings } from './Settings';
-import { withConfig, WithConfigProps } from '../../../../Library';
 
 type DebateListType = DebateList & WithConfigProps;
 

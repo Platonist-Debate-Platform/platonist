@@ -1,6 +1,6 @@
 import { FunctionComponent, ReactNode, useState } from 'react';
 
-import { AvailableLanguage } from '@platonist/library';
+import { AvailableLanguage } from '../Localize';
 import { ConfigContext } from './Context';
 import { ConfigContextValues } from './Types';
 
@@ -15,7 +15,10 @@ export const ConfigProvider: FunctionComponent<ConfigProviderProps> = ({
 }) => {
   const [api /* setApi */] = useState(config.api);
 
-  const handleApiChange = (code: AvailableLanguage) => {};
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const handleApiChange = (code: AvailableLanguage) => {
+    //
+  };
 
   return (
     <ConfigContext.Provider

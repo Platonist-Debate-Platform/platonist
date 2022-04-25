@@ -1,5 +1,5 @@
-import {io} from 'socket.io-client';
-import { createApiUrl, defaultConfig } from '../../../Library';
+import { io } from 'socket.io-client';
+import { createApiUrl, defaultConfig } from '@platonist/library';
 
 export const createSocket = () => {
   const config = defaultConfig();

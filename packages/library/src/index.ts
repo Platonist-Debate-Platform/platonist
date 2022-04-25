@@ -1,4 +1,5 @@
 export * from './Alerts';
+export * from './Config';
 export * from './DebateLink';
 export * from './Localize';
 export * from './Models';

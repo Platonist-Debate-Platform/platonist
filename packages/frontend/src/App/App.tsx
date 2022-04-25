@@ -1,7 +1,12 @@
-import { getCurrentHomepage, RequestStatus } from '@platonist/library';
 import { FunctionComponent } from 'react';
 
-import { isDevelopment, SetScrollPosition } from '../Library';
+import {
+  getCurrentHomepage,
+  isDevelopment,
+  RequestStatus,
+} from '@platonist/library';
+
+import { SetScrollPosition } from '../Library';
 import { useHomepages } from './Hooks';
 import { Loader, NotFound } from './Partials';
 import LoaderMain from './Partials/Loader/LoaderMain';

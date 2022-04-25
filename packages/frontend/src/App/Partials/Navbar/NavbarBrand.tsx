@@ -1,11 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import { Logo } from '@platonist/library';
-
-import { useConfig } from '../../../Library';
-
-console.log(process.env);
+import { Logo, useConfig } from '@platonist/library';
 
 export interface NavbarBrandProps extends Logo {
   title: string;

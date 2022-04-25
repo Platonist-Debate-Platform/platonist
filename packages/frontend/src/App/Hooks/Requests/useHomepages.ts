@@ -7,8 +7,8 @@ import {
   ReactReduxRequestDispatch,
   requestAction,
   RequestStatus,
+  useConfig,
 } from '@platonist/library';
-import { useConfig } from '../../../Library';
 
 export const useHomepages = (update: boolean = false) => {
   const dispatch = useDispatch<ReactReduxRequestDispatch>();

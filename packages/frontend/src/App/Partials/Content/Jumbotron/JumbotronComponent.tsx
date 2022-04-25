@@ -1,20 +1,22 @@
 // import './JumbotronComponent.scss';
 import classNames from 'classnames';
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Col, Container, Jumbotron, Row } from 'reactstrap';
 
-import shadeLeft from '../../../../Assets/Images/gct_circle-shape_left.svg';
-import shadeRight from '../../../../Assets/Images/gct_circle-shape_right.svg';
 import {
+  BreakpointTypes,
   encodeLink,
   Image as ImageProps,
   Jumbotron as JumbotronProps,
   TextAlign,
+  useConfig,
 } from '@platonist/library';
+
+import shadeLeft from '../../../../Assets/Images/gct_circle-shape_left.svg';
+import shadeRight from '../../../../Assets/Images/gct_circle-shape_right.svg';
 import { useWindowSize } from '../../../Hooks';
 import { Image } from '../../Image';
-import { BreakpointTypes, useConfig } from '../../../../Library';
 
 export const JumbotronComponentContent: React.FC<JumbotronProps> = ({
   callToAction,

@@ -95,10 +95,7 @@
   "scripts": {
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
-    "build:staging": "env-cmd -f .env.staging npm run build",
-    "build:production": "env-cmd -f .env.production npm run build",
     "serve": "serve -s build -l 3000",
-    "serve:staging": "serve -s build -l 3001",
     "translate": "node translationRunner.js",
     "test": "react-app-rewired test",
     "eject": "react-scripts eject"
@@ -119,11 +116,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "prettier": {
-    "trailingComma": "all",
-    "tabWidth": 2,
-    "semi": true,
-    "singleQuote": true
   }
 }

@@ -17,7 +17,10 @@ import {
   RestMethodKeys,
   RolePermissionTypes,
   RoleState,
+  useConfig,
 } from '@platonist/library';
+
+import {} from '../../../Library';
 import {
   useComments,
   useCommentSocket,
@@ -27,7 +30,6 @@ import {
 } from '../../Hooks';
 import { CommentAdd } from './CommentAdd';
 import { CommentListItem } from './CommentListItem';
-import { useConfig } from '../../../Library';
 
 export interface CommentListProps {
   debateId: Debate['id'];

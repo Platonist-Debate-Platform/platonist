@@ -12,8 +12,8 @@ import {
   ReactReduxRequestState,
   requestAction,
   RequestStatus,
+  useConfig,
 } from '@platonist/library';
-import { useConfig } from '../../../Library';
 
 export interface UseRequestBaseProps {
   id?: number;

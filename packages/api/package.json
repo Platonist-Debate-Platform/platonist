@@ -4,16 +4,11 @@
   "version": "0.1.0",
   "description": "The platonist api",
   "scripts": {
-    "build:develop": "strapi build",
-    "build:staging": "NODE_ENV=staging ./node_modules/.bin/strapi build",
-    "build": "NODE_ENV=production ./node_modules/.bin/strapi build",
+    "build": "strapi build",
     "develop": "strapi develop",
-    "serve:staging": "NODE_ENV=staging ./node_modules/.bin/pm2 restart ./server.js --name strapi-dev",
-    "serve": "NODE_ENV=production ./node_modules/.bin/pm2 start ./server.js --name strapi-prod",
-    "start:staging": "NODE_ENV=staging ./node_modules/.bin/pm2 start ./server.js --name strapi-dev",
+    "serve": "pm2 start ./server.js --name strapi-prod",
     "start": "strapi start",
-    "stop:staging": "./node_modules/.bin/pm2 stop strapi-dev",
-    "stop": "./node_modules/.bin/pm2 stop strapi-prod",
+    "stop": "pm2 stop strapi-prod",
     "strapi": "strapi"
   },
   "dependencies": {

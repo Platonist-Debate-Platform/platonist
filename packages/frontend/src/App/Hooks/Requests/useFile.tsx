@@ -9,8 +9,8 @@ import {
   ReactReduxRequestDispatch,
   requestAction,
   RequestStatus,
+  useConfig,
 } from '@platonist/library';
-import { useConfig } from '../../../Library';
 
 export interface ProfileImageEditProps {
   from: string;

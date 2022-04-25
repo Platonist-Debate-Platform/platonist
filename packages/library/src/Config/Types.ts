@@ -1,4 +1,5 @@
-import { AvailableLanguage } from '@platonist/library';
+/* eslint-disable no-use-before-define */
+import { AvailableLanguage } from '../Localize';
 
 export interface DefaultConfigEnv {
   host: string;
@@ -24,7 +25,7 @@ export interface DefaultConfig {
   isLocalhost: boolean;
 }
 
-export interface ConfigContextValues extends DefaultConfig {}
+export type ConfigContextValues = DefaultConfig;
 
 export enum AppEnvKeys {
   Development = 'development',

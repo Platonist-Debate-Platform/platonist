@@ -1,8 +1,8 @@
+import classNames from 'classnames';
 import React, { FunctionComponent, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Col, Container, Row } from 'reactstrap';
-import classNames from 'classnames';
 
 import {
   GlobalState,
@@ -10,10 +10,11 @@ import {
   ReactReduxRequestDispatch,
   requestAction,
   RequestStatus,
+  useConfig,
 } from '@platonist/library';
+
 import { useAuthentication } from '../../Hooks';
 import { AdminRoutes } from '../Routes';
-import { useConfig } from '../../../Library';
 
 export const PageAdmin: FunctionComponent = () => {
   const config = useConfig();

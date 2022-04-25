@@ -1,8 +1,13 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 
-import { Homepage, Meta } from '@platonist/library';
-import { ApiProtocol, isDevelopment, useConfig } from '../../../Library';
+import {
+  ApiProtocol,
+  Homepage,
+  isDevelopment,
+  Meta,
+  useConfig,
+} from '@platonist/library';
 
 export interface PageMetaProps {
   homepage: Homepage;

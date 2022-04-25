@@ -15,7 +15,6 @@ if (fs.existsSync(pathToEnvFile)) {
 
 const isStaging = process.env.NODE_ENV === 'staging' ? true : false;
 
-console.log(process.env);
 module.exports = ({ env }) => ({
   host: env('HOST', '0.0.0.0'),
   port: env.int('PORT', isStaging ? 1338 : 1337),

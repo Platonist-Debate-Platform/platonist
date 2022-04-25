@@ -22,6 +22,7 @@ module.exports = {
     '@typescript-eslint/no-parameter-properties': 0,
     'consistent-return': 'off',
     'import/extensions': 'off',
+    'import/no-extraneous-dependencies': 'off',
     'import/no-unresolved': 'off',
     'import/prefer-default-export': 'off',
     'no-await-in-loop': 'off',

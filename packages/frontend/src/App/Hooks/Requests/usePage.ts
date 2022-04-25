@@ -1,14 +1,14 @@
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import {
-  ReactReduxRequestDispatch,
   GlobalState,
   PublicRequestKeys,
-  RequestStatus,
+  ReactReduxRequestDispatch,
   requestAction,
+  RequestStatus,
+  useConfig,
 } from '@platonist/library';
-import { useEffect } from 'react';
-import { useConfig } from '../../../Library';
 
 export const usePage = (
   pageId?: number,
