@@ -6,9 +6,9 @@
   "scripts": {
     "build": "strapi build",
     "develop": "strapi develop",
-    "serve": "pm2 start ./server.js --name strapi-prod",
+    "serve": "pm2 start ./server.js",
     "start": "strapi start",
-    "stop": "pm2 stop strapi-prod",
+    "stop": "pm2 stop",
     "strapi": "strapi"
   },
   "dependencies": {

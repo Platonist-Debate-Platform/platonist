@@ -95,7 +95,7 @@
   "scripts": {
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
-    "serve": "serve -s build -l 3000",
+    "serve": "serve -s build",
     "translate": "node translationRunner.js",
     "test": "react-app-rewired test",
     "eject": "react-scripts eject"
