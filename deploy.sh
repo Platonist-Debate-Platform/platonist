@@ -76,7 +76,6 @@ set -x
 yarn workspace @platonist/api run pm2 stop api-"$NODE_ENV" || echo "Process was not running."
 set +x
 set -x
-export BUILD_ID=website_api_"$NODE_ENV"
 yarn workspace @platonist/api run pm2 start ./server.js --name api-"$NODE_ENV"
 set +x
 # END # ********************************************************************* #
@@ -93,7 +92,6 @@ set +x
 echo "";
 echo "#### STARTING THE APPLICATION ####"
 set -x
-export BUILD_ID=website_frontend_"$NODE_ENV"
 yarn serve:frontend -l "$PORT" -s build & sleep 1
 echo $! > .pidfile
 set +x
