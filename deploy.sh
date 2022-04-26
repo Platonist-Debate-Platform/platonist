@@ -73,10 +73,10 @@ set +x
 echo "";
 echo "#### STARTING THE API INSTANCE ####"
 set -x
-yarn stop:api -- api-"$NODE_ENV" || echo "Process was not running."
+yarn workspace @platonist/api run pm2 stop api-"$NODE_ENV" || echo "Process was not running."
 set +x
 set -x
-yarn serve:api --name api-"$NODE_ENV"
+yarn workspace @platonist/api run pm2 start ./server.js --name api-"$NODE_ENV"
 set +x
 # END # ********************************************************************* #
 
