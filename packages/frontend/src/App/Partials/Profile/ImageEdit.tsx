@@ -8,11 +8,16 @@ import Dropzone, { DropEvent, FileRejection } from 'react-dropzone';
 import { Redirect } from 'react-router-dom';
 import { usePrevious } from 'react-use';
 import { Button } from 'reactstrap';
+import { useSelector } from 'react-redux';
 
-import { Image, RequestStatus, User } from '@platonist/library';
+import { Image, RequestStatus, User, GlobalState, Image as ImageProps,
+  PrivateRequestKeys,
+  PublicRequestKeys, } from '@platonist/library';
 import useUser from '../../Hooks/Requests/useUser';
 import { ImageCrop } from '../Image';
 import { ModalWithRoute } from '../Modal';
+import { ImageCropReader } from '../Image/ImageCropReader';
+import { userInfo } from 'os';
 
 export interface ProfileImageEditProps {
   from: string;
@@ -59,6 +64,9 @@ export const ProfileImageEdit: FunctionComponent<ProfileImageEditProps> = ({
     send,
     user: { result, status },
   } = useUser<User | FormData>();
+
+  // const { result: user, sta 
+
 
   const [file, setFile] = useState<File | undefined>(undefined);
   const [formData, setFormData] = useState<FormData | undefined>(undefined);
@@ -201,23 +209,33 @@ export const ProfileImageEdit: FunctionComponent<ProfileImageEditProps> = ({
           onDrop={handleImageDrop}
         >
           {({ getRootProps, getInputProps }) => (
-            <section className="drop-zone-container">
-              <div {...getRootProps({ className: 'drop-zone-area' })}>
-                <input {...getInputProps({ multiple: false })} />
-                <p>
-                  Drag 'n' drop your profile image here, or click to select
-                  files
-                </p>
-              </div>
-            </section>
+            <div>
+              {
+              showDropZone && <section className="drop-zone-container">
+                <div {...getRootProps({ className: 'drop-zone-area' })}>
+                  <input {...getInputProps({ multiple: false })} />
+                  <p>
+                    Drag 'n' drop your profile image here, or click to select
+                    files
+                  </p>
+                </div>
+              </section>
+              }
+            </div>
           )}
         </Dropzone>
-        <ImageCrop
+        {
+          !showDropZone && file && image && <ImageCropReader image={file} originalImage={image} handleImageCrop={handleImageCrop} />
+        }
+        {
+          // TODO: rewrite new image crop
+        }
+        {/* <ImageCrop
           file={file}
           image={image}
           onCrop={handleImageCrop}
           reset={!file}
-        />
+        /> */}
       </div>
       {shouldRedirect && <Redirect to={from} />}
     </ModalWithRoute>
