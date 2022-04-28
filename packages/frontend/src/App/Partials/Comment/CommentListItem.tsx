@@ -38,6 +38,11 @@ export interface CommentListItemProps extends Comment {
   path: string;
 }
 
+/**
+ * TODO: this needs to fix. Bug with nested comments
+ * @param param0 
+ * @returns 
+ */
 export const CommentListItem: FunctionComponent<CommentListItemProps> = ({
   canCreate,
   canEdit,
