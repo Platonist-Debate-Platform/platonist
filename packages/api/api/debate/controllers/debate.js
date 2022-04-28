@@ -210,8 +210,7 @@ module.exports = {
     const result = entities.map(entity => {
       if (entity.comments && entity.comments.length) {
         const comments = entity.comments;
-        delete entity.comments;
-        entity.comments = comments.filter(comment => comment.blocked === false);
+        entity.comments = comments.filter(comment => comment.blocked !== true);
       }
       return sanitizeEntity(entity, { model });
     });
