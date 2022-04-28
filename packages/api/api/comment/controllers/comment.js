@@ -263,7 +263,7 @@ module.exports = {
       });
     }
 
-    const [comment] = await service.find(findQuery);
+    const [comment] = await service.find({ id: findQuery.id });
 
     if (!comment) {
       return ctx.unauthorized('You can\'t update this entry');
