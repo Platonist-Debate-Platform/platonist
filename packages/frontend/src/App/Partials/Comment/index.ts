@@ -7,3 +7,4 @@ export * from './CommentModeration';
 export * from './CommentReplies';
 export * from './CommentRoute';
 export * from './DismissButton';
+export * from './TypingUsersItem';

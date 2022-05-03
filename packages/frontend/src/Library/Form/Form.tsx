@@ -6,11 +6,26 @@ import React, {
   useEffect,
 } from 'react';
 import { Form as FormElement } from 'reactstrap';
+import { Socket } from 'socket.io-client';
 import { FromKeyboardEvent } from '.';
+import { useSelector } from 'react-redux';
 
 import { FormContext } from './Context';
 import { FormResolver } from './FormResolver';
 import { FormContextValue, FormData, FormEvent } from './Types';
+import {
+  ApplicationKeys,
+  Comment,
+  CommentStatus,
+  Debate,
+  GlobalState,
+  PrivateRequestKeys,
+  PublicRequestKeys,
+  RestMethodKeys,
+  RolePermissionTypes,
+  RoleState,
+  User,
+} from '@platonist/library';
 
 export type OnContextChange<D> = (
   key: string,
@@ -26,6 +41,7 @@ export interface FormProps<Data extends Object = {}> {
   onContextChange?: <D>(key: string, data: FormContextValue<D>) => void;
   onSubmit?: <D>(event: FormEvent<D>) => void;
   onKeyDown?: <D>(event: FromKeyboardEvent<D>) => void;
+  socket?: Socket;
 }
 
 export const Form: FunctionComponent<PropsWithChildren<FormProps>> = <
@@ -45,6 +61,10 @@ export const Form: FunctionComponent<PropsWithChildren<FormProps>> = <
     onSubmit,
     onKeyDown,
   } = props;
+  const { result: user } = useSelector<
+    GlobalState,
+    GlobalState[PrivateRequestKeys.User]
+  >((state) => state.user);
 
   const context = useContext(
     FormContext as React.Context<FormContextValue<Data> | undefined>,
@@ -77,6 +97,12 @@ export const Form: FunctionComponent<PropsWithChildren<FormProps>> = <
         data: context.data,
         submitData: context.submitData,
       });
+      if (props.socket) {
+        props.socket.emit("typing", {
+          comment: context.data,
+          user: user
+        });
+      }
     }
   }, [context, onKeyDown])
 
