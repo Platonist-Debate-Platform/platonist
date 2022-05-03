@@ -25,6 +25,7 @@ import { usePermission, useRoles } from '../../Hooks';
 import { CommentItem } from './CommentItem';
 import { CommentModeration } from './CommentModeration';
 import { CommentReplies } from './CommentReplies';
+import './CommentItem.scss';
 
 export interface CommentListItemProps extends Comment {
   canCreate?: boolean;
@@ -168,7 +169,7 @@ export const CommentListItem: FunctionComponent<CommentListItemProps> = ({
   ]);
 
   return (
-    <div className="comment-list-item">
+    <div className={!props.parent ? "comment-list-item parent" : "comment-list-item"}>
       <Row>
         <Col>
           <Card>
@@ -183,25 +184,27 @@ export const CommentListItem: FunctionComponent<CommentListItemProps> = ({
               <div className="comment-list-item-settings">
                 <Row>
                   <Col>
-                    <Link
-                      to={
-                        isDetail
-                          ? `${path}/${props.id}`
-                          : (location.pathname + location.search).indexOf(
-                              location.pathname + viewReplyQuery,
-                            ) > -1
-                          ? location.pathname
-                          : location.pathname + viewReplyQuery
-                      }
-                      className="p-0 mr-3 btn btn-none btn-sm"
-                      title="Show replies"
-                    >
-                      <Badge>{props.replyCount}</Badge> Replies{' '}
-                      <i className="fa fa-chevron-right" />
-                    </Link>
+                    {
+                      !props.parent && <Link
+                        to={
+                          isDetail
+                            ? `${path}/${props.id}`
+                            : (location.pathname + location.search).indexOf(
+                                location.pathname + viewReplyQuery,
+                              ) > -1
+                            ? location.pathname
+                            : location.pathname + viewReplyQuery
+                        }
+                        className="p-0 mr-3 btn btn-none btn-sm"
+                        title="Show replies"
+                      >
+                        <Badge>{props.replyCount}</Badge> Replies{' '}
+                        <i className="fa fa-chevron-right" />
+                      </Link>
+                    }
                   </Col>
                   <Col className="text-right">
-                    {!isDisputed && canComment && (
+                    {!isDisputed && canComment && !props.parent && (
                       <Link
                         to={
                           (isDetail
