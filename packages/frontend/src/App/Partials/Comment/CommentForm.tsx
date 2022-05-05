@@ -5,6 +5,7 @@ import {
   Debate,
   PrivateRequestKeys,
   RequestStatus,
+  User,
 } from '@platonist/library';
 import React, {
   FunctionComponent,
@@ -25,7 +26,8 @@ import {
 } from '../../../Library';
 import { SubmitButton } from '../../../Library/Form/Fields';
 import { Form, FromKeyboardEvent } from '../../../Library/Form';
-import { useAuthentication, useComments } from '../../Hooks';
+import { createSocket, useAuthentication, useComments, useSocket } from '../../Hooks';
+import { TypingUsersItem } from './TypingUsersItem';
 
 const commentFormData: FormDataConfig<Partial<Comment>>[] = [
   {
@@ -49,6 +51,11 @@ export interface CommentFormProps {
   reset?: boolean;
 }
 
+export interface TypingUsers {
+  user: User;
+  comment: Comment;
+}
+
 export const CommentForm: FunctionComponent<CommentFormProps> = ({
   commentId,
   debateId,
@@ -60,6 +67,8 @@ export const CommentForm: FunctionComponent<CommentFormProps> = ({
 }) => {
   const [isAuthenticated, state] = useAuthentication();
   const [shouldReset, setShouldReset] = useState(false);
+  const [socket, setSocket] = useState(createSocket());
+  const [typingUsers, setTypingUsers] = useState<TypingUsers[]>([]);
   const {
     clear,
     send,
@@ -116,6 +125,13 @@ export const CommentForm: FunctionComponent<CommentFormProps> = ({
   );
 
   useEffect(() => {
+    socket.on("typing", (data: {typingUsers: TypingUsers[]}) => {
+      console.log(data);
+      setTypingUsers(data.typingUsers);
+    })
+  }, [typingUsers]);
+
+  useEffect(() => {
     if (
       prevStatus === RequestStatus.Updating &&
       status === RequestStatus.Loaded &&
@@ -153,7 +169,10 @@ export const CommentForm: FunctionComponent<CommentFormProps> = ({
         inputConfig={commentFormData}
         reset={shouldReset || reset}
       >
-        <Form asForm={true} onKeyDown={handleKeyDown}>
+        <TypingUsersItem
+          typingUsers={typingUsers}
+        />
+        <Form socket={socket} asForm={true} onKeyDown={handleKeyDown}>
           <div className="text-right">
             {dismissElement && <>{dismissElement}</>}
             <SubmitButton

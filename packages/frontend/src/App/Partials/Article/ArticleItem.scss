@@ -1,5 +1,9 @@
 @import '../../../Assets/Sass/Vendors/bootstrap.scss';
 
+.debate-article-container {
+  cursor: pointer;
+}
+
 .debate-article {
   &-inner {
     position: relative;

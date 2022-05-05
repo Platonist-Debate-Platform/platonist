@@ -18,6 +18,7 @@ import React, {
   useEffect,
   useState,
 } from 'react';
+import { useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { Link, match as Match, Redirect } from 'react-router-dom';
 import { Badge, Card, CardBody, Col, Row } from 'reactstrap';
@@ -25,6 +26,7 @@ import { usePermission, useRoles } from '../../Hooks';
 import { CommentItem } from './CommentItem';
 import { CommentModeration } from './CommentModeration';
 import { CommentReplies } from './CommentReplies';
+import './CommentItem.scss';
 
 export interface CommentListItemProps extends Comment {
   canCreate?: boolean;
@@ -38,6 +40,11 @@ export interface CommentListItemProps extends Comment {
   path: string;
 }
 
+/**
+ * TODO: this needs to fix. Bug with nested comments
+ * @param param0
+ * @returns
+ */
 export const CommentListItem: FunctionComponent<CommentListItemProps> = ({
   canCreate,
   canEdit,
@@ -50,6 +57,7 @@ export const CommentListItem: FunctionComponent<CommentListItemProps> = ({
   ...props
 }) => {
   const author = props.user as User;
+  const history = useHistory();
 
   const { result: user } = useSelector<
     GlobalState,
@@ -60,6 +68,8 @@ export const CommentListItem: FunctionComponent<CommentListItemProps> = ({
     GlobalState,
     GlobalState[PublicRequestKeys.Router]
   >((state) => state[PublicRequestKeys.Router]);
+
+  console.log(location, history);
 
   const editQuery =
     '?' +
@@ -140,6 +150,21 @@ export const CommentListItem: FunctionComponent<CommentListItemProps> = ({
     }
   }, [onSubmit, shouldRedirect]);
 
+  const handleReplies = () => {
+    history.push(location.pathname);
+    setTimeout(() => {
+      history.push(
+        isDetail
+          ? `${path}/${props.id}`
+          : (location.pathname + location.search).indexOf(
+              location.pathname + viewReplyQuery,
+            ) > -1
+          ? location.pathname
+          : location.pathname + viewReplyQuery,
+      );
+    }, 100);
+  };
+
   useEffect(() => {
     if (isReply) {
       return;
@@ -163,7 +188,12 @@ export const CommentListItem: FunctionComponent<CommentListItemProps> = ({
   ]);
 
   return (
-    <div className="comment-list-item">
+    <div
+      id={props.id}
+      className={
+        !props.parent ? 'comment-list-item parent' : 'comment-list-item'
+      }
+    >
       <Row>
         <Col>
           <Card>
@@ -178,25 +208,28 @@ export const CommentListItem: FunctionComponent<CommentListItemProps> = ({
               <div className="comment-list-item-settings">
                 <Row>
                   <Col>
-                    <Link
-                      to={
-                        isDetail
-                          ? `${path}/${props.id}`
-                          : (location.pathname + location.search).indexOf(
-                              location.pathname + viewReplyQuery,
-                            ) > -1
-                          ? location.pathname
-                          : location.pathname + viewReplyQuery
-                      }
-                      className="p-0 mr-3 btn btn-none btn-sm"
-                      title="Show replies"
-                    >
-                      <Badge>{props.replyCount}</Badge> Replies{' '}
-                      <i className="fa fa-chevron-right" />
-                    </Link>
+                    {!props.parent && (
+                      <div
+                        onClick={handleReplies}
+                        // to={
+                        //   isDetail
+                        //     ? `${path}/${props.id}`
+                        //     : (location.pathname + location.search).indexOf(
+                        //         location.pathname + viewReplyQuery,
+                        //       ) > -1
+                        //     ? location.pathname
+                        //     : location.pathname + viewReplyQuery
+                        // }
+                        className="p-0 mr-3 btn btn-none btn-sm"
+                        title="Show replies"
+                      >
+                        <Badge>{props.replyCount}</Badge> Replies{' '}
+                        <i className="fa fa-chevron-right" />
+                      </div>
+                    )}
                   </Col>
                   <Col className="text-right">
-                    {!isDisputed && canComment && (
+                    {!isDisputed && canComment && !props.parent && (
                       <Link
                         to={
                           (isDetail

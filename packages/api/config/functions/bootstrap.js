@@ -22,6 +22,7 @@ module.exports = () => {
     }
   });
   const clients = [];
+  const typingUsers = [];
 
   io.on('connection', function(socket){
     
@@ -37,6 +38,30 @@ module.exports = () => {
         }
       });
     });
+    socket.on("typing", (data) => {
+      // console.log(data);
+      const { user } = data;
+      if (data.comment.comment.value.length > 5) {
+        if (!typingUsers.find(u => u.user.username === user.username)) {
+          typingUsers.push(data);
+        } else {
+          const index = typingUsers.indexOf(ele => ele.user.username === user.username);
+          if (index > 0) {
+            typingUsers[index] = data;
+          }
+        }
+        io.emit("typing", {
+          typingUsers: typingUsers
+        });
+      } else {
+        
+        const index = typingUsers.indexOf(ele => ele.user.username === user.username);
+        typingUsers.splice(index, 1);
+        io.emit("typing", {
+          typingUsers: typingUsers
+        });
+      }
+    })
   });
   
   const models = [];

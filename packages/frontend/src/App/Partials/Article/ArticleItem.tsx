@@ -20,31 +20,42 @@ export const ArticleItem: FunctionComponent<Article> = ({
   image,
   provider,
   title,
+  url
 }) => {
+  /**
+   * Redirects the user to the article by opening a new tab.
+   */
+  const openArticle = () => {
+    window.open(url, "_blank");
+  }
   return (
-    <div className="debate-article">
-      <div className="shadow p-3 mb-3 bg-white rounded">
-        <div className="debate-article-inner">
-          <div className="debate-article-image">
-            {image ? (
-              <img className="img-fluid" src={image} alt={title} />
-            ) : (
-              <></>
-            )}
-          </div>
-          <div className="debate-article-icon">
-            {icon ? (
-              <img className="img-fluid" src={icon} alt={provider} />
-            ) : (
-              <></>
-            )}
-          </div>
-          <div className="debate-article-content">
-            <h4 className="mb-2">{title}</h4>
-            <p title={description}>{trimString(description)}</p>
+    <>
+      <div key={url} className="debate-article-container" onClick={openArticle}>
+        <div className="debate-article">
+        <div className="shadow p-3 mb-3 bg-white rounded">
+          <div className="debate-article-inner">
+            <div className="debate-article-image">
+              {image ? (
+                <img className="img-fluid" src={image} alt={title} />
+              ) : (
+                <></>
+              )}
+            </div>
+            <div className="debate-article-icon">
+              {icon ? (
+                <img className="img-fluid" src={icon} alt={provider} />
+              ) : (
+                <></>
+              )}
+            </div>
+            <div className="debate-article-content">
+              <h4 className="mb-2">{title}</h4>
+              <p title={description}>{trimString(description)}</p>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+      </div>
+    </>
   );
 };

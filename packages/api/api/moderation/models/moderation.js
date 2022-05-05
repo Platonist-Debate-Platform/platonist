@@ -8,9 +8,7 @@ module.exports = {
   lifecycles: {
     afterCreate: async (result) => {
       if (strapi.emitSocket && strapi.emitSocket.comment && strapi.emitSocket.comment.create) {
-        console.log(result);
         let comment = await strapi.services.comment.findOne({ id: result.comment.id });
-        comment = await strapi.services.comment.update({id: comment.id}, comment);
         strapi.emitSocket.comment.create(sanitizeEntity(comment, {model: strapi.models.comment}));
       }
     },
@@ -25,7 +23,6 @@ module.exports = {
     // afterDelete: async(result) => {
     //   if (strapi.emitSocket && strapi.emitSocket.comment.delete) {
     //     let comment = await strapi.services.comment.findOne({ id: result.comment.id });
-    //     comment = await strapi.services.comment.update({id: comment.id}, comment);
     //     strapi.emitSocket.comment.create(sanitizeEntity(comment, {model: strapi.models.comment}));
     //   }
     // }
