@@ -1,0 +1,28 @@
+.moderation-panel-parent {
+    min-height: 80vh;
+    border: 1px solid #d9d9d9;
+    border-radius: 8px;
+    overflow-y: auto;
+    background-color: #721e54;
+    .moderation-container {
+        margin: 1em;
+    }
+}
+
+.moderation-panel-participation {
+    margin-top: 1rem;
+}
+
+.moderation-reply {
+    background-color: white;
+    padding: 1rem .5rem;
+    
+}
+
+.moderation-debate-reply {
+    margin-left: .4rem;
+    background-color: white;
+    padding: .5rem;
+    border: 1px solid #d9d9d9;
+    border-radius: 8px;
+}

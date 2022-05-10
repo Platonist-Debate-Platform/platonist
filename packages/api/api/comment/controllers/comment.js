@@ -31,9 +31,9 @@ const cleanEntity = entity => {
 
   entity.replyCount = countReplies(entity);
 
-  delete entity.debate;
-  delete entity.moderator;
-  delete entity.replies;
+  // delete entity.debate;
+  // delete entity.moderator;
+  // delete entity.replies;
   
   return entity;
 };

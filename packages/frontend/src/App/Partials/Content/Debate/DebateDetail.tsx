@@ -24,7 +24,8 @@ import {
 import {} from '../../../../Library';
 import { RequestSendProps, useDebates } from '../../../Hooks';
 import { ArticleItem } from '../../Article';
-import { CommentList } from '../../Comment';
+import { CommentList, TypingUsersItem } from '../../Comment';
+import { ModerationPanel } from './ModeratationPanel';
 
 export interface DebateDetailProps extends WithConfigProps {
   [PublicRequestKeys.DebateLink]: GlobalState[PublicRequestKeys.DebateLink];
@@ -99,6 +100,9 @@ export const DebateDetailBase: FunctionComponent<DebateDetailProps> = ({
     <>
       {debate && (
         <>
+          <TypingUsersItem
+            debateId={debate.id}
+          />
           <div className="jumbotron-fullscreen jumbotron jumbotron-debate jumbotron-fluid">
             <div className="jumbotron-content">
               <Container>
@@ -126,7 +130,7 @@ export const DebateDetailBase: FunctionComponent<DebateDetailProps> = ({
             </div>
           </div>
           <section className="section section-debate section-debate-detail">
-            <Route
+            {/* <Route
               path={encodeLink(`${path}/${debate.title}/:commentId`)}
               exact={true}
               render={(props: RouteComponentProps<{ commentId?: string }>) => {
@@ -138,20 +142,26 @@ export const DebateDetailBase: FunctionComponent<DebateDetailProps> = ({
                   />
                 );
               }}
-            />
-            <Route
-              path={encodeLink(`${path}/${debate.title}`)}
-              exact={true}
-              render={(props: RouteComponentProps<{ commentId?: string }>) => {
-                return (
-                  <CommentList
-                    debateId={debate.id}
-                    match={props.match}
+            /> */}
+            <Container>
+              <Row>
+                <Col>
+                  <Route
                     path={encodeLink(`${path}/${debate.title}`)}
+                    exact={true}
+                    render={(props: RouteComponentProps<{ commentId?: string }>) => {
+                      return (
+                        <CommentList
+                          debateId={debate.id}
+                          match={props.match}
+                          path={encodeLink(`${path}/${debate.title}`)}
+                        />
+                      );
+                    }}
                   />
-                );
-              }}
-            />
+                </Col>
+              </Row>
+            </Container>
           </section>
         </>
       )}

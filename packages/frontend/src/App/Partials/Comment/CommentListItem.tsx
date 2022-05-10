@@ -69,8 +69,6 @@ export const CommentListItem: FunctionComponent<CommentListItemProps> = ({
     GlobalState[PublicRequestKeys.Router]
   >((state) => state[PublicRequestKeys.Router]);
 
-  console.log(location, history);
-
   const editQuery =
     '?' +
     stringify({
