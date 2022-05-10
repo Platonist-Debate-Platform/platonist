@@ -37,6 +37,7 @@ export const ModerationReplyItem: React.FunctionComponent<
     GlobalState[PrivateRequestKeys.User]
   >((state) => state.user);
   let { result: userComments }: any = useUserComments(props.mod);
+  const moderator: User = userComments[0].user;
 
   const reducedComments: Comment[] = userComments
     ?.filter((c: Comment) => {
@@ -88,9 +89,9 @@ export const ModerationReplyItem: React.FunctionComponent<
               {(author as User) && (
                 <>
                   <Link
-                    to={`/user/${props.mod === author?.id ? 'me' : author?.id}`}
+                    to={`/user/${props.mod === moderator?.id ? 'me' : moderator?.id}`}
                   >
-                    {props.mod === author?.id ? 'You' : <>{author?.username}</>}
+                    { props.mod === author?.id ? 'You' : <>{moderator.username}</>}
                   </Link>{' '}
                   <span>
                     replied{' '}
