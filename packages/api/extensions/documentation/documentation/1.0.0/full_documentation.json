@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "10/14/2021 10:07:58 AM"
+    "x-generation-date": "05/12/2022 12:07:44 PM"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -8137,6 +8137,7 @@
                 "type": "string",
                 "enum": [
                   "active",
+                  "pinned",
                   "blocked",
                   "disputed"
                 ]
@@ -10216,6 +10217,7 @@
             "type": "string",
             "enum": [
               "active",
+              "pinned",
               "blocked",
               "disputed"
             ]
@@ -10325,6 +10327,7 @@
             "type": "string",
             "enum": [
               "active",
+              "pinned",
               "blocked",
               "disputed"
             ]

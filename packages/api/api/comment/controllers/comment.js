@@ -58,6 +58,13 @@ const resolveReplies = async(replyParent) => {
   return resolved;
 }
 
+const resolveModerator = async(moderation) => {
+  const result = new Promise((resolve, reject) => {
+    strapi.plugins["users-permissions"].services.user.fetch({id:moderation.moderator}).then(user => resolve(user))
+  });
+  return result;
+}
+
 module.exports = {
 
   /**
@@ -169,6 +176,14 @@ module.exports = {
     // );
 
     let repliesParent = entities.filter(e => e.replies.length > 0);
+    let pinnedComments = entities.filter(e => e.moderation && e.moderation.status && e.moderation.status === "pinned");
+
+    const pinnedByModerators = pinnedComments.map(comment => resolveModerator(comment.moderation));
+    const resolvedModerators = await Promise.all(pinnedByModerators);
+
+    pinnedComments.forEach((pinned, i) => {
+      pinned.moderation.user = resolvedModerators[i];
+    });
     
     const arr = []
     repliesParent.forEach(parent => {
@@ -189,6 +204,13 @@ module.exports = {
         entities[i] = reply;
       }
     });
+
+    pinnedComments.forEach(comment => {
+      if (entities.includes(entity => entity.id === comment.id)) {
+        const i = entities.findIndex(entity => entity.id === comment.id);
+        entities[i] = comment;
+      }
+    })
 
     const sanitizedEntites = entities.map(entity => cleanAndSanitizeEntity(entity, model));
     return sanitizedEntites;

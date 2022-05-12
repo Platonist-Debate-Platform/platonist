@@ -15,6 +15,7 @@ export enum CommentStatus {
   Active = 'active',
   Blocked = 'blocked',
   Disputed = 'disputed',
+  Pinned = 'pinned',
 }
 
 export interface Comment {

@@ -1,30 +1,16 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import {
-    Article,
-    clearDebateLink,
-    Debate,
-    DebateLinkDispatch,
-    DebateList,
-    decodeLink,
-    encodeLink,
     GlobalState,
     PublicRequestKeys,
-    ReactReduxRequestDispatch,
-    RequestStatus,
-    withConfig,
-    WithConfigProps,
     PrivateRequestKeys,
     Comment,
-    User
   } from '@platonist/library';
-import { Form } from '../../../../Library';
-import { SubmitButton } from '../../../../Library/Form/Fields';
-import classNames from 'classnames';
 import { CommentForm, CommentListItem } from '../../Comment';
 import './ModerationPanel.scss'
 import { match as Match} from 'react-router';
 import { ModerationReplyItem } from './ModerationReplyItem';
+import { ModerationPinnedItem } from './ModerationPinnedItem';
 
 export interface ModerationPanelProps {
     comments?: Comment[];
@@ -36,77 +22,123 @@ export interface ModerationPanelProps {
     path: string;
 }
 
+const upliftReplyAsParent = (comment: Comment) => {
+    let elements: Comment[] = [];
+    if (comment.replies && comment.replies.length>0) {
+        comment.replies.forEach((reply) => {
+            if (reply) {
+                const ele: Comment = {
+                    ...reply,
+                    replies: [comment],
+                };
+                elements.push(ele);
+            }
+        })
+    }
+    return elements;
+}
+
 export const ModerationPanel: React.FunctionComponent<ModerationPanelProps> = (props) => {
     const {
-        comments, canEdit, debateId, isDetail, match, onSubmit, path
+        comments, debateId, match, onSubmit, path
     } = props;
-    const { result: role } = useSelector<GlobalState, GlobalState[PrivateRequestKeys.Role]>((state) => state.role)
-    const { result: debate } = useSelector<GlobalState, GlobalState[PublicRequestKeys.Debate]>((state) => state.debate)
+    const { result: role } = useSelector<GlobalState, GlobalState[PrivateRequestKeys.Role]>((state) => state.role);
+    const { result: debate } = useSelector<GlobalState, GlobalState[PublicRequestKeys.Debate]>((state) => state.debate);
 
-    return (
-        <>
-            <div>
-                <div className="moderation-panel-parent">
-                    <div className="moderation-container">
-                        {
-                            comments && comments.map((comment, index) => {
-                                if (comment.moderator) {
-                                    return <CommentListItem
-                                        canEdit={true}
-                                        debateId={debateId}
-                                        isDisputed={false}
-                                        isDetail={false}
-                                        key={`comment_list_item_${comment.id}_${index}`}
-                                        match={match}
-                                        onSubmit={onSubmit}
-                                        path={path}
-                                        {...comment}
-                                    />
-                                }
-                                if (comment.replies && comment.replies.length > 0) {
-                                    return comment.replies.map((c, i) => {
-                                        const mod = c?.moderator;
-                                        if (mod) {
-                                            return (
-                                                <ModerationReplyItem
-                                                    mod={mod}
-                                                    key={`comment_list_item_${comment.id}_${i}`}
-                                                    comment={comment}
-                                                />
-                                            )
-                                        }
-                                    })
-                                }
+    if (comments) {
+        const pinnedComments = comments?.filter(comment => comment.moderation?.status === "pinned");
+        const modOnly = comments?.filter(comment => comment.moderator);
+        const repliesWithMod = comments?.filter(comment => (comment.replies && comment.replies?.length > 0) && comment.replies.filter(c => c?.moderator));
+        
+        let arr = [...modOnly, ...pinnedComments];
+        repliesWithMod.forEach(ele => {
+            const elements = upliftReplyAsParent(ele);
+            arr = [...arr, ...elements];
+        });
+        const sortedComments = arr.sort((i, j) => {
+            if (typeof i.moderation === 'number' || typeof j.moderation === 'number') 
+                return new Date(i.created_at).getTime() - new Date(j.created_at).getTime();
 
-                                return null;
-                            })
-                        }
+            if (i.moderation && !j.moderation) {
+                return new Date(i.moderation.updated_at).getTime() - new Date(j.created_at).getTime();
+            }
+            if (!i.moderation && j.moderation) {
+                return new Date(i.created_at).getTime() - new Date(j.moderation.updated_at).getTime();
+            }
+            if (i.moderation && j.moderation) {
+                return new Date(i.moderation.updated_at).getTime() - new Date(j.moderation.updated_at).getTime();
+            }
+            return new Date(i.created_at).getTime() - new Date(j.created_at).getTime();
+        });
+
+        return (
+            <>
+                <div>
+                    <div className="moderation-panel-parent">
+                        <div className="moderation-container">
+                            {
+                                sortedComments && sortedComments.map((comment, index) => {
+                                    if (comment.moderation) {
+                                        return (
+                                            <ModerationPinnedItem
+                                                pinnedComment={comment}
+                                            />
+                                        )
+                                    }
+                                    if (comment.replies && comment.replies.length > 0 && comment.moderator) {
+                                        return <ModerationReplyItem
+                                            comment={comment.replies[0]}
+                                            modReply={comment}
+                                            mod={comment.moderator}
+                                            key={`kek-${index}`}
+                                        />
+                                    }
+                                    if (comment.moderator) {
+                                        return <CommentListItem
+                                            canEdit={true}
+                                            debateId={debateId}
+                                            isDisputed={false}
+                                            isDetail={false}
+                                            key={`comment_list_item_${comment.id}_${index}`}
+                                            match={match}
+                                            onSubmit={onSubmit}
+                                            path={path}
+                                            {...comment}
+                                        />
+                                    }
+                                    return null;
+                                })
+                            }
+                        </div>
                     </div>
+                    {
+                        role?.role.type === 'admin' && <div className="moderation-panel-participation">
+                            {/* <Form
+                                asForm
+                            >
+                                <div className="text-right">
+                                    <SubmitButton
+                                        className={classNames('btn-success')}
+                                        preventDefault
+                                        type="submit"
+                                    >
+                                        Save Comment <i className="fa fa-cloud-upload-alt" />
+                                    </SubmitButton>
+    
+                                </div>
+                            </Form> */}
+                            {
+                                debate && <CommentForm
+                                    debateId={debate.id}
+                                />
+                            }
+                        </div>
+                    }
                 </div>
-                {
-                    role?.role.type === 'admin' && <div className="moderation-panel-participation">
-                        {/* <Form
-                            asForm
-                        >
-                            <div className="text-right">
-                                <SubmitButton
-                                    className={classNames('btn-success')}
-                                    preventDefault
-                                    type="submit"
-                                >
-                                    Save Comment <i className="fa fa-cloud-upload-alt" />
-                                </SubmitButton>
+            </>
+        );
+    }
+    
 
-                            </div>
-                        </Form> */}
-                        {
-                            debate && <CommentForm
-                                debateId={debate.id}
-                            />
-                        }
-                    </div>
-                }
-            </div>
-        </>
-    );
+    return null;
 }

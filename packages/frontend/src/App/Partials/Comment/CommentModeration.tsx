@@ -44,6 +44,7 @@ const commentFormData: FormDataConfig<Partial<Moderation>>[] = [
       CommentStatus.Active,
       CommentStatus.Blocked,
       CommentStatus.Disputed,
+      CommentStatus.Pinned,
     ],
   },
   {

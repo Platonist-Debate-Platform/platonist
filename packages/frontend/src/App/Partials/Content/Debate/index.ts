@@ -10,3 +10,4 @@ export * from './FormArticleFetcher';
 export * from './FormData';
 export * from './ModeratationPanel';
 export * from './ModerationReplyItem';
+export * from './ModerationPinnedItem';
