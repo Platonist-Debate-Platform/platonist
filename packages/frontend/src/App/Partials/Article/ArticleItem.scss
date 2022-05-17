@@ -45,7 +45,7 @@
     bottom: 0;
     left: 0;
     padding: $grid-gutter-width / 2;
-    background-color: rgba(255, 255, 255, .7);
+    background-color: #565656b3;
 
      > h4 {
       overflow: hidden;
@@ -55,6 +55,9 @@
 
      > *:last-child {
        margin: 0;
+     }
+     > p {
+       font-size: 1rem;
      }
   }
 }

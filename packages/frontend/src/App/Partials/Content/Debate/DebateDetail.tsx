@@ -96,6 +96,8 @@ export const DebateDetailBase: FunctionComponent<DebateDetailProps> = ({
     }
   });
 
+  console.log(debate);
+
   return (
     <>
       {debate && (
@@ -108,11 +110,15 @@ export const DebateDetailBase: FunctionComponent<DebateDetailProps> = ({
               <Container>
                 <div className="jumbotron-inner">
                   <Row>
-                    <Col md={12} className="text-center">
+                    <Col md={12}>
                       <h1>
-                        {debate.title} {debate.id}
+                        {debate.title}
                       </h1>
-                      <h3>{debate.subTitle}</h3>
+                      <div className="underline"></div>
+                      <h3 style={{
+                        marginBottom: "2px"
+                      }}>{debate.subTitle}</h3>
+                      <p className="py-3">{debate.shortDescription}</p>
                     </Col>
                     <Col md={6}>
                       {debate.articleA && !isEmpty(debate.articleA) && (
