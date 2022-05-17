@@ -57,18 +57,18 @@ export const ModerationPanel: React.FunctionComponent<ModerationPanelProps> = (p
         });
         const sortedComments = arr.sort((i, j) => {
             if (typeof i.moderation === 'number' || typeof j.moderation === 'number') 
-                return new Date(i.created_at).getTime() - new Date(j.created_at).getTime();
+                return new Date(j.created_at).getTime() - new Date(i.created_at).getTime();
 
             if (i.moderation && !j.moderation) {
-                return new Date(i.moderation.updated_at).getTime() - new Date(j.created_at).getTime();
+                return new Date(j.created_at).getTime() - new Date(i.moderation.created_at).getTime();
             }
             if (!i.moderation && j.moderation) {
-                return new Date(i.created_at).getTime() - new Date(j.moderation.updated_at).getTime();
+                return new Date(j.moderation.created_at).getTime() - new Date(i.created_at).getTime();
             }
             if (i.moderation && j.moderation) {
-                return new Date(i.moderation.updated_at).getTime() - new Date(j.moderation.updated_at).getTime();
+                return new Date(j.moderation.updated_at).getTime() - new Date(i.moderation.updated_at).getTime();
             }
-            return new Date(i.created_at).getTime() - new Date(j.created_at).getTime();
+            return new Date(j.created_at).getTime() - new Date(i.created_at).getTime();
         });
 
         return (
