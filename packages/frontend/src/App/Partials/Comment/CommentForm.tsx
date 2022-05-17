@@ -36,7 +36,7 @@ const commentFormData: FormDataConfig<Partial<Comment>>[] = [
     editable: true,
     key: 'comment',
     required: true,
-    title: 'Create a new comment',
+    title: 'Neuer Kommentar schreiben',
     type: FormInputTypes.Text,
     usePicker: true,
     validate: FormValidationTypes.Words,

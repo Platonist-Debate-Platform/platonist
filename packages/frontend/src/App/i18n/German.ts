@@ -7,7 +7,20 @@ export const GERMAN = {
         me_comment: [
             "hast",
             "kommentiert"
-        ]
+        ],
+        me_replied: [
+            "hast",
+            "geantwortet"
+        ],
+        me_pinned: [
+            "hast",
+            "gepinnt"
+        ],
+        participate: "Teilnehmen",
+        comments: "Kommentare",
+        reply: "Antworten",
+        _edit: "Bearbeiten",
+        moderate: "Moderieren",
     },
     moderation: "moderation"
 }

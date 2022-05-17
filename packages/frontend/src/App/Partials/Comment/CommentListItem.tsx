@@ -27,6 +27,7 @@ import { CommentItem } from './CommentItem';
 import { CommentModeration } from './CommentModeration';
 import { CommentReplies } from './CommentReplies';
 import './CommentItem.scss';
+import { GERMAN } from '../../i18n';
 
 export interface CommentListItemProps extends Comment {
   canCreate?: boolean;
@@ -221,7 +222,7 @@ export const CommentListItem: FunctionComponent<CommentListItemProps> = ({
                         className="p-0 mr-3 btn btn-none btn-sm"
                         title="Show replies"
                       >
-                        <Badge>{props.replyCount}</Badge> Replies{' '}
+                        <Badge>{props.replyCount}</Badge> {GERMAN.comments.comments}{' '}
                         <i className="fa fa-chevron-right" />
                       </div>
                     )}
@@ -236,7 +237,7 @@ export const CommentListItem: FunctionComponent<CommentListItemProps> = ({
                         }
                         className="p-0 mr-3 btn btn-none btn-sm"
                       >
-                        <i className="fa fa-reply" /> Reply
+                        <i className="fa fa-reply" /> {GERMAN.comments.reply}
                       </Link>
                     )}
                     {!isDisputed &&
@@ -251,7 +252,7 @@ export const CommentListItem: FunctionComponent<CommentListItemProps> = ({
                           }
                           className="p-0 btn btn-none btn-sm"
                         >
-                          <i className="fa fa-edit" /> Edit
+                          <i className="fa fa-edit" /> {GERMAN.comments._edit}
                         </Link>
                       )}
                     {canModerate && (
@@ -267,7 +268,7 @@ export const CommentListItem: FunctionComponent<CommentListItemProps> = ({
                         }
                         className="p-o btn btn-none btn-sm"
                       >
-                        <i className="fa fa-cogs" /> Moderate
+                        <i className="fa fa-cogs" /> {GERMAN.comments.moderate}
                       </Link>
                     )}
                   </Col>

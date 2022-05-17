@@ -1,4 +1,4 @@
-import { Comment } from '@platonist/library';
+import { Comment, RoleType } from '@platonist/library';
 import React from 'react';
 import './ModerationPanel.scss';
 import { Card, CardBody, CardSubtitle } from 'reactstrap';
@@ -6,6 +6,13 @@ import { GlobalState, PrivateRequestKeys, User } from '@platonist/library';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import TimeAgo from 'react-timeago2';
+
+// @ts-ignore
+import germanStrings from 'react-timeago2/lib/language-strings/de';
+// @ts-ignore
+import buildFormatter from 'react-timeago2/lib/formatters/buildFormatter';
+import { GERMAN } from '../../../i18n';
+const formatter = buildFormatter(germanStrings);
 
 export interface ModerationPinnedItemProps {
   pinnedComment: Comment;
@@ -15,6 +22,7 @@ export const ModerationPinnedItem: React.FunctionComponent<
   ModerationPinnedItemProps
 > = (props) => {
   const { pinnedComment } = props;
+  const author = pinnedComment.moderation?.user as User;
   const { result: user } = useSelector<
     GlobalState,
     GlobalState[PrivateRequestKeys.User]
@@ -27,6 +35,8 @@ export const ModerationPinnedItem: React.FunctionComponent<
     const updatedAt = new Date(pinnedComment.updated_at);
     const modCreatedAt = new Date(pinnedComment.moderation.created_at);
     const modUpdatedAt = new Date(pinnedComment.moderation.updated_at);
+
+    const isMe = author.id === user?.id;
     return (
         <>
           <Card className="comment-list-item parent">
@@ -41,13 +51,20 @@ export const ModerationPinnedItem: React.FunctionComponent<
                           pinnedComment.moderation.moderator === user?.id ? 'me' : (pinnedComment.moderation.user as User).id
                         }`}
                       >
-                        {pinnedComment.moderation?.moderator === user?.id ? 'You' : <>{pinnedComment.moderation?.user.username}</>}
+                        {pinnedComment.moderation?.moderator === user?.id ? 'Du' : <>{pinnedComment.moderation?.user.username}</>}
                       </Link>{' '}
                       <span>
-                        pinned{' '}
+                        {
+                            isMe ? GERMAN.comments.me_pinned[0] : GERMAN.comments.pinned
+                        }
+                        {' '}
                         <i>
-                          <TimeAgo date={pinnedComment.moderation?.updated_at} />
-                        </i>{' '}
+                          <TimeAgo date={pinnedComment.moderation?.updated_at} formatter={formatter} />
+                        </i> {
+                            isMe && GERMAN.comments.me_pinned[1]
+                        }
+                        
+                        {' '}
                       </span>
                       <i
                         className="fa-solid fa-bell"
@@ -58,6 +75,11 @@ export const ModerationPinnedItem: React.FunctionComponent<
                       ></i>
                     </>
                   )}
+                  {
+                    ((author.role?.type as any) == RoleType.Admin) && <div className="moderation-label">
+                        {GERMAN.moderation}
+                    </div>
+                    }
                 </small>
               </CardSubtitle>
               {

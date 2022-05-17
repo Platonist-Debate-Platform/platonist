@@ -65,6 +65,26 @@ const resolveModerator = async(moderation) => {
   return result;
 }
 
+const resolveRoles = async(entities) => {
+  const role = await strapi
+  .query('role', 'users-permissions')
+  .findOne({ id: 1 });
+  async function foo(entities) {
+    return entities.map(e => new Promise(resolve => {
+      strapi.query("role", "users-permissions").findOne({id: e.user.role}, ["permissions"]).then(r => resolve({
+        ...e,
+        user: {
+          ...e.user,
+          role: r,
+        }
+      }));
+    }));
+  }
+  const res = await foo(entities);
+  const resolve = await Promise.all(res);
+  return resolve;
+}
+
 module.exports = {
 
   /**
@@ -212,7 +232,9 @@ module.exports = {
       }
     })
 
-    const sanitizedEntites = entities.map(entity => cleanAndSanitizeEntity(entity, model));
+    const newEntites = await resolveRoles(entities);
+
+    const sanitizedEntites = newEntites.map(entity => cleanAndSanitizeEntity(entity, model));
     return sanitizedEntites;
   },
 

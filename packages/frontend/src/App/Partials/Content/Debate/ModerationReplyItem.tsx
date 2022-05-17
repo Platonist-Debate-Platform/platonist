@@ -5,10 +5,18 @@ import {
   GlobalState,
   PrivateRequestKeys,
   User,
+  RoleType
 } from '@platonist/library';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import TimeAgo from 'react-timeago2';
+
+// @ts-ignore
+import germanStrings from 'react-timeago2/lib/language-strings/de';
+// @ts-ignore
+import buildFormatter from 'react-timeago2/lib/formatters/buildFormatter';
+import { GERMAN } from '../../../i18n';
+const formatter = buildFormatter(germanStrings);
 
 export interface ModerationReplyItemProps {
   comment: Comment | null;
@@ -24,7 +32,6 @@ export const ModerationReplyItem: React.FunctionComponent<
     GlobalState,
     GlobalState[PrivateRequestKeys.User]
   >((state) => state.user);
-
   const modReply = props.modReply;
   const modUser = modReply.user as User;
 
@@ -34,6 +41,8 @@ export const ModerationReplyItem: React.FunctionComponent<
   
     const modCreatedAt = new Date(modReply.created_at).toUTCString();
     const modUpdatedAt = new Date(modReply.updated_at).toUTCString();
+
+    const isMe = modUser.id === author?.id;
   
     return (
       <>
@@ -46,14 +55,14 @@ export const ModerationReplyItem: React.FunctionComponent<
                     <Link
                       to={`/user/${author?.id === modUser?.id ? 'me' : modUser?.id}`}
                     >
-                      { props.mod === author?.id ? 'You' : <>{modUser.username}</>}
+                      { props.mod === author?.id ? 'Du' : <>{modUser.username}</>}
                     </Link>{' '}
                     <span>
-                      replied{' '}
+                      {isMe ? GERMAN.comments.me_replied[0] : GERMAN.comments.replied}{' '}
                       <i>
-                        <TimeAgo date={modReply.created_at} />
-                      </i>{' '}
-                      {modCreatedAt !== modUpdatedAt && (
+                        <TimeAgo date={modReply.created_at} formatter={formatter} />
+                      </i> {isMe && GERMAN.comments.me_replied[1]} {' '}
+                      {/* {modCreatedAt !== modUpdatedAt && (
                         <>
                           and edited this debate{' '}
                           <i>
@@ -61,7 +70,7 @@ export const ModerationReplyItem: React.FunctionComponent<
                           </i>
                           .
                         </>
-                      )}{' '}
+                      )}{' '} */}
                     </span>
                     <i
                       className="fa-solid fa-reply"
@@ -72,6 +81,11 @@ export const ModerationReplyItem: React.FunctionComponent<
                     ></i>
                   </>
                 )}
+                {
+                    ((user.role?.type as any) == RoleType.Admin) && <div className="moderation-label">
+                        {GERMAN.moderation}
+                    </div>
+                    }
               </small>
               <div className="card-text">
                 <p

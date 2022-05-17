@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState } from 'react';
+import React, { FunctionComponent, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { CardSubtitle } from 'reactstrap';
 import {
@@ -8,7 +8,8 @@ import {
   GlobalState,
   PublicRequestKeys,
   User,
-  RoleType
+  RoleType,
+  PrivateRequestKeys
 } from '@platonist/library';
 import TimeAgo from 'react-timeago2';
 import { useSelector } from 'react-redux';
@@ -21,6 +22,7 @@ import germanStrings from 'react-timeago2/lib/language-strings/de';
 // @ts-ignore
 import buildFormatter from 'react-timeago2/lib/formatters/buildFormatter';
 import { useRoles, useUser } from '../../Hooks';
+import { getRoleRequest } from '../../Request';
 const formatter = buildFormatter(germanStrings);
 
 export interface CommentItemProps {
@@ -49,7 +51,8 @@ export const CommentItem: FunctionComponent<CommentItemProps> = ({
 
   const isMe = user?.id === author?.id ? true : false;
   
-
+  // const { result: res } = useRoles(PrivateRequestKeys.Role, "1");
+  // console.log(res);
   if (author) {
     const { result } = commentUser;
     return (
@@ -75,11 +78,11 @@ export const CommentItem: FunctionComponent<CommentItemProps> = ({
               )}{' '}
               
             </span>
-            {/* {
-              roleResult === RoleType.Admin && <div className="moderation-label">
+            {
+              ((author.role?.type as any) == RoleType.Admin) && <div className="moderation-label">
                 {GERMAN.moderation}
               </div>
-            } */}
+            }
           </small>
           
         </CardSubtitle>
