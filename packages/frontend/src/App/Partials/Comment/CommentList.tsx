@@ -139,6 +139,7 @@ export const CommentList: FunctionComponent<CommentListProps> = ({
         <CommentAdd debateId={debateId} />
         <Row className="mt-3">
           <Col md={6}>
+            <h3>Moderation</h3>
             <ModerationPanel
               comments={comments}
               canEdit={canWrite}
@@ -149,10 +150,14 @@ export const CommentList: FunctionComponent<CommentListProps> = ({
               path={path}
             />
           </Col>
-          <Col md={6} style={{
-            border: "1px solid #d9d9d9",
-            borderRadius: "8px"
-          }}>
+          <Col md={6} >
+            <h3>Kommentare</h3>
+            <div
+              className="comment-list-root"
+            >
+            <div style={{
+              margin: "1em"
+            }}>
             {(comments &&
               comments.length &&
               comments.map((item, index) => {
@@ -177,6 +182,8 @@ export const CommentList: FunctionComponent<CommentListProps> = ({
                 ) && <>No Comments yet!</>}
               </>
             )}
+            </div>
+            </div>
           </Col>
         </Row>
       </Container>
