@@ -1,5 +1,5 @@
 import { isEmpty } from 'lodash';
-import React, { FunctionComponent, useEffect } from 'react';
+import React, { FunctionComponent, useEffect, useRef } from 'react';
 import { connect } from 'react-redux';
 import { match as Match, Route, RouteComponentProps } from 'react-router-dom';
 import { usePrevious, useUnmount } from 'react-use';
@@ -43,6 +43,7 @@ export const DebateDetailBase: FunctionComponent<DebateDetailProps> = ({
   path,
   routeProps,
 }) => {
+  const ref = useRef();
   const {
     clear,
     state: { result: debate, status },
@@ -96,7 +97,7 @@ export const DebateDetailBase: FunctionComponent<DebateDetailProps> = ({
     }
   });
 
-  console.log(debate);
+  console.log(window.scrollX);
 
   return (
     <>

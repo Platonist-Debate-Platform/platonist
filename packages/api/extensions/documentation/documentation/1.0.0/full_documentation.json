@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "05/12/2022 12:07:44 PM"
+    "x-generation-date": "05/24/2022 10:00:54 AM"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -10610,7 +10610,8 @@
                         "page-content.text",
                         "page-content.teaser",
                         "debates.debate-list",
-                        "profile.detail"
+                        "profile.detail",
+                        "blog.blog-list"
                       ]
                     },
                     "id": {
@@ -10801,7 +10802,8 @@
                         "page-content.text",
                         "page-content.teaser",
                         "debates.debate-list",
-                        "profile.detail"
+                        "profile.detail",
+                        "blog.blog-list"
                       ]
                     },
                     "id": {
@@ -10934,7 +10936,8 @@
                         "page-content.text",
                         "page-content.teaser",
                         "debates.debate-list",
-                        "profile.detail"
+                        "profile.detail",
+                        "blog.blog-list"
                       ]
                     },
                     "id": {
@@ -10971,7 +10974,8 @@
                         "page-content.text",
                         "page-content.teaser",
                         "debates.debate-list",
-                        "profile.detail"
+                        "profile.detail",
+                        "blog.blog-list"
                       ]
                     },
                     "id": {
@@ -11004,7 +11008,8 @@
                         "page-content.text",
                         "page-content.teaser",
                         "debates.debate-list",
-                        "profile.detail"
+                        "profile.detail",
+                        "blog.blog-list"
                       ]
                     },
                     "id": {
@@ -11028,13 +11033,39 @@
                         "page-content.text",
                         "page-content.teaser",
                         "debates.debate-list",
-                        "profile.detail"
+                        "profile.detail",
+                        "blog.blog-list"
                       ]
                     },
                     "id": {
                       "type": "string"
                     },
                     "title": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "id"
+                  ]
+                },
+                {
+                  "properties": {
+                    "__component": {
+                      "type": "string",
+                      "enum": [
+                        "page-content.jumbotron",
+                        "page-content.text-with-image",
+                        "page-content.text",
+                        "page-content.teaser",
+                        "debates.debate-list",
+                        "profile.detail",
+                        "blog.blog-list"
+                      ]
+                    },
+                    "id": {
+                      "type": "string"
+                    },
+                    "Title": {
                       "type": "string"
                     }
                   },
@@ -11218,7 +11249,8 @@
                         "page-content.text",
                         "page-content.teaser",
                         "debates.debate-list",
-                        "profile.detail"
+                        "profile.detail",
+                        "blog.blog-list"
                       ]
                     },
                     "id": {
@@ -11409,7 +11441,8 @@
                         "page-content.text",
                         "page-content.teaser",
                         "debates.debate-list",
-                        "profile.detail"
+                        "profile.detail",
+                        "blog.blog-list"
                       ]
                     },
                     "id": {
@@ -11542,7 +11575,8 @@
                         "page-content.text",
                         "page-content.teaser",
                         "debates.debate-list",
-                        "profile.detail"
+                        "profile.detail",
+                        "blog.blog-list"
                       ]
                     },
                     "id": {
@@ -11579,7 +11613,8 @@
                         "page-content.text",
                         "page-content.teaser",
                         "debates.debate-list",
-                        "profile.detail"
+                        "profile.detail",
+                        "blog.blog-list"
                       ]
                     },
                     "id": {
@@ -11612,7 +11647,8 @@
                         "page-content.text",
                         "page-content.teaser",
                         "debates.debate-list",
-                        "profile.detail"
+                        "profile.detail",
+                        "blog.blog-list"
                       ]
                     },
                     "id": {
@@ -11636,13 +11672,39 @@
                         "page-content.text",
                         "page-content.teaser",
                         "debates.debate-list",
-                        "profile.detail"
+                        "profile.detail",
+                        "blog.blog-list"
                       ]
                     },
                     "id": {
                       "type": "string"
                     },
                     "title": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "id"
+                  ]
+                },
+                {
+                  "properties": {
+                    "__component": {
+                      "type": "string",
+                      "enum": [
+                        "page-content.jumbotron",
+                        "page-content.text-with-image",
+                        "page-content.text",
+                        "page-content.teaser",
+                        "debates.debate-list",
+                        "profile.detail",
+                        "blog.blog-list"
+                      ]
+                    },
+                    "id": {
+                      "type": "string"
+                    },
+                    "Title": {
                       "type": "string"
                     }
                   },

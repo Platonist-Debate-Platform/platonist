@@ -1,0 +1,14 @@
+{
+  "collectionName": "components_blog_blog_lists",
+  "info": {
+    "name": "BlogList",
+    "icon": "list-ul",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "Title": {
+      "type": "string"
+    }
+  }
+}

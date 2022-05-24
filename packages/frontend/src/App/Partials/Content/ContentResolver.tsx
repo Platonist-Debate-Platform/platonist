@@ -18,6 +18,7 @@ import { JumbotronComponent } from './Jumbotron';
 import { TabPage } from './Tab';
 import { Teaser } from './Teaser';
 import { TextComponent, TextWithImage, TextWithList } from './Text';
+import BlogRoute from './Blog/BlogRoute';
 
 export interface ContentResolverProps {
   contents: (Content | null)[] | null;
@@ -45,6 +46,10 @@ export const ContentResolverItem: React.FC<ContentResolverItemProps> = (
   const { __component } = props;
 
   switch (__component) {
+    case ContentKeys.BlogList:
+      return <BlogRoute
+        {...(props)}
+      />;
     case ContentKeys.DebateList:
       return (
         <DebateRoute

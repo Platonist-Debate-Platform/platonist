@@ -82,7 +82,7 @@ export const ModerationReplyItem: React.FunctionComponent<
                   </>
                 )}
                 {
-                    ((user.role?.type as any) == RoleType.Admin) && <div className="moderation-label">
+                    ((modUser.role?.type as any) == RoleType.Admin) && <div className="moderation-label">
                         {GERMAN.moderation}
                     </div>
                     }
