@@ -8,9 +8,8 @@ import {
   DebateList as DebateListProps,
   encodeLink,
 } from '@platonist/library';
-import DebateDetail from '../Debate/DebateDetail';
-import DebateListComponent from '../Debate/DebateList';
 import BlogListComponent from './BlogList';
+import BlogArticlePage from './BlogArticlePage';
 
 export interface BlogRouteProps extends DebateListProps {
   [PublicRequestKeys.Router]: GlobalState[PublicRequestKeys.Router];
@@ -30,24 +29,18 @@ export const BlogRouteBase: React.FC<BlogRouteProps> = (props) => {
     }
   }, [location, router.location, setLocation]);
 
-  console.log(path, location.pathname);
-
   if (path === location.pathname) {
     return <BlogListComponent {...rest} path={encodeLink(path)} />;
-    // <div>detail</div>
   }
 
   if (location.pathname.startsWith(path) && routeProps) {
     return (
-    //   <DebateDetail
-    //     isAdmin={isAdmin}
-    //     path={encodeLink(path)}
-    //     routeProps={routeProps}
-    //     debateList={rest}
-    //   />
-    <div>
-        hi
-    </div>
+      <BlogArticlePage
+        isAdmin={isAdmin}
+        path={encodeLink(path)}
+        routeProps={routeProps}
+        {...rest}
+      />
     );
   }
 

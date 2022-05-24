@@ -6,18 +6,15 @@ import { Comment } from './Comment';
 import { ContentKeys } from './Content';
 
 export interface Blog {
-  archiveDate: Date;
-  archived: boolean;
   id: number;
-  isOffline: boolean;
   title: string;
-  subTitle: string;
-  shortDescription: string;
-  published: boolean;
+  subtitle: string;
+  description: string;
   published_at: number;
   created_at: string;
   updated_at: string;
-  comments: (Comment[] | null)[] | null;
+  articleImage: any;
+  content: any;
 }
 
 export interface BlogList {

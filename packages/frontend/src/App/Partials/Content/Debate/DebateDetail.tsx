@@ -97,8 +97,6 @@ export const DebateDetailBase: FunctionComponent<DebateDetailProps> = ({
     }
   });
 
-  console.log(window.scrollX);
-
   return (
     <>
       {debate && (

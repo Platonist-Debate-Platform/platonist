@@ -6,22 +6,21 @@ import { connect } from 'react-redux';
 import { usePrevious, useUnmount } from 'react-use';
 
 import {
-  Debate,
-  DebateList,
   GlobalState,
   PublicRequestKeys,
   QueryParameterBase,
   ReactReduxRequestDispatch,
   RequestStatus,
   RequestWithPager,
-  RestMethodKeys,
   ScrollPager,
   withConfig,
   WithConfigProps,
-  BlogList
+  BlogList,
+  Blog,
 } from '@platonist/library';
 
-import { useDebates, useDebateSocket } from '../../../Hooks';
+import { useBlogArticles, useDebateSocket } from '../../../Hooks';
+import { BlogDetailItem } from './BlogListItem';
 
 type BlogListType = BlogList & WithConfigProps;
 
@@ -49,12 +48,12 @@ export const BlogListBase: React.FunctionComponent<BlogListProps> = ({
     send,
     state: { result, status },
     reload,
-  } = useDebates<RequestWithPager<Debate[]>>({
-    key: PublicRequestKeys.Debates,
+  } = useBlogArticles<RequestWithPager<Blog[]>>({
+    key: PublicRequestKeys.BlogArticles,
     query,
   });
 
-  const debates = result && result.value;
+  const debates = result as any as Blog[];
 
   const [debate, meta, clearSocket] = useDebateSocket();
 
@@ -131,20 +130,9 @@ export const BlogListBase: React.FunctionComponent<BlogListProps> = ({
           >
             {debates &&
               debates.length &&
-              debates.map(
-                (debate, index) =>
-                  (page.result && debate && (
-                    // <DebateListItem
-                    //   key={`debate_list_item_${debate.id}_${index}`}
-                    //   pageTitle={page.result.title}
-                    //   {...debate}
-                    // />
-                    <div>
-                        <h3>TITLE</h3>
-                    </div>
-                  )) ||
-                  null,
-              )}
+              debates.map((debate, index) => {
+                return <BlogDetailItem pageTitle={'Blog'} {...debate} />;
+              })}
           </ScrollPager>
         )}
       </section>

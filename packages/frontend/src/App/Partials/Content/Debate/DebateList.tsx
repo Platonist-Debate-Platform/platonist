@@ -118,6 +118,8 @@ export const DebateListBase: React.FunctionComponent<DebateListProps> = ({
     }
   });
 
+  debates?.forEach(p => console.log(p))
+
   return (
     <>
       <DebateSettings method={RestMethodKeys.Create} />
