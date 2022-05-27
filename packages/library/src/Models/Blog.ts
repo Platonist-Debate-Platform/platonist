@@ -1,9 +1,11 @@
 import { AxiosRequestConfig } from 'axios';
 
 import { ReactReduxRequestState, RequestWithPager } from '../ReactReduxRequest';
-import { Article } from './Article';
-import { Comment } from './Comment';
-import { ContentKeys } from './Content';
+import { Content, ContentKeys } from './Content';
+
+export interface ContentType {
+  __component: ContentKeys;
+}
 
 export interface Blog {
   id: number;
@@ -14,7 +16,7 @@ export interface Blog {
   created_at: string;
   updated_at: string;
   articleImage: any;
-  content: any;
+  content: Content[];
 }
 
 export interface BlogList {

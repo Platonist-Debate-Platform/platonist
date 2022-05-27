@@ -16,7 +16,7 @@ import { Container, Col, Row } from 'reactstrap';
 import { FormattedDate } from 'react-intl';
 import { Image } from '../../Image';
 import './BlogList.scss';
-import { ContentResolverItem } from '../ContentResolver';
+import ContentResolver from '../ContentResolver';
 
 export interface BlogArticlePageParams {
   slug: string;
@@ -28,8 +28,6 @@ export interface BlogArticlePageLocationState {
 }
 
 export interface BlogArticlePageProps extends WithConfigProps {
-  // [PublicRequestKeys.BlogLink]: GlobalState[PublicRequestKeys.BlogLink];
-  // dispatch: ReactReduxRequestDispatch & BlogLinkDispatch;
   isAdmin: boolean;
   path: string;
   routeProps: RouteComponentProps;
@@ -38,9 +36,8 @@ export interface BlogArticlePageProps extends WithConfigProps {
 const BlogArticlePage: React.FunctionComponent<BlogArticlePageProps> = (
   props,
 ) => {
-  const { routeProps } = props;
+  const { routeProps, isAdmin, path } = props;
   const location = useLocation<BlogArticlePageLocationState>();
-//   const params = useParams<BlogArticlePageParams>();
 
   const {
     clear,
@@ -113,9 +110,13 @@ const BlogArticlePage: React.FunctionComponent<BlogArticlePageProps> = (
         </div>
         <section className="blog-detail-page">
           <Container>
-            {blog.content.map((c: any) => {
-              return <ContentResolverItem {...c} />;
-            })}
+            {
+              blog.content && <ContentResolver
+                contents={blog.content}
+                isAdmin={isAdmin}
+                path={path}
+              />    
+            }
           </Container>
         </section>
       </>
