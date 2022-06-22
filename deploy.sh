@@ -80,19 +80,19 @@ yarn workspace @platonist/api run pm2 start ./server.js --name api-"$NODE_ENV" -
 set +x
 # END # ********************************************************************* #
 
-# # START - Killig previously running applications # ************************** # 
-# echo "";
-# echo "#### KILLING PREVIOUS INSTANCE ####"
-# set -x
-# kill -9 $(cat .pidfile) || echo "Process was not running."
-# set +x
-# # END # ********************************************************************* #
+# START - Killig previously running applications # ************************** # 
+echo "";
+echo "#### KILLING PREVIOUS INSTANCE ####"
+set -x
+kill -9 $(cat .pidfile) || echo "Process was not running."
+set +x
+# END # ********************************************************************* #
 
-# # START - Starting the application # **************************************** #
-# echo "";
-# echo "#### STARTING THE APPLICATION ####"
-# set -x
-# yarn serve:frontend -l "$PORT" -s build & sleep 1
-# echo $! > .pidfile
-# set +x
-# # END # ********************************************************************* #
+# START - Starting the application # **************************************** #
+echo "";
+echo "#### STARTING THE APPLICATION ####"
+set -x
+yarn serve:frontend -l "$PORT" -s build & sleep 1
+echo $! > .pidfile
+set +x
+# END # ********************************************************************* #
