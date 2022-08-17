@@ -10,9 +10,11 @@ export interface Moderation {
   id: number;
   reason?: string;
   status: CommentStatus;
+  created_at: Date | string;
   updated_at: Date | string;
   updated_by: User['id'];
-  moderator: User['id'] | User | null;
+  moderator: User['id'] | User | null | number;
+  user: User;
 }
 
 export type ModerationState = ReactReduxRequestState<

@@ -23,6 +23,7 @@ import {
 } from '../Pages';
 import { PrivateRoute } from './PrivateRoute';
 import { NotFoundRoute } from './NotFoundRoute';
+import BlogArticlePage from '../Content/Blog/BlogArticlePage';
 
 const HomepageRoutes: React.FC<Homepage> = (props) => {
   const authentication = useAuthentication();
@@ -36,6 +37,7 @@ const HomepageRoutes: React.FC<Homepage> = (props) => {
     pages: pages?.result,
   });
 
+  console.log(routes);
   return (
     <div className="page" id="page">
       {pages?.status === RequestStatus.Loaded && (
@@ -53,6 +55,11 @@ const HomepageRoutes: React.FC<Homepage> = (props) => {
                   exact={true}
                   render={() => <HomepageResolver {...props} isAdmin={false} />}
                 />
+                {/* <Route
+                  path="/Blog/:slug"
+                  exact
+                  render={() => <BlogArticlePage {...props}/>}
+                /> */}
                 {routes.map((route, index) => (
                   <Route {...route} key={`main_route_${index}`} />
                 ))}

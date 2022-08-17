@@ -50,7 +50,7 @@ export const ArticleItem: FunctionComponent<Article> = ({
             </div>
             <div className="debate-article-content">
               <h4 className="mb-2">{title}</h4>
-              <p title={description}>{trimString(description)}</p>
+              <p title={description}>{description}</p>
             </div>
           </div>
         </div>

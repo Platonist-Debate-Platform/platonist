@@ -51,6 +51,8 @@
       display: flex;
       align-items: flex-end;
       height: 100%;
+      margin-top: calc(5% + 130px);
+      margin-bottom: 3rem;
     }
 
     &.jumbotron-404 {
@@ -83,8 +85,8 @@
   }
 
   &-fullscreen {
-    height: 100vh;
-    min-height: calculateRem($font-size-base, $font-size-base-px, 600);
+    // height: 100vh;
+    // min-height: calculateRem($font-size-base, $font-size-base-px, 600);
     margin-top: -60px;
     margin-bottom: 0;
     padding-bottom: 0;

@@ -2,7 +2,8 @@
   "kind": "collectionType",
   "collectionName": "moderations",
   "info": {
-    "name": "moderation"
+    "name": "moderation",
+    "description": ""
   },
   "options": {
     "increments": true,
@@ -14,6 +15,7 @@
       "type": "enumeration",
       "enum": [
         "active",
+        "pinned",
         "blocked",
         "disputed"
       ]

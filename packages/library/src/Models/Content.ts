@@ -16,6 +16,7 @@ export enum ContentKeys {
   TextWithList = 'page-content.text-with-list',
   TextWithListItem = 'page-content.text-with-list-item',
   CompanyLocationsListItem = 'page-content.company-location-list',
+  BlogList = 'blog.blog-list',
 }
 
 export type HomepageContent =

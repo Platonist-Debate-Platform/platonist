@@ -41,8 +41,8 @@
       "type": "text"
     },
     "moderation": {
-      "model": "moderation",
-      "via": "comment"
+      "via": "comment",
+      "model": "moderation"
     }
   }
 }

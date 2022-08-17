@@ -869,6 +869,7 @@
                 "type": "string",
                 "enum": [
                   "active",
+                  "pinned",
                   "blocked",
                   "disputed"
                 ]

@@ -15,6 +15,7 @@ export enum CommentStatus {
   Active = 'active',
   Blocked = 'blocked',
   Disputed = 'disputed',
+  Pinned = 'pinned',
 }
 
 export interface Comment {
@@ -27,6 +28,7 @@ export interface Comment {
   id: string;
   meta?: CommentMeta;
   moderation?: Moderation;
+  moderator?: string;
   moderationComment?: string;
   parent: Comment['id'] | Comment | null;
   published_at: number;

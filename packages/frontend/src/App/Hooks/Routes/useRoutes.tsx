@@ -55,6 +55,20 @@ export const createRoutes = (props: PageRoutesProps): RouteProps[] => {
                 ),
               });
               break;
+            case ContentKeys.BlogList:
+              routes.push({
+                exact: false,
+                path: encodeLink(`${path}/:slug`),
+                render: (props: RouteComponentProps) => (
+                  <ContentResolverItem
+                    {...item}
+                    isAdmin={isAdmin}
+                    path={path}
+                    routeProps={props}
+                  />
+                ),
+              });
+              break;
             default:
               break;
           }

@@ -3,6 +3,7 @@ import {
   Comment,
   CommentStatus,
   Debate,
+  GlobalState,
   PrivateRequestKeys,
   RequestStatus,
   User,
@@ -26,15 +27,15 @@ import {
 } from '../../../Library';
 import { SubmitButton } from '../../../Library/Form/Fields';
 import { Form, FromKeyboardEvent } from '../../../Library/Form';
-import { createSocket, useAuthentication, useComments, useSocket } from '../../Hooks';
-import { TypingUsersItem } from './TypingUsersItem';
+import { createSocket, useAuthentication, useComments } from '../../Hooks';
+import { useSelector } from 'react-redux';
 
 const commentFormData: FormDataConfig<Partial<Comment>>[] = [
   {
     editable: true,
     key: 'comment',
     required: true,
-    title: 'Create a new comment',
+    title: 'Neuer Kommentar schreiben',
     type: FormInputTypes.Text,
     usePicker: true,
     validate: FormValidationTypes.Words,
@@ -65,9 +66,13 @@ export const CommentForm: FunctionComponent<CommentFormProps> = ({
   parent,
   reset,
 }) => {
+  const { result: role } = useSelector<
+    GlobalState,
+    GlobalState[PrivateRequestKeys.Role]
+  >((state) => state.role);
   const [isAuthenticated, state] = useAuthentication();
   const [shouldReset, setShouldReset] = useState(false);
-  const [socket, setSocket] = useState(createSocket());
+  const [socket] = useState(createSocket());
   const [typingUsers, setTypingUsers] = useState<TypingUsers[]>([]);
   const {
     clear,
@@ -97,6 +102,7 @@ export const CommentForm: FunctionComponent<CommentFormProps> = ({
         status: (state?.status as CommentStatus) || CommentStatus.Active,
         updated_by: state?.id,
         user: state?.id,
+        moderator: role?.role.type === 'admin' ? state?.id : undefined,
       };
 
       if (parent) {
@@ -109,7 +115,16 @@ export const CommentForm: FunctionComponent<CommentFormProps> = ({
         pathname: `/comments${commentId ? '/' + commentId : ''}`,
       });
     },
-    [commentId, debateId, defaultData, isAuthenticated, parent, send, state],
+    [
+      commentId,
+      debateId,
+      defaultData,
+      isAuthenticated,
+      parent,
+      send,
+      state,
+      role,
+    ],
   );
 
   const handleKeyDown = useCallback(
@@ -125,11 +140,10 @@ export const CommentForm: FunctionComponent<CommentFormProps> = ({
   );
 
   useEffect(() => {
-    socket.on("typing", (data: {typingUsers: TypingUsers[]}) => {
-      console.log(data);
+    socket.on('typing', (data: { typingUsers: TypingUsers[] }) => {
       setTypingUsers(data.typingUsers);
-    })
-  }, [typingUsers]);
+    });
+  }, [socket, typingUsers]);
 
   useEffect(() => {
     if (
@@ -169,9 +183,6 @@ export const CommentForm: FunctionComponent<CommentFormProps> = ({
         inputConfig={commentFormData}
         reset={shouldReset || reset}
       >
-        <TypingUsersItem
-          typingUsers={typingUsers}
-        />
         <Form socket={socket} asForm={true} onKeyDown={handleKeyDown}>
           <div className="text-right">
             {dismissElement && <>{dismissElement}</>}
