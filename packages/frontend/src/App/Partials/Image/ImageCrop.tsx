@@ -1,5 +1,3 @@
-// import 'react-image-crop/lib/ReactCrop.scss';
-
 import React from 'react';
 import ReactCrop, { Crop } from 'react-image-crop';
 

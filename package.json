@@ -25,7 +25,8 @@
     "build": "yarn workspaces foreach -pt run build",
     "serve:api": "yarn workspace @platonist/api run serve",
     "serve:frontend": "yarn workspace @platonist/frontend run serve",
-    "stop:api": "yarn workspace @platonist/api run stop"
+    "stop:api": "yarn workspace @platonist/api run stop",
+    "start": "ultra -r start"
   },
   "prettier": {
     "printWidth": 80,
@@ -47,5 +48,8 @@
   "resolutions": {
     "react": "18.0.0",
     "react-dom": "18.0.0"
+  },
+  "dependencies": {
+    "ultra-runner": "^3.10.5"
   }
 }

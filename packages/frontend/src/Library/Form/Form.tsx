@@ -13,19 +13,7 @@ import { useSelector } from 'react-redux';
 import { FormContext } from './Context';
 import { FormResolver } from './FormResolver';
 import { FormContextValue, FormData, FormEvent } from './Types';
-import {
-  ApplicationKeys,
-  Comment,
-  CommentStatus,
-  Debate,
-  GlobalState,
-  PrivateRequestKeys,
-  PublicRequestKeys,
-  RestMethodKeys,
-  RolePermissionTypes,
-  RoleState,
-  User,
-} from '@platonist/library';
+import { GlobalState, PrivateRequestKeys } from '@platonist/library';
 
 export type OnContextChange<D> = (
   key: string,
@@ -45,7 +33,7 @@ export interface FormProps<Data extends Object = {}> {
 }
 
 export const Form: FunctionComponent<PropsWithChildren<FormProps>> = <
-  Data extends Object
+  Data extends Object,
 >(
   props: PropsWithChildren<FormProps<Data>>,
 ) => {
@@ -90,21 +78,24 @@ export const Form: FunctionComponent<PropsWithChildren<FormProps>> = <
     }
   };
 
-  const handleKeyDown = useCallback((event: React.KeyboardEvent<HTMLFormElement>) => {
-    if (onKeyDown && context) {
-      onKeyDown<Data>({
-        ...event,
-        data: context.data,
-        submitData: context.submitData,
-      });
-      if (props.socket) {
-        props.socket.emit("typing", {
-          comment: context.data,
-          user: user
+  const handleKeyDown = useCallback(
+    (event: React.KeyboardEvent<HTMLFormElement>) => {
+      if (onKeyDown && context) {
+        onKeyDown<Data>({
+          ...event,
+          data: context.data,
+          submitData: context.submitData,
         });
+        if (props.socket) {
+          props.socket.emit('typing', {
+            comment: context.data,
+            user: user,
+          });
+        }
       }
-    }
-  }, [context, onKeyDown])
+    },
+    [props.socket, user, context, onKeyDown],
+  );
 
   useEffect(() => {
     if (!asForm && inputKey && onContextChange && context) {
