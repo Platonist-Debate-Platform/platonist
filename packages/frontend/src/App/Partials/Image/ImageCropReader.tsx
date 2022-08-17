@@ -6,7 +6,6 @@ import {
   Image,
   randomHash,
   GlobalState,
-  Image as ImageProps,
   PrivateRequestKeys,
 } from '@platonist/library';
 
@@ -64,8 +63,8 @@ export const ImageCropReader: React.FunctionComponent<ImageCropReaderProps> = (
    */
   useEffect(() => {
     if (!didMount.current) {
-        didMount.current = true;
-        return;
+      didMount.current = true;
+      return;
     }
     handleOnComplete(crop);
     // eslint-disable-next-line react-hooks/exhaustive-deps

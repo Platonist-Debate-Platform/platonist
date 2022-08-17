@@ -1,6 +1,6 @@
 // import 'react-image-crop/lib/ReactCrop.scss';
 
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import ReactCrop, { Crop } from 'react-image-crop';
 import './Image.scss';
 
@@ -211,52 +211,18 @@ export class ImageCropBase extends React.Component<
             ruleOfThirds={true}
             // src={src}
           >
-            {image && <img src={src} className="cropped-image-responsive" alt={`Avatar`}/>}
+            {image && (
+              <img
+                src={src}
+                className="cropped-image-responsive"
+                alt={`Avatar`}
+              />
+            )}
           </ReactCrop>
         )}
       </>
     );
   }
-}
-
-export const ImageCropFunctionalComponent: React.FunctionComponent<ImageCropProps> = (props) => {
-  const [state, setState] = useState<ImageCropState>();
-  
-  useEffect(() => {
-    setSrcFromImage();
-
-    const _self = this;
-  }, [])
-
-  const setSrcFromImage = () => {
-    const { config, image } = props;
-
-    if (config) {
-      const apiUrl = config.api.createApiUrl(config.api.config);
-      apiUrl.pathname = (image && image.url) || '';
-
-      const obj: ImageCropState = {
-        src: apiUrl.href,
-        fileName: randomHash(32),
-        crop: {
-          // aspect: '1 / 1',
-          height: 50,
-          unit: '%',
-          width: 50,
-          x: 50,
-          y: 50,
-        }
-      }
-
-      setState(obj);
-    }    
-  }
-
-  return (
-    <>
-
-    </>
-  );
 }
 
 export const ImageCrop = withConfig(ImageCropBase);

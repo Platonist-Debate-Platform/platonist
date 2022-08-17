@@ -24,7 +24,11 @@ import {
 import {} from '../../../../Library';
 import { RequestSendProps, useDebates } from '../../../Hooks';
 import { ArticleItem } from '../../Article';
+<<<<<<< Updated upstream
 import { CommentList } from '../../Comment';
+=======
+import { CommentList, TypingUsersItem } from '../../Comment';
+>>>>>>> Stashed changes
 
 export interface DebateDetailProps extends WithConfigProps {
   [PublicRequestKeys.DebateLink]: GlobalState[PublicRequestKeys.DebateLink];
@@ -99,16 +103,34 @@ export const DebateDetailBase: FunctionComponent<DebateDetailProps> = ({
     <>
       {debate && (
         <>
+<<<<<<< Updated upstream
+=======
+          <TypingUsersItem debateId={debate.id} />
+>>>>>>> Stashed changes
           <div className="jumbotron-fullscreen jumbotron jumbotron-debate jumbotron-fluid">
             <div className="jumbotron-content">
               <Container>
                 <div className="jumbotron-inner">
                   <Row>
+<<<<<<< Updated upstream
                     <Col md={12} className="text-center">
                       <h1>
                         {debate.title} {debate.id}
                       </h1>
                       <h3>{debate.subTitle}</h3>
+=======
+                    <Col md={12}>
+                      <h1>{debate.title}</h1>
+                      <div className="underline"></div>
+                      <h3
+                        style={{
+                          marginBottom: '2px',
+                        }}
+                      >
+                        {debate.subTitle}
+                      </h3>
+                      <p className="py-3">{debate.shortDescription}</p>
+>>>>>>> Stashed changes
                     </Col>
                     <Col md={6}>
                       {debate.articleA && !isEmpty(debate.articleA) && (
@@ -148,6 +170,21 @@ export const DebateDetailBase: FunctionComponent<DebateDetailProps> = ({
                     debateId={debate.id}
                     match={props.match}
                     path={encodeLink(`${path}/${debate.title}`)}
+<<<<<<< Updated upstream
+=======
+                    exact={true}
+                    render={(
+                      props: RouteComponentProps<{ commentId?: string }>,
+                    ) => {
+                      return (
+                        <CommentList
+                          debateId={debate.id}
+                          match={props.match}
+                          path={encodeLink(`${path}/${debate.title}`)}
+                        />
+                      );
+                    }}
+>>>>>>> Stashed changes
                   />
                 );
               }}
