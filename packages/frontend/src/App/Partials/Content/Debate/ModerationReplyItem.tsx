@@ -15,7 +15,7 @@ import TimeAgo from 'react-timeago2';
 import germanStrings from 'react-timeago2/lib/language-strings/de';
 // @ts-ignore
 import buildFormatter from 'react-timeago2/lib/formatters/buildFormatter';
-import { GERMAN } from '../../../i18n';
+import { GERMAN } from '../../../i18n/German';
 const formatter = buildFormatter(germanStrings);
 
 export interface ModerationReplyItemProps {

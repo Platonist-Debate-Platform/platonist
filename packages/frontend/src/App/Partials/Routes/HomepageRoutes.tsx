@@ -23,7 +23,6 @@ import {
 } from '../Pages';
 import { PrivateRoute } from './PrivateRoute';
 import { NotFoundRoute } from './NotFoundRoute';
-import BlogArticlePage from '../Content/Blog/BlogArticlePage';
 
 const HomepageRoutes: React.FC<Homepage> = (props) => {
   const authentication = useAuthentication();
