@@ -23,3 +23,4 @@ export * from './Tab';
 export * from './Teaser';
 export * from './Text';
 export * from './User';
+export * from './Blog';

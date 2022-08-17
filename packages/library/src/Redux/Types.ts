@@ -3,6 +3,7 @@ import { RouterActionType } from 'connected-react-router';
 import { Location } from 'history';
 
 import { AlertState } from '../Alerts';
+import { BlogLinkState } from '../BlogLink';
 import { DebateLinkState } from '../DebateLink';
 import { AvailableLanguage } from '../Localize';
 import {
@@ -23,6 +24,8 @@ import {
   RolesState,
   RoleState,
   UserState,
+  BlogState,
+  BlogsState,
 } from '../Models';
 import { PermissionsState, PermissionState } from '../Models/Permission';
 import { ReactReduxRequestState } from '../ReactReduxRequest';
@@ -53,6 +56,9 @@ export interface PublicState {
   [PublicRequestKeys.Page]: PageState;
   [PublicRequestKeys.Pages]: PagesState;
   [PublicRequestKeys.Router]: RouterState;
+  [PublicRequestKeys.Blog]: BlogState;
+  [PublicRequestKeys.BlogArticles]: BlogsState;
+  [PublicRequestKeys.BlogLink]: BlogLinkState;
 }
 
 export interface PrivateState {
@@ -67,6 +73,7 @@ export interface PrivateState {
   [PrivateRequestKeys.Roles]: RolesState;
   [PrivateRequestKeys.Upload]: ReactReduxRequestState<any, AxiosRequestConfig>;
   [PrivateRequestKeys.User]: UserState;
+  [PrivateRequestKeys.Blog]: BlogState;
 }
 
 export type GlobalState = PublicState & PrivateState;

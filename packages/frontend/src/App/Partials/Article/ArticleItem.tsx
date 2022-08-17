@@ -4,15 +4,15 @@ import React, { FunctionComponent } from 'react';
 
 import { Article } from '@platonist/library';
 
-// const trimString = (str: string, max: number = 115) => {
-//   let trimmed = str.substr(0, max);
-//   if (str.length > trimmed.length) {
-//     trimmed =
-//       trimmed.substr(0, Math.min(trimmed.length, trimmed.lastIndexOf(' '))) +
-//       '...';
-//   }
-//   return trimmed;
-// };
+const trimString = (str: string, max: number = 115) => {
+  let trimmed = str.substr(0, max);
+  if (str.length > trimmed.length) {
+    trimmed =
+      trimmed.substr(0, Math.min(trimmed.length, trimmed.lastIndexOf(' '))) +
+      '...';
+  }
+  return trimmed;
+};
 
 export const ArticleItem: FunctionComponent<Article> = ({
   description,
@@ -32,7 +32,6 @@ export const ArticleItem: FunctionComponent<Article> = ({
     <>
       <div key={url} className="debate-article-container" onClick={openArticle}>
         <div className="debate-article">
-<<<<<<< Updated upstream
         <div className="shadow p-3 mb-3 bg-white rounded">
           <div className="debate-article-inner">
             <div className="debate-article-image">
@@ -52,7 +51,6 @@ export const ArticleItem: FunctionComponent<Article> = ({
             <div className="debate-article-content">
               <h4 className="mb-2">{title}</h4>
               <p title={description}>{trimString(description)}</p>
-=======
           <div className="shadow p-3 mb-3 bg-white rounded">
             <div className="debate-article-inner">
               <div className="debate-article-image">
@@ -73,7 +71,7 @@ export const ArticleItem: FunctionComponent<Article> = ({
                 <h4 className="mb-2">{title}</h4>
                 <p title={description}>{description}</p>
               </div>
->>>>>>> Stashed changes
+              <p title={description}>{description}</p>
             </div>
           </div>
         </div>

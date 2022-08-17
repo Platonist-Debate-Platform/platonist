@@ -15,6 +15,9 @@ export enum PublicRequestKeys {
   Page = 'page',
   Pages = 'pages',
   Router = 'router',
+  Blog = 'blog',
+  BlogArticles = 'blog-articles',
+  BlogLink = 'blogLink',
 }
 
 // eslint-disable-next-line no-shadow
@@ -30,4 +33,5 @@ export enum PrivateRequestKeys {
   Permissions = 'permissions',
   Upload = 'upload',
   User = 'user',
+  Blog = 'blog',
 }

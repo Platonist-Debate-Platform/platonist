@@ -31,9 +31,9 @@ const cleanEntity = entity => {
 
   entity.replyCount = countReplies(entity);
 
-  delete entity.debate;
-  delete entity.moderator;
-  delete entity.replies;
+  // delete entity.debate;
+  // delete entity.moderator;
+  // delete entity.replies;
   
   return entity;
 };
@@ -45,6 +45,45 @@ const cleanAndSanitizeEntity = (entity, model) => {
 
   return cleanEntity(sanitizedEntity);
 };
+
+const resolveReplies = async(replyParent) => {
+  const result = new Promise((resolve, reject) => {
+    const replies = replyParent.replies.map(reply => new Promise((r) => {
+      strapi.plugins["users-permissions"].services.user.fetch({id:reply.user}).then(user => r(user));
+    }));
+    resolve(replies);        
+  });
+
+  const resolved = await Promise.all((await result));
+  return resolved;
+}
+
+const resolveModerator = async(moderation) => {
+  const result = new Promise((resolve, reject) => {
+    strapi.plugins["users-permissions"].services.user.fetch({id:moderation.moderator}).then(user => resolve(user))
+  });
+  return result;
+}
+
+const resolveRoles = async(entities) => {
+  const role = await strapi
+  .query('role', 'users-permissions')
+  .findOne({ id: 1 });
+  async function foo(entities) {
+    return entities.map(e => new Promise(resolve => {
+      strapi.query("role", "users-permissions").findOne({id: e.user.role}, ["permissions"]).then(r => resolve({
+        ...e,
+        user: {
+          ...e.user,
+          role: r,
+        }
+      }));
+    }));
+  }
+  const res = await foo(entities);
+  const resolve = await Promise.all(res);
+  return resolve;
+}
 
 module.exports = {
 
@@ -143,7 +182,60 @@ module.exports = {
       entities = await service.find(ctx.query);
     }
 
-    return entities.map(entity => cleanAndSanitizeEntity(entity, model));
+    // let sort = "desc";
+    // if (ctx.query["_sort"].toLowerCase().includes("desc")) sort = "desc";
+    // else sort = "asc";
+    // const comments = await strapi.connections.default.raw(
+    //   `
+    //     select comments.*, u.* from comments
+    //     inner join \`users-permissions_user\` as u 
+    //     on comments.user = u.id 
+    //     where comments.debate = ${ctx.query["debate.id"]} 
+    //     order by comments.created_at ${sort}
+    //   `
+    // );
+
+    let repliesParent = entities.filter(e => e.replies.length > 0);
+    let pinnedComments = entities.filter(e => e.moderation && e.moderation.status && e.moderation.status === "pinned");
+
+    const pinnedByModerators = pinnedComments.map(comment => resolveModerator(comment.moderation));
+    const resolvedModerators = await Promise.all(pinnedByModerators);
+
+    pinnedComments.forEach((pinned, i) => {
+      pinned.moderation.user = resolvedModerators[i];
+    });
+    
+    const arr = []
+    repliesParent.forEach(parent => {
+      const resolved = resolveReplies(parent);
+      arr.push(resolved)
+    })
+    
+    const resolvedUsers = await Promise.all(arr);
+    repliesParent.forEach((parent, i) => {
+      parent.replies.forEach((reply, j) => {
+        reply.user = resolvedUsers[i][j];
+      });
+    });
+
+    repliesParent.forEach(reply => {
+      if (entities.includes(entity => entity.id === reply.id)) {
+        const i = entities.findIndex(entity => entity.id === reply.id);
+        entities[i] = reply;
+      }
+    });
+
+    pinnedComments.forEach(comment => {
+      if (entities.includes(entity => entity.id === comment.id)) {
+        const i = entities.findIndex(entity => entity.id === comment.id);
+        entities[i] = comment;
+      }
+    })
+
+    const newEntites = await resolveRoles(entities);
+
+    const sanitizedEntites = newEntites.map(entity => cleanAndSanitizeEntity(entity, model));
+    return sanitizedEntites;
   },
 
   /**

@@ -1,0 +1,41 @@
+@import '../../../../Assets/Sass/Vendors/bootstrap.scss';
+
+.debate{
+  &-list {
+    &-item {
+      padding-top: $grid-gutter-width;
+      padding-bottom: $grid-gutter-width;
+
+      &:first-child {
+        padding-top: 0;
+      }
+
+      &:last-child {
+        // padding-bottom: 0;
+      }
+
+      &:nth-child(even) {
+        background-color: lighten($blue-dark, 65%);
+      }
+
+      & + .debate-list-item {
+
+      }
+    }
+  }
+
+  &-settings{
+    &-create {
+      position: sticky;
+      position: -webkit-sticky;
+      top: 100px; /* required */
+    }
+  }
+}
+
+div.blog-image {
+    div.img-wrap > figure > .img-fluid {
+        width: 100%;
+        margin: 1rem auto;
+    }
+}

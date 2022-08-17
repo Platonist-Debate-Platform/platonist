@@ -5271,6 +5271,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"ansi-split@npm:^1.0.1":
+  version: 1.0.1
+  resolution: "ansi-split@npm:1.0.1"
+  dependencies:
+    ansi-regex: ^3.0.0
+  checksum: 301b98e935222273f668e8b7587fc1fbbc8a48be14e08899ad3be92327a78f584945fc745201bff90819cb687132945114bb7f9bd44d055197dfc983850ce23c
+  languageName: node
+  linkType: hard
+
 "ansi-styles@npm:^2.2.1":
   version: 2.2.1
   resolution: "ansi-styles@npm:2.2.1"
@@ -10723,7 +10732,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fast-glob@npm:^3.2.11, fast-glob@npm:^3.2.7, fast-glob@npm:^3.2.9":
+"fast-glob@npm:^3.2.11, fast-glob@npm:^3.2.5, fast-glob@npm:^3.2.7, fast-glob@npm:^3.2.9":
   version: 3.2.11
   resolution: "fast-glob@npm:3.2.11"
   dependencies:
@@ -11858,6 +11867,13 @@ __metadata:
     pify: ^2.0.0
     pinkie-promise: ^2.0.0
   checksum: 18109d6b9d55643d2b98b59c3cfae7073ccfe39829632f353d516cc124d836c2ddebe48a23f04af63d66a621b6d86dd4cbd7e6af906f2458a7fe510ffc4bd424
+  languageName: node
+  linkType: hard
+
+"globrex@npm:^0.1.2":
+  version: 0.1.2
+  resolution: "globrex@npm:0.1.2"
+  checksum: adca162494a176ce9ecf4dd232f7b802956bb1966b37f60c15e49d2e7d961b66c60826366dc2649093cad5a0d69970cfa8875bd1695b5a1a2f33dcd2aa88da3c
   languageName: node
   linkType: hard
 
@@ -15854,6 +15870,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"micro-memoize@npm:^4.0.9":
+  version: 4.0.10
+  resolution: "micro-memoize@npm:4.0.10"
+  checksum: a04fcb199f47e61218b4921e1cd8b2cd4c26fccdb189278a61a1bac90886b377c2da2f5d2d76941b8a8cd798fbff630037a6ddd32541cafcf5962ebf11f8f8d1
+  languageName: node
+  linkType: hard
+
 "micromark-core-commonmark@npm:^1.0.1":
   version: 1.0.6
   resolution: "micromark-core-commonmark@npm:1.0.6"
@@ -17147,21 +17170,21 @@ __metadata:
   languageName: node
   linkType: hard
 
+"npm-run-path@npm:4.0.1, npm-run-path@npm:^4.0.1":
+  version: 4.0.1
+  resolution: "npm-run-path@npm:4.0.1"
+  dependencies:
+    path-key: ^3.0.0
+  checksum: 5374c0cea4b0bbfdfae62da7bbdf1e1558d338335f4cacf2515c282ff358ff27b2ecb91ffa5330a8b14390ac66a1e146e10700440c1ab868208430f56b5f4d23
+  languageName: node
+  linkType: hard
+
 "npm-run-path@npm:^2.0.0":
   version: 2.0.2
   resolution: "npm-run-path@npm:2.0.2"
   dependencies:
     path-key: ^2.0.0
   checksum: acd5ad81648ba4588ba5a8effb1d98d2b339d31be16826a118d50f182a134ac523172101b82eab1d01cb4c2ba358e857d54cfafd8163a1ffe7bd52100b741125
-  languageName: node
-  linkType: hard
-
-"npm-run-path@npm:^4.0.1":
-  version: 4.0.1
-  resolution: "npm-run-path@npm:4.0.1"
-  dependencies:
-    path-key: ^3.0.0
-  checksum: 5374c0cea4b0bbfdfae62da7bbdf1e1558d338335f4cacf2515c282ff358ff27b2ecb91ffa5330a8b14390ac66a1e146e10700440c1ab868208430f56b5f4d23
   languageName: node
   linkType: hard
 
@@ -18091,6 +18114,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"pid-cwd@npm:^1.2.0":
+  version: 1.2.0
+  resolution: "pid-cwd@npm:1.2.0"
+  checksum: 5a7872f39bce9c2885215e013b66e775e01060fd14f9054e14f35f4c77dcc59bbf51d3a1da055f1b14854b16cafef84c9c63a249a7ab1286e37a0de02941fb86
+  languageName: node
+  linkType: hard
+
 "pidusage@npm:^2.0.21":
   version: 2.0.21
   resolution: "pidusage@npm:2.0.21"
@@ -18204,6 +18234,7 @@ __metadata:
   dependencies:
     prettier: ^2.5.1
     typescript: ^4.6.3
+    ultra-runner: ^3.10.5
   languageName: unknown
   linkType: soft
 
@@ -19468,6 +19499,13 @@ __metadata:
   version: 1.0.1
   resolution: "prr@npm:1.0.1"
   checksum: 3bca2db0479fd38f8c4c9439139b0c42dcaadcc2fbb7bb8e0e6afaa1383457f1d19aea9e5f961d5b080f1cfc05bfa1fe9e45c97a1d3fd6d421950a73d3108381
+  languageName: node
+  linkType: hard
+
+"ps-list@npm:^7.2.0":
+  version: 7.2.0
+  resolution: "ps-list@npm:7.2.0"
+  checksum: 38969f4fb86e2b88bac4b033ff63dcf98e9490d4fa40d94feb369d79f9aa6a04efccbc3338c49eeeb2f0890cada80d74daee28584f0902c4cba0928f6e394c37
   languageName: node
   linkType: hard
 
@@ -22260,6 +22298,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"shellwords-ts@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "shellwords-ts@npm:3.0.0"
+  checksum: 32faa081b1996c250d41b60a41764078d1e2b46706fe656d01d02aec6937fbf4645aedb68d6f1784c69845d66f0557656583ef872b7367c8d9f8c84543c5c343
+  languageName: node
+  linkType: hard
+
 "shimmer@npm:^1.1.0, shimmer@npm:^1.2.0":
   version: 1.2.1
   resolution: "shimmer@npm:1.2.1"
@@ -24649,6 +24694,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"tslib@npm:2.1.0":
+  version: 2.1.0
+  resolution: "tslib@npm:2.1.0"
+  checksum: aa189c8179de0427b0906da30926fd53c59d96ec239dff87d6e6bc831f608df0cbd6f77c61dabc074408bd0aa0b9ae4ec35cb2c15f729e32f37274db5730cb78
+  languageName: node
+  linkType: hard
+
 "tslib@npm:^1.10.0, tslib@npm:^1.8.1, tslib@npm:^1.9.0, tslib@npm:^1.9.3":
   version: 1.14.1
   resolution: "tslib@npm:1.14.1"
@@ -24766,7 +24818,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"type-fest@npm:^0.21.3":
+"type-fest@npm:^0.21.2, type-fest@npm:^0.21.3":
   version: 0.21.3
   resolution: "type-fest@npm:0.21.3"
   checksum: e6b32a3b3877f04339bae01c193b273c62ba7bfc9e325b8703c4ee1b32dc8fe4ef5dfa54bf78265e069f7667d058e360ae0f37be5af9f153b22382cd55a9afe0
@@ -24892,6 +24944,34 @@ __metadata:
   bin:
     uglifyjs: bin/uglifyjs
   checksum: dfc61c85b0660216432e021aac6a5f3ea0331720003d4d929b95f297daceb73bc9615875ca150516b49bc57ab60d3cf32415fc006cccf20f275c806f6686da0d
+  languageName: node
+  linkType: hard
+
+"ultra-runner@npm:^3.10.5":
+  version: 3.10.5
+  resolution: "ultra-runner@npm:3.10.5"
+  dependencies:
+    ansi-split: ^1.0.1
+    chalk: ^4.1.0
+    cross-spawn: ^7.0.3
+    fast-glob: ^3.2.5
+    globrex: ^0.1.2
+    ignore: ^5.1.8
+    json5: ^2.2.0
+    micro-memoize: ^4.0.9
+    npm-run-path: 4.0.1
+    pid-cwd: ^1.2.0
+    ps-list: ^7.2.0
+    shellwords-ts: ^3.0.0
+    string-width: ^4.2.0
+    tslib: 2.1.0
+    type-fest: ^0.21.2
+    wrap-ansi: ^7.0.0
+    yamljs: ^0.3.0
+    yargs: ^16.2.0
+  bin:
+    ultra: bin/ultra.js
+  checksum: 4aed834863a8c199b093131fd0c66cf0699fdba715815d6b0672a7c69148ad3a920dd758aba9d9e76fae01472fb7d1df1feaeae9292b21fec89412f1ef1b916f
   languageName: node
   linkType: hard
 
@@ -26496,7 +26576,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"yamljs@npm:0.3.0":
+"yamljs@npm:0.3.0, yamljs@npm:^0.3.0":
   version: 0.3.0
   resolution: "yamljs@npm:0.3.0"
   dependencies:

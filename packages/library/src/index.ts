@@ -1,6 +1,7 @@
 export * from './Alerts';
 export * from './Config';
 export * from './DebateLink';
+export * from './BlogLink';
 export * from './Localize';
 export * from './Models';
 export * from './Pager';

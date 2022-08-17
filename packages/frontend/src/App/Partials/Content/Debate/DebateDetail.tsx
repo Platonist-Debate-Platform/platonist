@@ -1,5 +1,5 @@
 import { isEmpty } from 'lodash';
-import React, { FunctionComponent, useEffect } from 'react';
+import React, { FunctionComponent, useEffect, useRef } from 'react';
 import { connect } from 'react-redux';
 import { match as Match, Route, RouteComponentProps } from 'react-router-dom';
 import { usePrevious, useUnmount } from 'react-use';
@@ -24,11 +24,8 @@ import {
 import {} from '../../../../Library';
 import { RequestSendProps, useDebates } from '../../../Hooks';
 import { ArticleItem } from '../../Article';
-<<<<<<< Updated upstream
-import { CommentList } from '../../Comment';
-=======
 import { CommentList, TypingUsersItem } from '../../Comment';
->>>>>>> Stashed changes
+import { ModerationPanel } from './ModeratationPanel';
 
 export interface DebateDetailProps extends WithConfigProps {
   [PublicRequestKeys.DebateLink]: GlobalState[PublicRequestKeys.DebateLink];
@@ -46,6 +43,7 @@ export const DebateDetailBase: FunctionComponent<DebateDetailProps> = ({
   path,
   routeProps,
 }) => {
+  const ref = useRef();
   const {
     clear,
     state: { result: debate, status },
@@ -103,34 +101,26 @@ export const DebateDetailBase: FunctionComponent<DebateDetailProps> = ({
     <>
       {debate && (
         <>
-<<<<<<< Updated upstream
-=======
           <TypingUsersItem debateId={debate.id} />
->>>>>>> Stashed changes
+          <TypingUsersItem
+            debateId={debate.id}
+          />
           <div className="jumbotron-fullscreen jumbotron jumbotron-debate jumbotron-fluid">
             <div className="jumbotron-content">
               <Container>
                 <div className="jumbotron-inner">
                   <Row>
-<<<<<<< Updated upstream
                     <Col md={12} className="text-center">
+                    <Col md={12}>
                       <h1>
-                        {debate.title} {debate.id}
+                        {debate.title}
                       </h1>
                       <h3>{debate.subTitle}</h3>
-=======
-                    <Col md={12}>
-                      <h1>{debate.title}</h1>
                       <div className="underline"></div>
-                      <h3
-                        style={{
-                          marginBottom: '2px',
-                        }}
-                      >
-                        {debate.subTitle}
-                      </h3>
+                      <h3 style={{
+                        marginBottom: "2px"
+                      }}>{debate.subTitle}</h3>
                       <p className="py-3">{debate.shortDescription}</p>
->>>>>>> Stashed changes
                     </Col>
                     <Col md={6}>
                       {debate.articleA && !isEmpty(debate.articleA) && (
@@ -148,7 +138,7 @@ export const DebateDetailBase: FunctionComponent<DebateDetailProps> = ({
             </div>
           </div>
           <section className="section section-debate section-debate-detail">
-            <Route
+            {/* <Route
               path={encodeLink(`${path}/${debate.title}/:commentId`)}
               exact={true}
               render={(props: RouteComponentProps<{ commentId?: string }>) => {
@@ -160,22 +150,18 @@ export const DebateDetailBase: FunctionComponent<DebateDetailProps> = ({
                   />
                 );
               }}
-            />
-            <Route
-              path={encodeLink(`${path}/${debate.title}`)}
-              exact={true}
-              render={(props: RouteComponentProps<{ commentId?: string }>) => {
-                return (
-                  <CommentList
-                    debateId={debate.id}
-                    match={props.match}
+            /> */}
+            <Container>
+              <Row>
+                <Col>
+                  <Route
                     path={encodeLink(`${path}/${debate.title}`)}
-<<<<<<< Updated upstream
-=======
                     exact={true}
                     render={(
                       props: RouteComponentProps<{ commentId?: string }>,
                     ) => {
+                    exact={true}
+                    render={(props: RouteComponentProps<{ commentId?: string }>) => {
                       return (
                         <CommentList
                           debateId={debate.id}
@@ -184,11 +170,10 @@ export const DebateDetailBase: FunctionComponent<DebateDetailProps> = ({
                         />
                       );
                     }}
->>>>>>> Stashed changes
                   />
-                );
-              }}
-            />
+                </Col>
+              </Row>
+            </Container>
           </section>
         </>
       )}

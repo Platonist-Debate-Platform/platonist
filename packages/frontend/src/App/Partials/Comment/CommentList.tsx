@@ -30,6 +30,7 @@ import {
 } from '../../Hooks';
 import { CommentAdd } from './CommentAdd';
 import { CommentListItem } from './CommentListItem';
+import { ModerationPanel } from '../Content';
 
 export interface CommentListProps {
   debateId: Debate['id'];
@@ -137,22 +138,43 @@ export const CommentList: FunctionComponent<CommentListProps> = ({
       <Container>
         <CommentAdd debateId={debateId} />
         <Row className="mt-3">
-          <Col>
+          <Col md={6}>
+            <h3>Moderation</h3>
+            <ModerationPanel
+              comments={comments}
+              canEdit={canWrite}
+              debateId={debateId}
+              isDetail={false}
+              match={match}
+              onSubmit={handleSubmit}
+              path={path}
+            />
+          </Col>
+          <Col md={6} >
+            <h3>Kommentare</h3>
+            <div
+              className="comment-list-root"
+            >
+            <div style={{
+              margin: "1em"
+            }}>
             {(comments &&
               comments.length &&
-              comments.map((item, index) => (
-                <CommentListItem
-                  canEdit={canWrite}
-                  debateId={debateId}
-                  isDisputed={item.disputed}
-                  isDetail={false}
-                  key={`comment_list_item_${item.id}_${index}`}
-                  match={match}
-                  onSubmit={handleSubmit}
-                  path={path}
-                  {...item}
-                />
-              ))) || (
+              comments.map((item, index) => {
+                  if (!item.moderator) return <CommentListItem
+                    canEdit={canWrite}
+                    debateId={debateId}
+                    isDisputed={item.disputed}
+                    isDetail={false}
+                    key={`comment_list_item_${item.id}_${index}`}
+                    match={match}
+                    onSubmit={handleSubmit}
+                    path={path}
+                    {...item}
+                  />
+                  return null;
+                }
+              )) || (
               <>
                 {!(
                   status === RequestStatus.Updating ||
@@ -160,6 +182,8 @@ export const CommentList: FunctionComponent<CommentListProps> = ({
                 ) && <>No Comments yet!</>}
               </>
             )}
+            </div>
+            </div>
           </Col>
         </Row>
       </Container>

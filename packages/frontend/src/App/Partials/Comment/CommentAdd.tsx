@@ -15,6 +15,7 @@ import { useAuthentication } from '../../Hooks';
 import { AuthenticationButton } from '../Authentication';
 import { CommentForm } from './CommentForm';
 import { DismissButton } from './DismissButton';
+import { GERMAN } from '../../i18n';
 
 export interface CommentAddProps {
   debateId: Debate['id'];
@@ -89,7 +90,7 @@ export const CommentAdd: FunctionComponent<CommentAddProps> = ({
         <AuthenticationButton
           component={
             <>
-              Participate <i className="fa fa-comment" />
+              {GERMAN.comments.participate} <i className="fa fa-comment" />
             </>
           }
           onClick={toggle}
