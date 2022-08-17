@@ -80,6 +80,7 @@ export const createReducer = <
         };
 
       case createRequestActionType(RequestActionType.Receive, id):
+        // eslint-disable-next-line no-console
         console.log(action);
 
         const stateValue =

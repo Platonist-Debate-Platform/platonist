@@ -1,5 +1,5 @@
 import { isEmpty } from 'lodash';
-import React, { FunctionComponent, useEffect, useRef } from 'react';
+import React, { FunctionComponent, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { match as Match, Route, RouteComponentProps } from 'react-router-dom';
 import { usePrevious, useUnmount } from 'react-use';
@@ -25,7 +25,6 @@ import {} from '../../../../Library';
 import { RequestSendProps, useDebates } from '../../../Hooks';
 import { ArticleItem } from '../../Article';
 import { CommentList, TypingUsersItem } from '../../Comment';
-import { ModerationPanel } from './ModeratationPanel';
 
 export interface DebateDetailProps extends WithConfigProps {
   [PublicRequestKeys.DebateLink]: GlobalState[PublicRequestKeys.DebateLink];
@@ -43,7 +42,6 @@ export const DebateDetailBase: FunctionComponent<DebateDetailProps> = ({
   path,
   routeProps,
 }) => {
-  const ref = useRef();
   const {
     clear,
     state: { result: debate, status },
@@ -102,35 +100,36 @@ export const DebateDetailBase: FunctionComponent<DebateDetailProps> = ({
       {debate && (
         <>
           <TypingUsersItem debateId={debate.id} />
-          <TypingUsersItem
-            debateId={debate.id}
-          />
+          <TypingUsersItem debateId={debate.id} />
           <div className="jumbotron-fullscreen jumbotron jumbotron-debate jumbotron-fluid">
             <div className="jumbotron-content">
               <Container>
                 <div className="jumbotron-inner">
                   <Row>
                     <Col md={12} className="text-center">
-                    <Col md={12}>
-                      <h1>
-                        {debate.title}
-                      </h1>
-                      <h3>{debate.subTitle}</h3>
-                      <div className="underline"></div>
-                      <h3 style={{
-                        marginBottom: "2px"
-                      }}>{debate.subTitle}</h3>
-                      <p className="py-3">{debate.shortDescription}</p>
-                    </Col>
-                    <Col md={6}>
-                      {debate.articleA && !isEmpty(debate.articleA) && (
-                        <ArticleItem {...(debate.articleA as Article)} />
-                      )}
-                    </Col>
-                    <Col md={6}>
-                      {debate.articleB && !isEmpty(debate.articleB) && (
-                        <ArticleItem {...(debate.articleB as Article)} />
-                      )}
+                      <Col md={12}>
+                        <h1>{debate.title}</h1>
+                        <h3>{debate.subTitle}</h3>
+                        <div className="underline"></div>
+                        <h3
+                          style={{
+                            marginBottom: '2px',
+                          }}
+                        >
+                          {debate.subTitle}
+                        </h3>
+                        <p className="py-3">{debate.shortDescription}</p>
+                      </Col>
+                      <Col md={6}>
+                        {debate.articleA && !isEmpty(debate.articleA) && (
+                          <ArticleItem {...(debate.articleA as Article)} />
+                        )}
+                      </Col>
+                      <Col md={6}>
+                        {debate.articleB && !isEmpty(debate.articleB) && (
+                          <ArticleItem {...(debate.articleB as Article)} />
+                        )}
+                      </Col>
                     </Col>
                   </Row>
                 </div>
@@ -160,8 +159,6 @@ export const DebateDetailBase: FunctionComponent<DebateDetailProps> = ({
                     render={(
                       props: RouteComponentProps<{ commentId?: string }>,
                     ) => {
-                    exact={true}
-                    render={(props: RouteComponentProps<{ commentId?: string }>) => {
                       return (
                         <CommentList
                           debateId={debate.id}

@@ -26,6 +26,7 @@ const addAlertToState = (
 ): AlertState => {
   const alert = state[payload.type].find((a) => a.id === payload.id);
   if (alert) {
+    // eslint-disable-next-line no-console
     console.warn(warnings(payload.id).skip);
     return state;
   }
@@ -41,6 +42,7 @@ const hideAlert = (
   const index = newState[payload.type].findIndex((a) => a.id === payload.id);
 
   if (!(index > -1)) {
+    // eslint-disable-next-line no-console
     console.warn(warnings(payload.id).notFound);
     return newState;
   }
@@ -57,6 +59,7 @@ const removeAlert = (
   const index = state[payload.type].findIndex((a) => a.id === payload.id);
 
   if (!(index > -1)) {
+    // eslint-disable-next-line no-console
     console.warn(warnings(payload.id).notFound);
     return state;
   }
@@ -73,6 +76,7 @@ const showAlert = (
   const newState = state;
   const index = newState[payload.type].findIndex((a) => a.id === payload.id);
   if (!(index > -1)) {
+    // eslint-disable-next-line no-console
     console.warn(warnings(payload.id).notFound);
     return state;
   }
