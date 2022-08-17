@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactCrop, { Crop } from 'react-image-crop';
+import './Image.scss';
 
 import {
   Image,
@@ -189,6 +190,9 @@ export class ImageCropBase extends React.Component<
 
   public render() {
     const { crop, src } = this.state;
+    const { image } = this.props;
+
+    console.log(image);
 
     return (
       <>
@@ -204,7 +208,9 @@ export class ImageCropBase extends React.Component<
             // onImageLoaded={this.onImageLoaded}
             ruleOfThirds={true}
             // src={src}
-          />
+          >
+            {image && <img src={src} className="cropped-image-responsive" alt={`Avatar`}/>}
+          </ReactCrop>
         )}
       </>
     );
