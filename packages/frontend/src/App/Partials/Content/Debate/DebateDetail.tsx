@@ -106,30 +106,27 @@ export const DebateDetailBase: FunctionComponent<DebateDetailProps> = ({
               <Container>
                 <div className="jumbotron-inner">
                   <Row>
-                    <Col md={12} className="text-center">
-                      <Col md={12}>
-                        <h1>{debate.title}</h1>
-                        <h3>{debate.subTitle}</h3>
-                        <div className="underline"></div>
-                        <h3
-                          style={{
-                            marginBottom: '2px',
-                          }}
-                        >
-                          {debate.subTitle}
-                        </h3>
-                        <p className="py-3">{debate.shortDescription}</p>
-                      </Col>
-                      <Col md={6}>
-                        {debate.articleA && !isEmpty(debate.articleA) && (
-                          <ArticleItem {...(debate.articleA as Article)} />
-                        )}
-                      </Col>
-                      <Col md={6}>
-                        {debate.articleB && !isEmpty(debate.articleB) && (
-                          <ArticleItem {...(debate.articleB as Article)} />
-                        )}
-                      </Col>
+                    <Col md={12}>
+                      <h1>{debate.title}</h1>
+                      <div className="underline"></div>
+                      <h3
+                        style={{
+                          marginBottom: '2px',
+                        }}
+                      >
+                        {debate.subTitle}
+                      </h3>
+                      <p className="py-3">{debate.shortDescription}</p>
+                    </Col>
+                    <Col md={6}>
+                      {debate.articleA && !isEmpty(debate.articleA) && (
+                        <ArticleItem {...(debate.articleA as Article)} />
+                      )}
+                    </Col>
+                    <Col md={6}>
+                      {debate.articleB && !isEmpty(debate.articleB) && (
+                        <ArticleItem {...(debate.articleB as Article)} />
+                      )}
                     </Col>
                   </Row>
                 </div>

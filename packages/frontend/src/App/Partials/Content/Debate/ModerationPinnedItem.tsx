@@ -36,7 +36,7 @@ export const ModerationPinnedItem: React.FunctionComponent<
     // const modCreatedAt = new Date(pinnedComment.moderation.created_at);
     // const modUpdatedAt = new Date(pinnedComment.moderation.updated_at);
 
-    const isMe = author.id === user?.id;
+    // TODO: fix here with rendering
     return (
       <>
         <Card className="comment-list-item parent">
@@ -51,19 +51,19 @@ export const ModerationPinnedItem: React.FunctionComponent<
                     ></i>
                     <Link
                       to={`/user/${
-                        pinnedComment.moderation.moderator === user?.id
+                        pinnedComment.moderation.moderator == user?.id
                           ? 'me'
                           : (pinnedComment.moderation.user as User).id
                       }`}
                     >
-                      {pinnedComment.moderation?.moderator === user?.id ? (
+                      {pinnedComment.moderation?.moderator == user?.id ? (
                         'Du'
                       ) : (
                         <>{pinnedComment.moderation?.user.username}</>
                       )}
                     </Link>{' '}
                     <span>
-                      {isMe
+                      {/* {isMe
                         ? GERMAN.comments.me_pinned[0]
                         : GERMAN.comments.pinned}{' '}
                       <i>
@@ -72,7 +72,7 @@ export const ModerationPinnedItem: React.FunctionComponent<
                           formatter={formatter}
                         />
                       </i>{' '}
-                      {isMe && GERMAN.comments.me_pinned[1]}{' '}
+                      {isMe && GERMAN.comments.me_pinned[1]}{' '} */}
                     </span>
                     <i
                       className="fa-solid fa-bell"

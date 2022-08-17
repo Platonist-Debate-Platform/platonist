@@ -5,13 +5,16 @@ module.exports = ({ env }) => ({
       connector: 'bookshelf',
       settings: {
         client: 'mysql',
-        host: '127.0.0.1',
-        port: 3306,
-        username: 'root',
-        password: 'password',
-        database: 'platonist_staging',
+        host: env('DB_HOST', '0.0.0.0'),
+        port: env.int('DB_PORT', 3306),
+        username: env('DB_USER'),
+        password: env('DB_PASSWORD'),
+        database: env('DB_NAME'),
+        charset: env('DB_CHARSET', 'utf8mb4'),
       },
-      options: {},
+      options: {
+        useNullAsDefault: true,
+      },
     },
   },
 });
