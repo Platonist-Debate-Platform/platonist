@@ -21,7 +21,6 @@ import {
   WithConfigProps,
 } from '@platonist/library';
 
-import {} from '../../../../Library';
 import { RequestSendProps, useDebates } from '../../../Hooks';
 import { ArticleItem } from '../../Article';
 import { CommentList, TypingUsersItem } from '../../Comment';

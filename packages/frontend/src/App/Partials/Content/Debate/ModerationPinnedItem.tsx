@@ -38,6 +38,7 @@ export const ModerationPinnedItem: React.FunctionComponent<
 
     // TODO: fix here with rendering
     if (user) {
+      // eslint-disable-next-line eqeqeq
       const isMe = user?.id == pinnedComment.moderation.moderator;
       return (
         <>
@@ -53,16 +54,20 @@ export const ModerationPinnedItem: React.FunctionComponent<
                       ></i>
                       <Link
                         to={`/user/${
+                          // eslint-disable-next-line eqeqeq
                           pinnedComment.moderation.moderator == user?.id
                             ? 'me'
                             : (pinnedComment.moderation.user as User).id
                         }`}
                       >
-                        {pinnedComment.moderation?.moderator == user?.id ? (
-                          'Du'
-                        ) : (
-                          <>{pinnedComment.moderation?.user.username}</>
-                        )}
+                        {
+                          /* eslint-disable-next-line eqeqeq */
+                          pinnedComment.moderation?.moderator == user?.id ? (
+                            'Du'
+                          ) : (
+                            <>{pinnedComment.moderation?.user.username}</>
+                          )
+                        }
                       </Link>{' '}
                       <span>
                         {isMe
