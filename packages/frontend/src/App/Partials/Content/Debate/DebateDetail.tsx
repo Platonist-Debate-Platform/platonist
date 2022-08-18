@@ -99,7 +99,6 @@ export const DebateDetailBase: FunctionComponent<DebateDetailProps> = ({
       {debate && (
         <>
           <TypingUsersItem debateId={debate.id} />
-          <TypingUsersItem debateId={debate.id} />
           <div className="jumbotron-fullscreen jumbotron jumbotron-debate jumbotron-fluid">
             <div className="jumbotron-content">
               <Container>

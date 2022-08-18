@@ -13,7 +13,11 @@ import { useSelector } from 'react-redux';
 import { FormContext } from './Context';
 import { FormResolver } from './FormResolver';
 import { FormContextValue, FormData, FormEvent } from './Types';
-import { GlobalState, PrivateRequestKeys } from '@platonist/library';
+import {
+  GlobalState,
+  PrivateRequestKeys,
+  PublicRequestKeys,
+} from '@platonist/library';
 
 export type OnContextChange<D> = (
   key: string,
@@ -53,6 +57,10 @@ export const Form: FunctionComponent<PropsWithChildren<FormProps>> = <
     GlobalState,
     GlobalState[PrivateRequestKeys.User]
   >((state) => state.user);
+  const { result: debate } = useSelector<
+    GlobalState,
+    GlobalState[PublicRequestKeys.Debate]
+  >((state) => state.debate);
 
   const context = useContext(
     FormContext as React.Context<FormContextValue<Data> | undefined>,
@@ -90,11 +98,12 @@ export const Form: FunctionComponent<PropsWithChildren<FormProps>> = <
           props.socket.emit('typing', {
             comment: context.data,
             user: user,
+            debate: debate,
           });
         }
       }
     },
-    [props.socket, user, context, onKeyDown],
+    [props.socket, user, debate, context, onKeyDown],
   );
 
   useEffect(() => {

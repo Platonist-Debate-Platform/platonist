@@ -15,21 +15,27 @@ const socket = require('socket.io');
 const isStaging = process.env.NODE_ENV === 'staging' ? true : false;
 const isProduction = process.env.NODE_ENV === 'production' ? true : false;
 
-module.exports = () => {
+module.exports = async () => {
+  const debates = await strapi.services.debate.find();
   var io = socket(strapi.server, {
     cors: {
-      origin: (isProduction && 'https://platonist.de') || (isStaging && 'https://staging.platonist.de') || 'http://localhost:3000',
-    }
+      origin:
+        (isProduction && 'https://platonist.de') ||
+        (isStaging && 'https://staging.platonist.de') ||
+        'http://localhost:3000',
+    },
   });
   const clients = [];
-  const typingUsers = [];
+  const rooms = new Map();
+  debates.forEach((debate) => {
+    rooms.set(debate.id, []);
+  });
 
-  io.on('connection', function(socket){
-    
+  io.on('connection', function (socket) {
     // TODO - Change ID
-    socket.user_id = (Math.random() * 100000000000000);
+    socket.user_id = Math.random() * 100000000000000;
     clients.push(socket);
-    
+
     socket.on('disconnect', () => {
       // Remove client on disconnect
       clients.forEach((client, index) => {
@@ -38,50 +44,59 @@ module.exports = () => {
         }
       });
     });
-    socket.on("typing", (data) => {
-      // console.log(data);
-      const { user } = data;
+
+    socket.on(`notification`, (data) => {
+      const room = rooms.get(data.id);
+      io.emit(`debate:${data.id}`, { typingUsers: room });
+    });
+
+    socket.on('typing', (data) => {
+      const { user, debate } = data;
+      const room = rooms.get(debate.id);
       if (data.comment.comment.value.length > 5) {
-        if (!typingUsers.find(u => u.user.username === user.username)) {
-          typingUsers.push(data);
+        if (!room.find((u) => u.user.username === user.username)) {
+          room.push(data);
+          rooms.set(debate.id, room);
         } else {
-          const index = typingUsers.indexOf(ele => ele.user.username === user.username);
-          if (index > 0) {
-            typingUsers[index] = data;
+          const index = room.findIndex(
+            (ele) => ele.user.username === user.username,
+          );
+          if (index > -1) {
+            room[index] = data;
           }
         }
-        io.emit("typing", {
-          typingUsers: typingUsers
-        });
+        io.emit(`debate:${debate.id}`, { typingUsers: room });
       } else {
-        
-        const index = typingUsers.indexOf(ele => ele.user.username === user.username);
-        typingUsers.splice(index, 1);
-        io.emit("typing", {
-          typingUsers: typingUsers
-        });
+        const index = room.findIndex(
+          (ele) => ele.user.username === user.username,
+        );
+        if (index > -1) {
+          room.splice(index, 1);
+          rooms.set(debate.id, room);
+        }
+        io.emit(`debate:${debate.id}`, { typingUsers: room });
       }
-    })
+    });
   });
-  
+
   const models = [];
-  
-  Object.keys(strapi.models).forEach(key => {
+
+  Object.keys(strapi.models).forEach((key) => {
     if (key !== 'core_store' && key !== 'strapi_webhooks') {
       models.push(key);
     }
-  }); 
-  
+  });
+
   strapi.io = io;
   strapi.emitSocket = {};
-  
-  models.forEach(model => {
+
+  models.forEach((model) => {
     Object.assign(strapi.emitSocket, {
       [model]: {
-        create: data => io.emit(`${model}.create`, data),
-        delete: data => io.emit(`${model}.delete`, data),
-        update: data => io.emit(`${model}.update`, data),
-      }, 
+        create: (data) => io.emit(`${model}.create`, data),
+        delete: (data) => io.emit(`${model}.delete`, data),
+        update: (data) => io.emit(`${model}.update`, data),
+      },
     });
   });
 };

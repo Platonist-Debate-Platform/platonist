@@ -6,7 +6,6 @@ import './TypingUsersItem.scss';
 import { createSocket } from '../../Hooks';
 
 export interface TypingUsersProps {
-  // typingUsers: TypingUsers[];
   debateId: number;
 }
 
@@ -21,12 +20,13 @@ export const TypingUsersItem: React.FunctionComponent<TypingUsersProps> = (
   const [typingUsers, setTypingUsers] = useState<TypingUsers[]>([]);
 
   useEffect(() => {
-    socket.on('typing', (data) => {
+    socket.emit(`notification`, { id: props.debateId });
+    socket.on(`debate:${props.debateId}`, (data) => {
       if (data.typingUsers) {
         setTypingUsers(data.typingUsers);
       }
     });
-  }, [socket, typingUsers]);
+  }, [props.debateId, socket, user]);
 
   return (
     <>
@@ -34,7 +34,6 @@ export const TypingUsersItem: React.FunctionComponent<TypingUsersProps> = (
         <div className="typing-users-parent">
           {typingUsers &&
             typingUsers.map((e) => {
-              if (e.user.username === user?.username) return null;
               return (
                 <>
                   <div
@@ -42,7 +41,11 @@ export const TypingUsersItem: React.FunctionComponent<TypingUsersProps> = (
                     key={`typing-user-${e.user.username}`}
                   >
                     <div>
-                      <span>{e.user.username} is typing</span>
+                      {e.user.username !== user?.username ? (
+                        <span>{e.user.username} schreibt</span>
+                      ) : (
+                        <span>Du schreibst</span>
+                      )}
                       <span className="loading-fade">&nbsp; . . .</span>
                     </div>
                   </div>
