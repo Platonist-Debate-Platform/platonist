@@ -193,9 +193,6 @@ export class ImageCropBase extends React.Component<
   public render() {
     const { crop, src } = this.state;
     const { image } = this.props;
-
-    console.log(image);
-
     return (
       <>
         {src && (

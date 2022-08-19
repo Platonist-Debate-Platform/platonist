@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useEffect } from 'react';
+import { FunctionComponent, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Col, Container, Row } from 'reactstrap';
 
@@ -43,8 +43,8 @@ export const PageProfile: FunctionComponent = () => {
         <Container>
           <Row>
             <Col>
-              <h2>Your profile</h2>
-              Welcome <b>{user.username}</b>
+              <h2>Dein Profil</h2>
+              Willkommen <b>{user.username}</b>
             </Col>
           </Row>
           <Row>

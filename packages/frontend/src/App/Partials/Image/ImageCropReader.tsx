@@ -203,7 +203,9 @@ export const ImageCropReader: React.FunctionComponent<ImageCropReaderProps> = (
           </ReactCrop>
         </div>
       ) : (
-        user?.avatar && !props.showDropZone && !src && <Img {...user.avatar} />
+        user?.avatar &&
+        !props.showDropZone &&
+        !src && <Img {...(user.avatarOriginal as Image)} />
       )}
     </>
   );

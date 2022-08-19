@@ -37,7 +37,7 @@ const profileFormData: FormDataConfig<Partial<User>>[] = [
     editable: true,
     key: 'firstName',
     required: true,
-    title: 'First name',
+    title: 'Vorname',
     type: FormInputTypes.String,
     validate: FormValidationTypes.Length,
   },
@@ -45,7 +45,7 @@ const profileFormData: FormDataConfig<Partial<User>>[] = [
     editable: true,
     key: 'lastName',
     required: true,
-    title: 'Last name',
+    title: 'Nachname',
     type: FormInputTypes.String,
     validate: FormValidationTypes.Length,
   },
@@ -53,7 +53,7 @@ const profileFormData: FormDataConfig<Partial<User>>[] = [
     editable: false,
     key: 'username',
     required: true,
-    title: 'Username',
+    title: 'Benutzername',
     type: FormInputTypes.String,
     validate: FormValidationTypes.Length,
   },
@@ -125,7 +125,7 @@ export const ProfileFormBase: FunctionComponent<{
           </InputGroup>
         </FormGroup>
         <FormGroup>
-          <Label>Password</Label>
+          <Label>Passwort</Label>
           <InputGroup>
             <Input
               type="password"
@@ -148,7 +148,7 @@ export const ProfileFormBase: FunctionComponent<{
             onClick={(ev) => handleSubmit(ev as any)}
             disabled={userState.status === RequestStatus.Updating}
           >
-            Save <i className="fa fa-save" />
+            Speichern <i className="fa fa-save" />
           </SubmitButton>
         </div>
       </Form>

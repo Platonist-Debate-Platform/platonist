@@ -1,12 +1,7 @@
 import './Image.scss';
 
 import { stringify } from 'qs';
-import React, {
-  FunctionComponent,
-  useCallback,
-  useEffect,
-  useState,
-} from 'react';
+import { FunctionComponent, useCallback, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
@@ -75,12 +70,16 @@ export const ProfileImage: FunctionComponent = () => {
   return (
     <div className="profile-image">
       <Link to={encodeLink(target)}>
-        {avatar ? <Image {...avatar} /> : <Image {...noImage} isLocal={true} />}
+        {avatar ? (
+          <Image {...(user?.avatarOriginal as ImageProps)} />
+        ) : (
+          <Image {...noImage} isLocal={true} />
+        )}
       </Link>
       <ProfileImageEdit
         from={location.pathname}
-        image={user?.avatarOriginal}
-        imageCropped={avatar}
+        image={user?.avatar}
+        imageCropped={user?.avatar}
         onFinished={handleFinished}
         to={target}
       />
