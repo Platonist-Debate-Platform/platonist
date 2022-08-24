@@ -84,7 +84,8 @@ export const CommentReplies: FunctionComponent<CommentRepliesProps> = ({
           ) : (
             <p className="small text-danger">
               <i className="fa fa-exclamation-triangle"></i>
-              This Comment is Disputed, replying is disabled
+              Dieser Kommentar wurde von der Moderation blockiert, da er gegen
+              die Debattenrichtlinien verstößt.
             </p>
           )}
         </>
@@ -112,7 +113,7 @@ export const CommentReplies: FunctionComponent<CommentRepliesProps> = ({
               {!(
                 status === RequestStatus.Updating ||
                 status === RequestStatus.Initial
-              ) && <>No Comments yet!</>}
+              ) && <>Keine Kommentare bis jetzt!</>}
             </>
           )}
         </div>

@@ -68,7 +68,7 @@ export const PageLogout: FunctionComponent = () => {
       dispatch(
         alertAction.add({
           id: 'logout_success',
-          message: 'You have been logged out successful',
+          message: 'Du hast dich erfolgreich ausgeloggt.',
           state: ToggleType.Show,
           type: AlertTypes.Success,
         }),

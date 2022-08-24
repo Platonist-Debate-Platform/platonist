@@ -31,7 +31,7 @@ const registerFormData: FormDataConfig<Partial<RegisterData>>[] = [
     editable: true,
     key: 'username',
     required: true,
-    title: 'Username',
+    title: 'Benutzername',
     type: FormInputTypes.String,
     validate: FormValidationTypes.Length,
   },
@@ -39,7 +39,7 @@ const registerFormData: FormDataConfig<Partial<RegisterData>>[] = [
     editable: true,
     key: 'firstName',
     required: true,
-    title: 'First name',
+    title: 'Vorname',
     type: FormInputTypes.String,
     validate: FormValidationTypes.Length,
   },
@@ -47,7 +47,7 @@ const registerFormData: FormDataConfig<Partial<RegisterData>>[] = [
     editable: true,
     key: 'lastName',
     required: true,
-    title: 'Last name',
+    title: 'Nachname',
     type: FormInputTypes.String,
     validate: FormValidationTypes.Length,
   },
@@ -65,7 +65,7 @@ const registerFormData: FormDataConfig<Partial<RegisterData>>[] = [
     editable: true,
     key: 'password',
     required: true,
-    title: 'Password',
+    title: 'Passwort',
     type: FormInputTypes.Password,
     validate: FormValidationTypes.Password,
   },
@@ -75,7 +75,7 @@ const registerFormData: FormDataConfig<Partial<RegisterData>>[] = [
     editable: true,
     key: 'passwordRepeat',
     required: true,
-    title: 'Repeat password',
+    title: 'Passwort wiederholen',
     type: FormInputTypes.Password,
     validate: FormValidationTypes.Equal,
     validateOptions: {},
@@ -153,7 +153,7 @@ export const RegisterFormWithoutState: FunctionComponent<RegisterFormProps> = ({
             preventDefault={true}
             type="submit"
           >
-            Sign up <i className="fa fa-user-plus" />
+            Registrieren <i className="fa fa-user-plus" />
           </SubmitButton>
         </div>
       </Form>

@@ -3,11 +3,12 @@ import { defineMessages } from 'react-intl';
 const MESSAGES = defineMessages({
   backHome: {
     id: 'NotFound.backHome',
-    defaultMessage: 'Back to Homepage',
+    defaultMessage: 'Zurück zur Startseite.',
   },
   teaser: {
     id: 'NotFound.teaser',
-    defaultMessage: 'Sorry ... something went wrong. The page you were looking for doesn\'t exist.',
+    defaultMessage:
+      'Sorry ... etwas ist schief gelaufen. Die gesuchte Seite existiert nicht. ',
   },
   ooops: {
     id: 'NotFound.Ooops',

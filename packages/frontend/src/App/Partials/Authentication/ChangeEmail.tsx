@@ -31,7 +31,7 @@ const changeEmailFormData: FormDataConfig<Partial<ChangeEmailData>>[] = [
     editable: true,
     key: 'email',
     required: true,
-    title: 'New E-Mail',
+    title: 'Neue Emailadresse',
     type: FormInputTypes.Email,
     validate: FormValidationTypes.Email,
   },
@@ -41,7 +41,7 @@ const changeEmailFormData: FormDataConfig<Partial<ChangeEmailData>>[] = [
     editable: true,
     key: 'emailRepeat',
     required: true,
-    title: 'Repeat E-mail',
+    title: 'Emailadresse wiederholen',
     type: FormInputTypes.Email,
     validate: FormValidationTypes.Equal,
     validateOptions: {},
@@ -115,7 +115,7 @@ export const ChangeEmail: FunctionComponent<{
             preventDefault={true}
             type="submit"
           >
-            Save <i className="fa fa-save" />
+            Speichern <i className="fa fa-save" />
           </SubmitButton>
         </div>
       </Form>

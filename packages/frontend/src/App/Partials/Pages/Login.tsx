@@ -33,7 +33,7 @@ export const PageLogin: FunctionComponent<PageLoginProps> = ({
         <Container>
           <Row>
             <Col md={8} className="offset-md-2">
-              <h2>Sign in / up</h2>
+              <h2>Login /Registrierung</h2>
               <Authentication infoText={infoText} />
             </Col>
           </Row>

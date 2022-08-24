@@ -150,39 +150,41 @@ export const CommentList: FunctionComponent<CommentListProps> = ({
               path={path}
             />
           </Col>
-          <Col md={6} >
+          <Col md={6}>
             <h3>Kommentare</h3>
-            <div
-              className="comment-list-root"
-            >
-            <div style={{
-              margin: "1em"
-            }}>
-            {(comments &&
-              comments.length &&
-              comments.map((item, index) => {
-                  if (!item.moderator) return <CommentListItem
-                    canEdit={canWrite}
-                    debateId={debateId}
-                    isDisputed={item.disputed}
-                    isDetail={false}
-                    key={`comment_list_item_${item.id}_${index}`}
-                    match={match}
-                    onSubmit={handleSubmit}
-                    path={path}
-                    {...item}
-                  />
-                  return null;
-                }
-              )) || (
-              <>
-                {!(
-                  status === RequestStatus.Updating ||
-                  status === RequestStatus.Initial
-                ) && <>No Comments yet!</>}
-              </>
-            )}
-            </div>
+            <div className="comment-list-root">
+              <div
+                style={{
+                  margin: '1em',
+                }}
+              >
+                {(comments &&
+                  comments.length &&
+                  comments.map((item, index) => {
+                    if (!item.moderator)
+                      return (
+                        <CommentListItem
+                          canEdit={canWrite}
+                          debateId={debateId}
+                          isDisputed={item.disputed}
+                          isDetail={false}
+                          key={`comment_list_item_${item.id}_${index}`}
+                          match={match}
+                          onSubmit={handleSubmit}
+                          path={path}
+                          {...item}
+                        />
+                      );
+                    return null;
+                  })) || (
+                  <>
+                    {!(
+                      status === RequestStatus.Updating ||
+                      status === RequestStatus.Initial
+                    ) && <>Keine Kommentare bis jetzt!</>}
+                  </>
+                )}
+              </div>
             </div>
           </Col>
         </Row>

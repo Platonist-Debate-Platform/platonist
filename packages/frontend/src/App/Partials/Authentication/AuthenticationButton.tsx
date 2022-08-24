@@ -72,7 +72,8 @@ export const AuthenticationButton: FunctionComponent<
           <Link className="btn btn-primary" to={encodeLink(pathToAction)}>
             {component || (
               <>
-                Sign in <i className="fa fa-sign-in-alt" />
+                Login
+                <i className="fa fa-sign-in-alt" />
               </>
             )}
           </Link>
@@ -81,7 +82,8 @@ export const AuthenticationButton: FunctionComponent<
           <Button color="primary" onClick={handleClick}>
             {component || (
               <>
-                Sign in <i className="fa fa-sign-in-alt" />
+                Login
+                <i className="fa fa-sign-in-alt" />
               </>
             )}
           </Button>

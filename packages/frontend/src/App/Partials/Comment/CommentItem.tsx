@@ -39,7 +39,6 @@ export const CommentItem: FunctionComponent<CommentItemProps> = ({
   user,
 }) => {
   const author = item.user as User;
-  // const { user: commentUser } = useUser(author.id);
   const { location } = useSelector<
     GlobalState,
     GlobalState[PublicRequestKeys.Router]
@@ -49,10 +48,7 @@ export const CommentItem: FunctionComponent<CommentItemProps> = ({
 
   const isMe = user?.id === author?.id ? true : false;
 
-  // const { result: res } = useRoles(PrivateRequestKeys.Role, "1");
-  // console.log(res);
   if (author) {
-    // const { result } = commentUser;
     return (
       <>
         <CardSubtitle>
@@ -89,15 +85,17 @@ export const CommentItem: FunctionComponent<CommentItemProps> = ({
                 item.moderation.status === CommentStatus.Disputed && (
                   <p className="small text-danger">
                     {' '}
-                    <i className="fa fa-exclamation-triangle" /> This comment is
-                    disputed by a moderator. Editing and replying is disabled.
+                    <i className="fa fa-exclamation-triangle" /> Dieser
+                    Kommentar wurde von der Moderation blockiert, da er gegen
+                    die Debattenrichtlinien verstößt.
                   </p>
                 )}
               {item.moderation &&
                 item.moderation.status === CommentStatus.Blocked && (
                   <p className="small text-danger">
-                    <i className="fa fa-exclamation-triangle" /> This comment is
-                    blocked by a moderator. Editing is disabled.
+                    <i className="fa fa-exclamation-triangle" /> Dieser
+                    Kommentar wurde von der Moderation blockiert, da er gegen
+                    die Debattenrichtlinien verstößt.
                   </p>
                 )}
               {item.moderation && item.moderation.reason && (
@@ -137,7 +135,8 @@ export const CommentItem: FunctionComponent<CommentItemProps> = ({
               ) : (
                 <p className="small text-danger">
                   <i className="fa fa-exclamation-triangle" />
-                  This comment is blocked by a moderator. Editing is disabled.
+                  Dieser Kommentar wurde von der Moderation blockiert, da er
+                  gegen die Debattenrichtlinien verstößt.
                 </p>
               )}
             </>

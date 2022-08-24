@@ -67,7 +67,7 @@ export const DebateSettings: FunctionComponent<DebateSettingsProps> = ({
                     className="btn btn-primary btn-sm"
                     title="Create a new debate"
                   >
-                    <i className="fa fa-plus" /> Add new debate
+                    <i className="fa fa-plus" /> Füge neue Debatte hinzu
                   </Link>
                 </Col>
               </Row>
@@ -81,7 +81,7 @@ export const DebateSettings: FunctionComponent<DebateSettingsProps> = ({
               className="btn btn-primary btn-sm"
               title="Edit this debate"
             >
-              <i className="fa fa-edit" /> Edit
+              <i className="fa fa-edit" /> Bearbeiten
             </Link>
           </span>
         )}
@@ -92,7 +92,7 @@ export const DebateSettings: FunctionComponent<DebateSettingsProps> = ({
               className="btn btn-danger btn-sm"
               title="Delete this debate"
             >
-              <i className="fa fa-trash" /> Delete
+              <i className="fa fa-trash" /> Löschen
             </Link>
           </span>
         )}

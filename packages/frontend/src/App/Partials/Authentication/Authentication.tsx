@@ -10,9 +10,8 @@ export interface AuthenticationProps {
 export const Authentication: FunctionComponent<AuthenticationProps> = ({
   infoText,
 }) => {
-
   const [open, setOpen] = useState(false);
-  
+
   const handleClick = () => {
     setOpen(!open);
   };
@@ -21,7 +20,9 @@ export const Authentication: FunctionComponent<AuthenticationProps> = ({
     <div className="authentication">
       {infoText || (
         <p>
-          In order to participate you'll have to sign in. If you don't have an account you could register an account.
+          ​​Zur Teilnahme an den Debatten ist der Login mit deinem Konto
+          erforderlich. Wenn Du noch kein Konto bei Platonist angelegt hast,
+          registriere dich bitte hier.
         </p>
       )}
       <Collapse isOpen={!open}>
@@ -36,9 +37,9 @@ export const Authentication: FunctionComponent<AuthenticationProps> = ({
       </Collapse>
       <div className="authentication-modal-toggle">
         <Button size="sm" color="none" onClick={handleClick}>
-          {open ? 'Or sign in here' : 'Or sign up now'}
+          {open ? 'Hier einloggen' : 'Hier registrieren'}
         </Button>
       </div>
     </div>
   );
-}
+};

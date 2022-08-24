@@ -94,16 +94,15 @@ export const DebateDelete: React.FunctionComponent<DebateDeleteProps> = ({
         footer={
           <>
             <button className="btn btn-primary btn-sm" onClick={handleCancel}>
-              Cancel
+              Abbrechen
             </button>
             <button className="btn btn-danger btn-sm" onClick={handleDelete}>
-              Delete
+              Löschen
             </button>
           </>
         }
       >
-        You are about to delete the Debate <b>{debate.title}</b>, are you really
-        sure about it?
+        Du löscht die Debatte <b>{debate.title}</b>. Bist du dir sicher?
       </ModalWithRoute>
       {shouldRedirect && <Redirect to={props.from} />}
     </>

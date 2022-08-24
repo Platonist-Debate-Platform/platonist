@@ -32,7 +32,7 @@ const changePasswordFormData: FormDataConfig<Partial<ChangePasswordData>>[] = [
     editable: true,
     key: 'oldPassword',
     required: true,
-    title: 'Old password',
+    title: 'Altes Passwort',
     type: FormInputTypes.Password,
     validate: FormValidationTypes.Length,
   },
@@ -41,7 +41,7 @@ const changePasswordFormData: FormDataConfig<Partial<ChangePasswordData>>[] = [
     editable: true,
     key: 'password',
     required: true,
-    title: 'Password',
+    title: 'Neues Passwort',
     type: FormInputTypes.Password,
     validate: FormValidationTypes.Password,
   },
@@ -51,7 +51,7 @@ const changePasswordFormData: FormDataConfig<Partial<ChangePasswordData>>[] = [
     editable: true,
     key: 'passwordRepeat',
     required: true,
-    title: 'Repeat password',
+    title: 'Neues Passwort wiederholen',
     type: FormInputTypes.Password,
     validate: FormValidationTypes.Equal,
     validateOptions: {},
@@ -132,7 +132,7 @@ export const ChangePassword: FunctionComponent<{
             preventDefault={true}
             type="submit"
           >
-            Save <i className="fa fa-save" />
+            Speichern <i className="fa fa-save" />
           </SubmitButton>
         </div>
       </Form>

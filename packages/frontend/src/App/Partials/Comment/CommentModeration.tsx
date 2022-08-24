@@ -38,7 +38,7 @@ const commentFormData: FormDataConfig<Partial<Moderation>>[] = [
     editable: true,
     key: 'status',
     required: true,
-    title: 'Set comment Status',
+    title: 'Setze Kommentarstatus',
     type: FormInputTypes.Select,
     selectValues: [
       CommentStatus.Active,
@@ -51,13 +51,14 @@ const commentFormData: FormDataConfig<Partial<Moderation>>[] = [
     editable: true,
     key: 'reason',
     required: false,
-    title: 'Reason for disputing or blocking this Comment',
+    title:
+      'Reason for disputing or blocking this Comment. Grund, weswegen dieser Kommentar nicht toleriert wird.',
     type: FormInputTypes.Text,
     validate: FormValidationTypes.Words,
   },
 ];
 
-const ModerationModalHeader = () => <>Moderate Comment</>;
+const ModerationModalHeader = () => <>Moderiere den Komentar</>;
 
 export const CommentModeration: FunctionComponent<CommentModerationProps> = ({
   commentId,
@@ -186,7 +187,7 @@ export const CommentModeration: FunctionComponent<CommentModerationProps> = ({
             className="btn btn-green btn-small"
             onClick={handleSubmit}
           >
-            Save
+            Senden
           </SubmitButton>
         </FormProvider>
       )}

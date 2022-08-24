@@ -133,7 +133,7 @@ export const ModerationPinnedItem: React.FunctionComponent<
                       )}
                     </Link>{' '}
                     <span>
-                      commented{' '}
+                      kommentierte{' '}
                       <i>
                         <TimeAgo date={pinnedComment.created_at} />
                       </i>{' '}
@@ -221,7 +221,7 @@ export const ModerationPinnedItem: React.FunctionComponent<
                     <>{(pinnedComment?.user as User).username}</>
                   </Link>{' '}
                   <span>
-                    commented{' '}
+                    kommentierte{' '}
                     <i>
                       <TimeAgo date={pinnedComment.created_at} />
                     </i>{' '}

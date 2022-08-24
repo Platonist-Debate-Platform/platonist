@@ -50,9 +50,9 @@ const DebateModalHeader: FunctionComponent<{
 }> = ({ method }) => {
   switch (method) {
     case RestMethodKeys.Create:
-      return <>Create a new Debate</>;
+      return <>Erstelle eine neue Debatte</>;
     case RestMethodKeys.Update:
-      return <>Edit this Debate</>;
+      return <>Bearbeite diese Debatte</>;
     default:
       return null;
   }
@@ -328,7 +328,7 @@ export const DebateForm: FunctionComponent<DebateFormProps> = ({
             onClick={handleSubmit}
             disabled={status === RequestStatus.Updating}
           >
-            Save
+            Speichern
           </SubmitButton>
         }
         header={<DebateModalHeader method={method} />}

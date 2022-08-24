@@ -40,7 +40,7 @@ export const ProfileChangeEmailForm: FunctionComponent = () => {
   return (
     <ModalWithRoute
       from={location.pathname}
-      header="Change E-Mail"
+      header="E-Mail ändern"
       onClosed={handleClose}
       to={location.pathname + queryParameter}
     >

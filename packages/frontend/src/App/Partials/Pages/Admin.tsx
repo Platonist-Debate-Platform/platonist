@@ -57,7 +57,7 @@ export const PageAdmin: FunctionComponent = () => {
           {showLoginForm && (
             <Col>
               <p>
-                Please <Link to="/auth/login">Login</Link>
+                Bitte <Link to="/auth/login">einloggen</Link>
               </p>
             </Col>
           )}

@@ -7,25 +7,23 @@ import { Button, Col, Container, Row } from 'reactstrap';
 
 export const CookieConsent: FunctionComponent = () => {
   const [value, updateCookie] = useCookie('cookie-consent');
-  
-  const updateCookieHandler= () => {
-    updateCookie('true')
-  }
+
+  const updateCookieHandler = () => {
+    updateCookie('true');
+  };
 
   return !Boolean(value) ? (
     <div className="cookie-consent">
       <Container fluid={true}>
         <Row>
-          <Col md={6}>
-            We are using cookies
-          </Col>
+          <Col md={6}>Wir benutzen Cookies.</Col>
           <Col md={6}>
             <Button color="green" onClick={() => updateCookieHandler()}>
-              Accept
+              Akzeptieren
             </Button>
           </Col>
         </Row>
       </Container>
     </div>
   ) : null;
-}
+};

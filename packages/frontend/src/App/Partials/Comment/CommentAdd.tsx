@@ -74,7 +74,7 @@ export const CommentAdd: FunctionComponent<CommentAddProps> = ({
                   className="mr-3"
                   isBtn={true}
                   pathname={location.pathname}
-                  title="Cancel"
+                  title="Abbrechen"
                 />
               }
             />

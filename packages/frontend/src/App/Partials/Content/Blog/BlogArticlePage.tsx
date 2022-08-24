@@ -1,9 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import {
-  Blog,
-  WithConfigProps,
-  RequestStatus,
-} from '@platonist/library';
+import { Blog, WithConfigProps, RequestStatus } from '@platonist/library';
 import React, { useEffect } from 'react';
 import {
   useLocation,
@@ -47,7 +43,7 @@ const BlogArticlePage: React.FunctionComponent<BlogArticlePageProps> = (
   const prevRouterProps = usePrevious(routeProps);
 
   useEffect(() => {
-    const match = routeProps.match as Match<{ title: string }>;
+    // const match = routeProps.match as Match<{ title: string }>;
     const requestProps: RequestSendProps<Blog> = {
       pathname: `blog-articles/${location.state.id}`,
       method: 'GET',
@@ -110,13 +106,13 @@ const BlogArticlePage: React.FunctionComponent<BlogArticlePageProps> = (
         </div>
         <section className="blog-detail-page">
           <Container>
-            {
-              blog.content && <ContentResolver
+            {blog.content && (
+              <ContentResolver
                 contents={blog.content}
                 isAdmin={isAdmin}
                 path={path}
-              />    
-            }
+              />
+            )}
           </Container>
         </section>
       </>

@@ -41,7 +41,7 @@ const loginFormData: FormDataConfig<Partial<LoginData>>[] = [
     editable: true,
     key: 'password',
     required: true,
-    title: 'Password',
+    title: 'Passwort',
     type: FormInputTypes.Password,
     validate: FormValidationTypes.Length,
     validateOptions: {
@@ -101,7 +101,7 @@ export const LoginFormWithoutState: FunctionComponent<LoginFormProps> = ({
             preventDefault={true}
             type="submit"
           >
-            Sign in <i className="fa fa-sign-in-alt" />
+            Login <i className="fa fa-sign-in-alt" />
           </SubmitButton>
         </div>
       </Form>

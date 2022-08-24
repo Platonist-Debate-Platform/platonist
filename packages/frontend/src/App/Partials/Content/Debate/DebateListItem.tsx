@@ -11,6 +11,7 @@ import {
 import { ArticleItem } from '../../Article';
 import { DebateSettings } from './Settings';
 import { DebateLink } from '../../../../Library';
+import { GERMAN } from '../../../i18n';
 
 export interface DebateListItemProps extends Debate {
   pageTitle: string;
@@ -56,7 +57,7 @@ export const DebateListItem: FunctionComponent<DebateListItemProps> = ({
           </Col>
           <Col className="text-right" md={4}>
             <small>
-              Comments <Badge>{comments?.length || 0}</Badge>
+              {GERMAN.comments.comments} <Badge>{comments?.length || 0}</Badge>
             </small>
           </Col>
           <Col md={6}>
@@ -71,7 +72,7 @@ export const DebateListItem: FunctionComponent<DebateListItemProps> = ({
           </Col>
           <Col className="text-right" md={12}>
             <DebateLink className="btn btn-primary" debate={debate} to={href}>
-              Debate now <i className="fa fa-comments" />
+              Debatier jetzt <i className="fa fa-comments" />
             </DebateLink>
           </Col>
         </Row>

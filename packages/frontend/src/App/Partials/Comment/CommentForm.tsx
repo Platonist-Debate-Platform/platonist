@@ -195,7 +195,8 @@ export const CommentForm: FunctionComponent<CommentFormProps> = ({
               preventDefault={true}
               type="submit"
             >
-              Save Comment <i className="fa fa-cloud-upload-alt" />
+              Kommentar senden
+              <i className="fa fa-cloud-upload-alt" />
             </SubmitButton>
           </div>
         </Form>

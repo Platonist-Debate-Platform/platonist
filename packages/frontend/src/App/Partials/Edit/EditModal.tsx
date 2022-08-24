@@ -50,7 +50,7 @@ export const EditModalWithoutState: FunctionComponent<EditModalProps> = ({
         className={className}
         onClosed={() => setRedirect(true)}
       >
-        <ModalHeader toggle={toggle}>Modal title</ModalHeader>
+        <ModalHeader toggle={toggle}>Modaltitel</ModalHeader>
         <ModalBody>{children}</ModalBody>
         <ModalFooter>
           <Button color="primary" onClick={toggle}>

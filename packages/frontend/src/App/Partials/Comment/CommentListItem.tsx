@@ -41,11 +41,6 @@ export interface CommentListItemProps extends Comment {
   path: string;
 }
 
-/**
- * TODO: this needs to fix. Bug with nested comments
- * @param param0
- * @returns
- */
 export const CommentListItem: FunctionComponent<CommentListItemProps> = ({
   canCreate,
   canEdit,
@@ -222,7 +217,8 @@ export const CommentListItem: FunctionComponent<CommentListItemProps> = ({
                         className="p-0 mr-3 btn btn-none btn-sm"
                         title="Show replies"
                       >
-                        <Badge>{props.replyCount}</Badge> {GERMAN.comments.comments}{' '}
+                        <Badge>{props.replyCount}</Badge>{' '}
+                        {GERMAN.comments.comments}{' '}
                         <i className="fa fa-chevron-right" />
                       </div>
                     )}

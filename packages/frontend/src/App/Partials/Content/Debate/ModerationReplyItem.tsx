@@ -117,15 +117,21 @@ export const ModerationReplyItem: React.FunctionComponent<
                       {user?.id === author?.id ? 'You' : <>{user?.username}</>}
                     </Link>{' '}
                     <span>
-                      commented{' '}
+                      kommentierte{' '}
                       <i>
-                        <TimeAgo date={props.comment.created_at} />
+                        <TimeAgo
+                          format={formatter}
+                          date={props.comment.created_at}
+                        />
                       </i>{' '}
                       {createdAt !== updatedAt && (
                         <>
-                          and edited this debate{' '}
+                          und editierte diesen Kommentar{' '}
                           <i>
-                            <TimeAgo date={props.comment.updated_at} />
+                            <TimeAgo
+                              format={formatter}
+                              date={props.comment.updated_at}
+                            />
                           </i>
                           .
                         </>
