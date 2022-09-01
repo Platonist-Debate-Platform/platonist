@@ -9,7 +9,7 @@ export const PrivateRoute: FunctionComponent<RouteProps> = (props) => {
   return !isAuthenticated ? (
     <PageLogin
       infoText={
-        <p>In order to see this page you'll have to sign in. If you don't have an account you could register an account.</p>
+        <p>​​Zur Teilnahme an den Debatten ist der Login mit deinem Konto erforderlich. Wenn Du noch kein Konto bei Platonist angelegt hast, registriere dich bitte hier.</p>
       }
     />
   ) : (

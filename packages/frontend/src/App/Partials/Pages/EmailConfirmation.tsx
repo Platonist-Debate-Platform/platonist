@@ -30,9 +30,9 @@ export const PageEmailConfirmation: FunctionComponent = () => {
         pathname: '/auth/email-confirmation',
         search: location.search,
       });
-      setSuccessful(true);
     }
-  }, [isAuthenticated, location.search, send, successful, user]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   if (
     !isAuthenticated ||

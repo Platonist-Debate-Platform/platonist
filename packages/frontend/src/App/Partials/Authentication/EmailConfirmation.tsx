@@ -32,15 +32,10 @@ export const EmailConfirmation: FunctionComponent<{}> = () => {
           <Col>
             <Alert color="info" isOpen={visible} toggle={onDismiss}>
               Dein Profil ist noch nicht bestätigt. Bitte überprüfe Deinen
-              Postfach. Your account email is not confirmed, please check your
-              mailbox and double opt-in. Wenn du keine Mail erhalten hast,{' '}
+              Postfach. Wenn du keine Mail erhalten hast,{' '}
               <Link className="alert-link" to="/user/me?modal=change-email">
-                ändere Deine Emailadresse{' '}
+                ändere Deine Emailadresse. {' '}
               </Link>{' '}
-              oder{' '}
-              <Link className="alert-link" to="/auth/resend-confirmation">
-                sende erneut die Bestätigungsemail.
-              </Link>
             </Alert>
           </Col>
         </Row>

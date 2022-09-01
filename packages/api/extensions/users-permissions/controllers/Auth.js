@@ -61,7 +61,7 @@ module.exports = {
           null,
           formatError({
             id: 'Auth.form.error.email.provide',
-            message: 'Please provide your username or your e-mail.',
+            message: 'Bitte gebe deinen Nutzername oder deine Email-Adresse ein.',
           }),
         );
       }
@@ -72,7 +72,7 @@ module.exports = {
           null,
           formatError({
             id: 'Auth.form.error.password.provide',
-            message: 'Please provide your password.',
+            message: 'Bitte gib deinen Passwort ein.',
           }),
         );
       }
@@ -99,7 +99,7 @@ module.exports = {
           null,
           formatError({
             id: 'Auth.form.error.invalid',
-            message: 'Identifier or password invalid.',
+            message: 'Passwort ungültig oder falsch.',
           }),
         );
       }
@@ -109,7 +109,7 @@ module.exports = {
           null,
           formatError({
             id: 'Auth.form.error.blocked',
-            message: 'Your account has been blocked by an administrator',
+            message: 'Dein Profil wurde von Moderator gesperrt.',
           }),
         );
       }
@@ -135,7 +135,7 @@ module.exports = {
           null,
           formatError({
             id: 'Auth.form.error.invalid',
-            message: 'Identifier or password invalid.',
+            message: 'Passwort ungültig.',
           }),
         );
       } else {
@@ -212,7 +212,7 @@ module.exports = {
           null,
           formatError({
             id: 'Auth.form.error.code.provide',
-            message: 'Incorrect code provided.',
+            message: 'Inkorrekter Code zugestellt.',
           }),
         );
       }
@@ -245,7 +245,7 @@ module.exports = {
         null,
         formatError({
           id: 'Auth.form.error.password.matching',
-          message: 'Passwords do not match.',
+          message: 'Passwörter stimmen nicht überein.',
         }),
       );
     } else {
@@ -253,7 +253,7 @@ module.exports = {
         null,
         formatError({
           id: 'Auth.form.error.params.provide',
-          message: 'Incorrect params provided.',
+          message: 'Fehlende Parameter.',
         }),
       );
     }
@@ -306,7 +306,7 @@ module.exports = {
         null,
         formatError({
           id: 'Auth.form.error.email.format',
-          message: 'Please provide valid email address.',
+          message: 'Bitte gebe eine gültige Email ein.',
         }),
       );
     }
@@ -328,7 +328,7 @@ module.exports = {
         null,
         formatError({
           id: 'Auth.form.error.user.not-exist',
-          message: 'This email does not exist.',
+          message: 'Email-Adresse exisitiert nicht.',
         }),
       );
     }
@@ -409,7 +409,7 @@ module.exports = {
         null,
         formatError({
           id: 'Auth.advanced.allow_register',
-          message: 'Register action is currently disabled.',
+          message: 'Registrierung ist gerade nicht möglich.',
         }),
       );
     }
@@ -429,7 +429,7 @@ module.exports = {
         null,
         formatError({
           id: 'Auth.form.error.password.provide',
-          message: 'Please provide your password.',
+          message: 'Bitte gebe ein Passwort ein.',
         }),
       );
     }
@@ -440,7 +440,7 @@ module.exports = {
         null,
         formatError({
           id: 'Auth.form.error.email.provide',
-          message: 'Please provide your email.',
+          message: 'Bite gebe eine gültige Emailadresse ein.',
         }),
       );
     }
@@ -457,7 +457,7 @@ module.exports = {
         formatError({
           id: 'Auth.form.error.password.format',
           message:
-            'Your password cannot contain more than three times the symbol `$`.',
+            'Dein Passwort darf nicht mehr als 3 Zeichen dieses Symboles sein `$`.',
         }),
       );
     }
@@ -486,7 +486,7 @@ module.exports = {
         null,
         formatError({
           id: 'Auth.form.error.email.format',
-          message: 'Please provide valid email address.',
+          message: 'Bitte gebe eine gültige Emailadresse ein.',
         }),
       );
     }
@@ -505,7 +505,7 @@ module.exports = {
         null,
         formatError({
           id: 'Auth.form.error.email.taken',
-          message: 'Email is already taken.',
+          message: 'Email bereits vergeben.',
         }),
       );
     }
@@ -515,7 +515,7 @@ module.exports = {
         null,
         formatError({
           id: 'Auth.form.error.email.taken',
-          message: 'Email is already taken.',
+          message: 'Email bereits vergeben.',
         }),
       );
     }
@@ -540,6 +540,7 @@ module.exports = {
           ].services.user.sendConfirmationEmail(user);
         } catch (err) {
           strapi.log.error(err);
+          return ctx.badRequest('Email-Adresse exisitiert nicht.');
         }
       }
 
@@ -560,11 +561,11 @@ module.exports = {
       const adminError = _.includes(err.message, 'username')
         ? {
             id: 'Auth.form.error.username.taken',
-            message: 'Username already taken',
+            message: 'Nutzername bereits vergeben.',
           }
         : {
             id: 'Auth.form.error.email.taken',
-            message: 'Email already taken',
+            message: 'Email bereits vergeben.',
           };
 
       ctx.badRequest(null, formatError(adminError));
@@ -667,20 +668,20 @@ module.exports = {
     ctx.send({
       status: 'Unauthorized',
       authorized: false,
-      message: 'Successfully destroyed session',
+      message: 'Erfolgreich Session zerstört.',
       user: null,
     });
   },
 
   async changePassword(ctx) {
     if (!ctx.state.user) {
-      ctx.unauthorized('You have to login in order to change your password.');
+      ctx.unauthorized('Du musst eingeloggt sein, um dein Passwort zu ändern.');
     }
 
     const body = ctx.request.body;
 
     if (!body || (body && !body.password) || (body && !body.oldPassword)) {
-      ctx.badRequest(null, 'Password or old password should be set.');
+      ctx.badRequest(null, 'Neues und altes Passwörter müssen gesetzt sein.');
     }
 
     const model = strapi.query('user', 'users-permissions').model;
@@ -701,7 +702,7 @@ module.exports = {
     );
 
     if (!passwordIsValid) {
-      ctx.badRequest(null, "Old password doesn't match.");
+      ctx.badRequest(null, "Altes Passwort stimmt nicht überein.");
     }
 
     const isSamePassword = await service.validatePassword(
@@ -710,7 +711,7 @@ module.exports = {
     );
 
     if (isSamePassword) {
-      ctx.badRequest(null, 'Please use a different password');
+      ctx.badRequest(null, 'Bitte nutz ein anderes Passwort.');
     }
 
     delete body.oldPassword;
@@ -736,8 +737,8 @@ module.exports = {
 
       const message = `
         <p>Hallo ${entity.firstName || ''}</p>
-        <p>We just want you to inform that you successfully changed your password.</p>
-        <p>Regards<br/>Your platonist Team</p>
+        <p>Dein Passwort wurde erfolgreich geändert.</p>
+        <p>Mit besten Grüßen<br/>Der platonist Team</p>
       `;
 
       await strapi.plugins['email'].services.email.send({
@@ -759,19 +760,19 @@ module.exports = {
   },
   async changeEmail(ctx) {
     if (!ctx.state.user) {
-      ctx.unauthorized('You have to login in order to change your password.');
+      ctx.unauthorized('Du musst eingeloggt sein, um deine Email-Adresse zu ändern.');
     }
 
     const body = ctx.request.body;
 
     if (!body || (body && !body.email)) {
-      ctx.badRequest(null, 'Email should be set.');
+      ctx.badRequest(null, 'Email sollte gesetzt sein.');
     }
 
     const isEmail = emailRegExp.test(body.email);
 
     if (!isEmail) {
-      ctx.badRequest('Please use a valid Email');
+      ctx.badRequest('Bitte nutz eine valide Email-Adresse.');
     }
 
     const email = body.email.toLowerCase();
@@ -803,7 +804,7 @@ module.exports = {
 
     if (!user || !canUpdate) {
       return ctx.unauthorized(
-        `You can\'t edit this entry, email: ${user.email}`,
+        `Du kannst diesen Eintrag nicht ändern: ${user.email}`,
       );
     }
 
@@ -812,7 +813,7 @@ module.exports = {
         null,
         formatError({
           id: 'Auth.form.error.email.useDifferent',
-          message: 'Email is the same.',
+          message: 'Du nutzt die vorherig selbe Adresse.',
         }),
       );
     }
@@ -839,7 +840,7 @@ module.exports = {
           null,
           formatError({
             id: 'Auth.form.error.email.taken',
-            message: 'Email is already taken.',
+            message: 'Email ist bereits vergeben.',
           }),
         );
       }
@@ -851,6 +852,11 @@ module.exports = {
       confirmationToken: null,
       confirmed: !settings.email_confirmation,
     };
+
+    const existingUser = await strapi.query('user', 'users-permissions').find({email});
+    if (existingUser && existingUser.length > 0) {
+      return ctx.badRequest(null, 'Email ist bereits vergeben.');
+    }
 
     if (settings.email_confirmation) {
       try {
