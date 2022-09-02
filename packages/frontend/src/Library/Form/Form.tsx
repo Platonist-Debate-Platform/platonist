@@ -83,6 +83,13 @@ export const Form: FunctionComponent<PropsWithChildren<FormProps>> = <
         data: context.data,
         submitData: context.submitData,
       });
+      if (props.socket) {
+        props.socket.emit('typing', {
+          comment: context.data,
+          user: user,
+          debate: debate,
+        });
+      }
     }
   };
 

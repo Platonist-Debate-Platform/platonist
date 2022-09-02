@@ -21,6 +21,7 @@ export const PageEmailConfirmation: FunctionComponent = () => {
     GlobalState,
     GlobalState[PublicRequestKeys.Router]
   >((state) => state.router);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [successful, setSuccessful] = useState(false);
 
   useEffect(() => {
@@ -31,7 +32,7 @@ export const PageEmailConfirmation: FunctionComponent = () => {
         search: location.search,
       });
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (
