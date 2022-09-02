@@ -7,3 +7,4 @@ export * from './Meta';
 export * from './NotFound';
 export * from './Profile';
 export * from './Resolver';
+export * from './PageResetPassword';

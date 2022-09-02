@@ -6,3 +6,4 @@ export * from './ChangePassword';
 export * from './EmailConfirmation';
 export * from './LoginForm';
 export * from './RegisterForm';
+export * from './ForgotPasswordForm';

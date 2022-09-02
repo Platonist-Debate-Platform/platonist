@@ -20,6 +20,7 @@ import {
   PageLogin,
   PageLogout,
   PageProfile,
+  PageResetPassword,
 } from '../Pages';
 import { PrivateRoute } from './PrivateRoute';
 import { NotFoundRoute } from './NotFoundRoute';
@@ -78,6 +79,11 @@ const HomepageRoutes: React.FC<Homepage> = (props) => {
                   path="/auth/email-confirmation"
                   exact={true}
                   component={PageEmailConfirmation}
+                />
+                <Route
+                  path="/auth/reset-password"
+                  exact
+                  component={PageResetPassword}
                 />
                 <Route path="/404" exact={true} component={NotFound} />
                 <Route component={NotFoundRoute} />

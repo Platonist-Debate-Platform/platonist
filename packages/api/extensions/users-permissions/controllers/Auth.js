@@ -61,7 +61,8 @@ module.exports = {
           null,
           formatError({
             id: 'Auth.form.error.email.provide',
-            message: 'Bitte gebe deinen Nutzername oder deine Email-Adresse ein.',
+            message:
+              'Bitte gebe deinen Nutzername oder deine Email-Adresse ein.',
           }),
         );
       }
@@ -294,7 +295,7 @@ module.exports = {
   },
 
   async forgotPassword(ctx) {
-    let { email } = ctx.request.body;
+    let { identifier: email } = ctx.request.body;
 
     // Check if the provided email is valid or not.
     const isEmail = emailRegExp.test(email);
@@ -702,7 +703,7 @@ module.exports = {
     );
 
     if (!passwordIsValid) {
-      ctx.badRequest(null, "Altes Passwort stimmt nicht überein.");
+      ctx.badRequest(null, 'Altes Passwort stimmt nicht überein.');
     }
 
     const isSamePassword = await service.validatePassword(
@@ -760,7 +761,9 @@ module.exports = {
   },
   async changeEmail(ctx) {
     if (!ctx.state.user) {
-      ctx.unauthorized('Du musst eingeloggt sein, um deine Email-Adresse zu ändern.');
+      ctx.unauthorized(
+        'Du musst eingeloggt sein, um deine Email-Adresse zu ändern.',
+      );
     }
 
     const body = ctx.request.body;
@@ -853,7 +856,9 @@ module.exports = {
       confirmed: !settings.email_confirmation,
     };
 
-    const existingUser = await strapi.query('user', 'users-permissions').find({email});
+    const existingUser = await strapi
+      .query('user', 'users-permissions')
+      .find({ email });
     if (existingUser && existingUser.length > 0) {
       return ctx.badRequest(null, 'Email ist bereits vergeben.');
     }
