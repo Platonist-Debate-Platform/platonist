@@ -13,3 +13,4 @@ export * from './useRoles';
 export * from './useUser';
 export * from './useBlogArticles';
 export * from './useBlogArticle';
+export * from './useUserProfile';

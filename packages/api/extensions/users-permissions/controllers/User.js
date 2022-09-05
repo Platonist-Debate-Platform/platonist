@@ -25,19 +25,19 @@ const formatError = error => [
 ];
 
 module.exports = {
-  // findOne: async (ctx) => {
-  //   try {
-  //     const user = await strapi.plugins['users-permissions'].services.user.fetch({username: ctx.params.id});
-  //     if (user) {
-  //       ctx.send(sanitizeUser(user))
-  //     } else {
-  //       return ctx.badRequest('Nutzer nicht gefunden.');
-  //     }
-  //   } catch (err) {
-  //     console.error(err);
-  //     return ctx.send(err);
-  //   }
-  // },
+  findOne: async (ctx) => {
+    try {
+      const user = await strapi.plugins['users-permissions'].services.user.fetch({username: ctx.params.id}) || await strapi.plugins['users-permissions'].services.user.fetch({id: ctx.params.id});
+      if (user) {
+        ctx.send(sanitizeUser(user))
+      } else {
+        return ctx.badRequest('Nutzer nicht gefunden.');
+      }
+    } catch (err) {
+      console.error(err);
+      return ctx.send(err);
+    }
+  },
   update: async (ctx) => {
     const {
       state: { isAuthenticatedAdmin },
