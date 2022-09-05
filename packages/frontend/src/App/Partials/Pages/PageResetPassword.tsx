@@ -20,6 +20,7 @@ import { Form } from 'reactstrap';
 import { connect, useDispatch } from 'react-redux';
 import { Container, Row, Col } from 'reactstrap';
 import { useSelector } from 'react-redux';
+import { Redirect, useHistory } from 'react-router';
 
 interface ResetPasswordData {
   password: string;
@@ -32,7 +33,7 @@ const resetPasswordForm: FormDataConfig<Partial<ResetPasswordData>>[] = [
     editable: true,
     key: 'password',
     required: true,
-    title: 'Passwort',
+    title: 'Neues Passwort',
     type: FormInputTypes.Password,
     validate: FormValidationTypes.Password,
   },
@@ -42,7 +43,7 @@ const resetPasswordForm: FormDataConfig<Partial<ResetPasswordData>>[] = [
     editable: true,
     key: 'passwordConfirmation',
     required: true,
-    title: 'Passwort wiederholen',
+    title: 'Neues Passwort wiederholen',
     type: FormInputTypes.Password,
     validate: FormValidationTypes.Equal,
     validateOptions: {},
@@ -56,6 +57,7 @@ export interface PageResetPasswordProps {
 export const PageResetPasswordWithoutState: React.FunctionComponent<
   PageResetPasswordProps
 > = ({ authentication }) => {
+  const history = useHistory();
   const { location } = useSelector<
     GlobalState,
     GlobalState[PublicRequestKeys.Router]
@@ -65,14 +67,16 @@ export const PageResetPasswordWithoutState: React.FunctionComponent<
   const url = config.createApiUrl(config.api.config);
   url.pathname = `/auth/reset-password`;
 
-  const handleSubmit = (event: FormClickEvent<Partial<ResetPasswordData>>) => {
+  const search = new URLSearchParams(window.location.search);
+  const code = search.get('code');
+
+  const handleSubmit = (event: FormClickEvent<Partial<ResetPasswordData & { code: string }>>) => {
     if (!event.submitData.isValid) {
       return;
-    }
+    }    
 
     const data = event.submitData.data;
-
-    // console.log(url.href, location);
+    if (code) data.code = code;
 
     dispatch(
       requestAction.load(PublicRequestKeys.Authentication, {
@@ -83,6 +87,25 @@ export const PageResetPasswordWithoutState: React.FunctionComponent<
       }),
     );
   };
+
+  if (!code) return <Redirect to="/" />
+
+  if (authentication.status === 'LOADED' && authentication.meta) {
+    setTimeout(() => {
+      history.push('/');
+    }, 5000)
+    return <section className="section section-authenticate">
+      <Container>
+        <Row>
+          <Col md={8} className="offset-md-2">
+            <div className="border border-info bg-info p-3 rounded">
+            <p className="text-white">Dein Passwort wurde erfolgreich geändert.</p>
+            </div>
+          </Col>
+        </Row>
+      </Container>
+    </section>
+  }
 
   return (
     <>

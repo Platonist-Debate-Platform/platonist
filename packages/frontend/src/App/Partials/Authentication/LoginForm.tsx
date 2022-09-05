@@ -84,6 +84,12 @@ export const LoginFormWithoutState: FunctionComponent<LoginFormProps> = ({
       data={{ identifier: '', password: '' }}
       inputConfig={loginFormData}
     >
+      <h2>Login</h2>
+      <p>
+        ​​Zur Teilnahme an den Debatten ist der Login mit deinem Konto
+        erforderlich. Wenn Du noch kein Konto bei Platonist angelegt hast,
+        registriere dich bitte hier.
+      </p>
       <Form>
         <Input
           disabled={authentication?.status === RequestStatus.Updating}

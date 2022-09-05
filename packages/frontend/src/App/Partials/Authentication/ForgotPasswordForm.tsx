@@ -63,9 +63,20 @@ export const ForgotPasswordFormWithoutState: React.FunctionComponent<
       }),
     );
   };
+
+  if (authentication && authentication.status === 'LOADED' && authentication.meta) {
+    return (
+      <>
+        <div className="border border-info bg-info p-3 rounded">
+          <p className="text-white">Ein Link, um dein Passwort zurückzusetzen wurde an deine Emailadresse zugestellt. Schau in deinem Postfach nach.</p>
+        </div>
+      </>
+    );
+  }
+
   return (
     <>
-      <h4>Password vergessen</h4>
+      <h2>Password vergessen</h2>
       <FormProvider inputConfig={forgotPasswordForm} data={{ identifier: '' }}>
         <Input
           disabled={authentication?.status === RequestStatus.Updating}

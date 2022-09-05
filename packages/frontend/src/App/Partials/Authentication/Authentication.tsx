@@ -27,13 +27,6 @@ export const Authentication: FunctionComponent<AuthenticationProps> = ({
 
   return (
     <div className="authentication">
-      {infoText || (
-        <p>
-          ​​Zur Teilnahme an den Debatten ist der Login mit deinem Konto
-          erforderlich. Wenn Du noch kein Konto bei Platonist angelegt hast,
-          registriere dich bitte hier.
-        </p>
-      )}
       <Collapse isOpen={panel === AuthenticationPages.Login}>
         <div className="authentication-modal-login">
           <LoginForm />

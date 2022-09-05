@@ -54,7 +54,7 @@ export const CommentItem: FunctionComponent<CommentItemProps> = ({
         <CardSubtitle>
           <small>
             {author && (
-              <Link to={`/user/${user?.id === author?.id ? 'me' : author.id}`}>
+              <Link to={`/user/${user?.id === author?.id ? 'me' : author.username}`}>
                 {isMe ? 'Du' : <>{author.username}</>}
               </Link>
             )}{' '}

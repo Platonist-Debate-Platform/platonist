@@ -54,7 +54,7 @@ export const ModerationReplyItem: React.FunctionComponent<
                   <>
                     <Link
                       to={`/user/${
-                        author?.id === modUser?.id ? 'me' : modUser?.id
+                        author?.id === modUser?.id ? 'me' : modUser?.username
                       }`}
                     >
                       {props.mod === author?.id ? (
@@ -112,7 +112,7 @@ export const ModerationReplyItem: React.FunctionComponent<
                 {(user as User) && (
                   <>
                     <Link
-                      to={`/user/${user?.id === author?.id ? 'me' : user?.id}`}
+                      to={`/user/${user?.id === author?.id ? 'me' : user?.username}`}
                     >
                       {user?.id === author?.id ? 'You' : <>{user?.username}</>}
                     </Link>{' '}

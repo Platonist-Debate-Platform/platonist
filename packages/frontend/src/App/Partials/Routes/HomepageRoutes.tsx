@@ -21,9 +21,11 @@ import {
   PageLogout,
   PageProfile,
   PageResetPassword,
+  UserProfilePage,
 } from '../Pages';
 import { PrivateRoute } from './PrivateRoute';
 import { NotFoundRoute } from './NotFoundRoute';
+import { PageResendConfirmation } from '../Pages/PageResendConfirmation';
 
 const HomepageRoutes: React.FC<Homepage> = (props) => {
   const authentication = useAuthentication();
@@ -81,9 +83,19 @@ const HomepageRoutes: React.FC<Homepage> = (props) => {
                   component={PageEmailConfirmation}
                 />
                 <Route
+                  path="/auth/send-email-confirmation"
+                  exact
+                  component={PageResendConfirmation}
+                />
+                <Route
                   path="/auth/reset-password"
                   exact
                   component={PageResetPassword}
+                />
+                <Route
+                  path="/user/:username"
+                  exact
+                  component={UserProfilePage}
                 />
                 <Route path="/404" exact={true} component={NotFound} />
                 <Route component={NotFoundRoute} />

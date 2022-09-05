@@ -57,7 +57,7 @@ export const ModerationPinnedItem: React.FunctionComponent<
                           // eslint-disable-next-line eqeqeq
                           pinnedComment.moderation.moderator == user?.id
                             ? 'me'
-                            : (pinnedComment.moderation.user as User).id
+                            : (pinnedComment.moderation.user as User).username
                         }`}
                       >
                         {
@@ -123,7 +123,7 @@ export const ModerationPinnedItem: React.FunctionComponent<
                       to={`/user/${
                         user?.id === (pinnedComment.user as User).id
                           ? 'me'
-                          : (pinnedComment?.user as User).id
+                          : (pinnedComment?.user as User).username
                       }`}
                     >
                       {user?.id === (pinnedComment.user as User).id ? (

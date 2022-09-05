@@ -15,7 +15,8 @@ import {
 import { Image } from '../Image';
 import { ProfileImageEdit } from './ImageEdit';
 
-const noImageItem = require('../../../Assets/Images/dummy-profile.png');
+// const noImageItem = require('../../../Assets/Images/dummy-profile.png');
+import noImageItem from '../../../Assets/Images/dummy-profile.png';
 
 const noImage: ImageProps = {
   id: 9999999,
@@ -27,7 +28,7 @@ const noImage: ImageProps = {
   ext: '.png',
   hash: '',
   mime: 'image/jpeg',
-  url: noImageItem.default,
+  url: noImageItem,
   previewUrl: null,
   provider: 'local',
   provider_metadata: null,

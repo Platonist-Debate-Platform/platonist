@@ -34,8 +34,12 @@ export const EmailConfirmation: FunctionComponent<{}> = () => {
               Dein Profil ist noch nicht bestätigt. Bitte überprüfe Deinen
               Postfach. Wenn du keine Mail erhalten hast,{' '}
               <Link className="alert-link" to="/user/me?modal=change-email">
-                ändere Deine Emailadresse. {' '}
+                ändere Deine Emailadresse {' '}
               </Link>{' '}
+              oder sende erneut eine {' '}
+              <Link className="alert-link" to="/auth/send-email-confirmation">
+                Bestätigungsemail.
+              </Link>
             </Alert>
           </Col>
         </Row>

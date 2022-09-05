@@ -213,7 +213,7 @@ module.exports = {
           null,
           formatError({
             id: 'Auth.form.error.code.provide',
-            message: 'Inkorrekter Code zugestellt.',
+            message: 'Inkorrekter Code zugestellt. Der Link ist ungültig. Versuch nochmal, eine Email zu versenden oder überprüfe, ob der geklickte Link funktioniert.',
           }),
         );
       }
@@ -654,10 +654,7 @@ module.exports = {
       await strapi.plugins[
         'users-permissions'
       ].services.user.sendConfirmationEmail(user);
-      ctx.send({
-        email: user.email,
-        sent: true,
-      });
+      ctx.send('Bestätigungsemail erneut versendet.');
     } catch (err) {
       return ctx.badRequest(null, err);
     }
