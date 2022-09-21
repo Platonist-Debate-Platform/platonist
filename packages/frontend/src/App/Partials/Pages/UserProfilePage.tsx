@@ -43,6 +43,7 @@ export const UserProfilePage: React.FunctionComponent<
       method: 'GET',
       pathname: `/users/${params.username}`,
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (error) {
@@ -77,7 +78,7 @@ export const UserProfilePage: React.FunctionComponent<
               </div>
             </Col>
             <Col md={8}>
-                <div>Bis jetzt noch keine Beiträge.</div>
+              <div>Bis jetzt noch keine Beiträge.</div>
             </Col>
           </Row>
         </Container>
