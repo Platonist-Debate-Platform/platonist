@@ -111,7 +111,6 @@ export const ImageCropReader: React.FunctionComponent<ImageCropReaderProps> = (
 
     if (imageRef.current) {
       const img = await getCroppedImage(imageRef.current, obj, fileName);
-      console.log(img);
 
       if (img && img.blob && handleImageCrop) {
         const reader = new FileReader();

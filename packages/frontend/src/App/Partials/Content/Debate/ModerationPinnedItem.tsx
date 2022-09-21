@@ -166,7 +166,9 @@ export const ModerationPinnedItem: React.FunctionComponent<
                       style={{ marginRight: '3px' }}
                     ></i>
                     <Link
-                      to={`/user/${(pinnedComment.moderation.user as User).id}`}
+                      to={`/user/${
+                        (pinnedComment.moderation.user as User).username
+                      }`}
                     >
                       <>{pinnedComment.moderation?.user.username}</>
                     </Link>{' '}
@@ -217,7 +219,7 @@ export const ModerationPinnedItem: React.FunctionComponent<
             <div className="moderation-debate-reply">
               <small>
                 <>
-                  <Link to={`/user/${(pinnedComment?.user as User).id}`}>
+                  <Link to={`/user/${(pinnedComment?.user as User).username}`}>
                     <>{(pinnedComment?.user as User).username}</>
                   </Link>{' '}
                   <span>

@@ -1,11 +1,27 @@
 import React, { useEffect } from 'react';
 import { Redirect, useParams } from 'react-router';
-import { Container, Row, Col } from 'reactstrap';
-import { useUser } from '../../Hooks';
+import {
+  Container,
+  Row,
+  Col,
+  Badge,
+  Card,
+  CardBody,
+  CardSubtitle,
+} from 'reactstrap';
+import { useUser, useUserComments } from '../../Hooks';
 import { Image } from '../Image';
-import { Image as ImageProps } from '@platonist/library';
+import { Comment, Image as ImageProps } from '@platonist/library';
+import TimeAgo from 'react-timeago2';
+
+// @ts-ignore
+import germanStrings from 'react-timeago2/lib/language-strings/de';
+// @ts-ignore
+import buildFormatter from 'react-timeago2/lib/formatters/buildFormatter';
 
 import noImageItem from '../../../Assets/Images/dummy-profile.png';
+
+const formatter = buildFormatter(germanStrings);
 
 const noImage: ImageProps = {
   id: 9999999,
@@ -38,12 +54,17 @@ export const UserProfilePage: React.FunctionComponent<
     send,
   } = useUser(params.username);
 
+  const { result: comments } = useUserComments(result?.id);
+  const list = comments as any as Comment[];
+
   useEffect(() => {
     send({
       method: 'GET',
       pathname: `/users/${params.username}`,
+      get: true,
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
+    return () => {};
   }, []);
 
   if (error) {
@@ -78,7 +99,38 @@ export const UserProfilePage: React.FunctionComponent<
               </div>
             </Col>
             <Col md={8}>
-              <div>Bis jetzt noch keine Beiträge.</div>
+              {/* <div>Bis jetzt noch keine Beiträge.</div> */}
+              {/* <div className="d-flex">
+                <div
+                  className="border border-light rounded bg-light w-75"
+                  style={{ height: 30 }}
+                ></div>
+              </div>
+              <div
+                className="border border-light rounded bg-light mt-3 d-flex justify-content-center align-items-center"
+                style={{ height: 300 }}
+              >
+                <b>Beiträge des Nutzers kommen beim nächsten Update!</b>
+              </div> */}
+              {list?.map((comment, id) => {
+                return (
+                  <Card
+                    key={`user_${params.username}_comment_${id}`}
+                    className="border rounded border-light bg-light mb-3"
+                  >
+                    <CardBody>
+                      <span style={{ lineHeight: 2 }}>
+                        {params.username} kommentierte{' '}
+                        <TimeAgo
+                          formatter={formatter}
+                          date={comment.created_at}
+                        />
+                      </span>
+                      <p>{comment.comment}</p>
+                    </CardBody>
+                  </Card>
+                );
+              })}
             </Col>
           </Row>
         </Container>

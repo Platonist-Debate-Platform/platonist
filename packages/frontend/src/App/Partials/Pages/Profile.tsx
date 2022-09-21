@@ -28,6 +28,11 @@ export const PageProfile: FunctionComponent = () => {
 
   const comments = useUserComments(user?.id);
 
+  useEffect(() => {
+    dispatch(requestAction.clear(PrivateRequestKeys.User));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   useEffect(
     () => () => {
       if (comments.status === RequestStatus.Loaded) {

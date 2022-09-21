@@ -18,6 +18,7 @@ export interface UseRequestSendProps<Data extends Object> {
   pathname?: string;
   search?: string;
   headers?: { [key: string]: string };
+  get?: boolean;
 }
 
 export const useUser = <Data extends Object>(id?: string) => {
@@ -37,6 +38,7 @@ export const useUser = <Data extends Object>(id?: string) => {
     method,
     pathname,
     search,
+    get,
   }: UseRequestSendProps<Data>) => {
     let sendUrl: URL | undefined;
 
@@ -46,7 +48,18 @@ export const useUser = <Data extends Object>(id?: string) => {
       sendUrl.search = search || '';
     }
 
-    if (userId && isAuthenticated) {
+    if (userId && get) {
+      dispatch(
+        requestAction.load(PrivateRequestKeys.User, {
+          method,
+          url: sendUrl?.href || url.href,
+          data,
+          withCredentials: true,
+        }),
+      );
+    }
+
+    if (userId && isAuthenticated && !get) {
       dispatch(
         requestAction.update(PrivateRequestKeys.User, {
           method,

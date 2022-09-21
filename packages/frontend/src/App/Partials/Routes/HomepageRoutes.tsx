@@ -39,7 +39,6 @@ const HomepageRoutes: React.FC<Homepage> = (props) => {
     pages: pages?.result,
   });
 
-  console.log(routes);
   return (
     <div className="page" id="page">
       {pages?.status === RequestStatus.Loaded && (

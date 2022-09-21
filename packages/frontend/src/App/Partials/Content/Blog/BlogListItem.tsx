@@ -21,7 +21,6 @@ export const BlogDetailItem: FunctionComponent<BlogDetailItemProps> = ({
   const image = articleImage[0];
 
   const href = encodeLink(`/${pageTitle}/${blog.title}`);
-  console.log(href);
   return (
     <div className="debate-list-item">
       <Container>
