@@ -1,14 +1,6 @@
 import React, { useEffect } from 'react';
 import { Redirect, useParams } from 'react-router';
-import {
-  Container,
-  Row,
-  Col,
-  Badge,
-  Card,
-  CardBody,
-  CardSubtitle,
-} from 'reactstrap';
+import { Container, Row, Col, Card, CardBody } from 'reactstrap';
 import { useUser, useUserComments } from '../../Hooks';
 import { Image } from '../Image';
 import { Comment, Image as ImageProps } from '@platonist/library';
@@ -63,8 +55,8 @@ export const UserProfilePage: React.FunctionComponent<
       pathname: `/users/${params.username}`,
       get: true,
     });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     return () => {};
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (error) {
