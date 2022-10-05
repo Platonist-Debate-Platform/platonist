@@ -84,7 +84,8 @@ set +x
 echo "";
 echo "#### KILLING PREVIOUS INSTANCE ####"
 set -x
-kill -9 $(cat .pidfile) || echo "Process was not running."
+yarn workspace @platonist/frontend run pm2 stop frontend || echo "Frontend process was not running."
+yarn workspace @platonist/api run pm2 save
 set +x
 # END # ********************************************************************* #
 
@@ -92,7 +93,6 @@ set +x
 echo "";
 echo "#### STARTING THE APPLICATION ####"
 set -x
-yarn serve:frontend -l "$PORT" -s build & sleep 1
-echo $! > .pidfile
+PORT="$PORT" yarn workspace @platonist/frontend run pm2 start ./index.js --name frontend --log pm2.log
 set +x
 # END # ********************************************************************* #
