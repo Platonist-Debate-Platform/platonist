@@ -2821,6 +2821,7 @@ __metadata:
     js-cookie: ^3.0.1
     lodash: ^4.17.21
     node-sass: ^7.0.1
+    pm2: ^5.2.0
     pure-react-carousel: ^1.28.1
     qs: ^6.10.3
     raf: ^3.4.1
@@ -18393,7 +18394,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"pm2@npm:^5.1.2":
+"pm2@npm:^5.1.2, pm2@npm:^5.2.0":
   version: 5.2.0
   resolution: "pm2@npm:5.2.0"
   dependencies:
