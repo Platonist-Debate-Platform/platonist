@@ -31,8 +31,12 @@
 
 .sticky {
   position: fixed;
-  top: 110px;
+  top: 97px;
   z-index: 999;
   animation: 500ms ease-in-out 0s normal none 1 running fadeInDown;
   width: inherit;
+  border: 1px solid rgb(217, 217, 217);
+  padding: 1rem;
+  border-radius: 10px;
+  background: white;
 }
