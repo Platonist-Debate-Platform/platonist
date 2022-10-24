@@ -22,6 +22,7 @@ export interface ModerationReplyItemProps {
   comment: Comment | null;
   mod?: string;
   modReply: Comment;
+  index?: number;
 }
 
 export const ModerationReplyItem: React.FunctionComponent<
@@ -52,6 +53,7 @@ export const ModerationReplyItem: React.FunctionComponent<
               <small>
                 {(modUser as User) && (
                   <>
+                    {props.index} -{' '}
                     <Link
                       to={`/user/${
                         author?.id === modUser?.id ? 'me' : modUser?.username
@@ -74,15 +76,6 @@ export const ModerationReplyItem: React.FunctionComponent<
                         />
                       </i>{' '}
                       {isMe && GERMAN.comments.me_replied[1]}{' '}
-                      {/* {modCreatedAt !== modUpdatedAt && (
-                        <>
-                          and edited this debate{' '}
-                          <i>
-                            <TimeAgo date={modReply.updated_at} />
-                          </i>
-                          .
-                        </>
-                      )}{' '} */}
                     </span>
                     <i
                       className="fa-solid fa-reply"
@@ -112,7 +105,9 @@ export const ModerationReplyItem: React.FunctionComponent<
                 {(user as User) && (
                   <>
                     <Link
-                      to={`/user/${user?.id === author?.id ? 'me' : user?.username}`}
+                      to={`/user/${
+                        user?.id === author?.id ? 'me' : user?.username
+                      }`}
                     >
                       {user?.id === author?.id ? 'You' : <>{user?.username}</>}
                     </Link>{' '}

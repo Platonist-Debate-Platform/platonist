@@ -16,6 +16,7 @@ const formatter = buildFormatter(germanStrings);
 
 export interface ModerationPinnedItemProps {
   pinnedComment: Comment;
+  index?: number;
 }
 
 export const ModerationPinnedItem: React.FunctionComponent<
@@ -52,6 +53,7 @@ export const ModerationPinnedItem: React.FunctionComponent<
                         className="fa fa-exclamation-triangle text-danger"
                         style={{ marginRight: '3px' }}
                       ></i>
+                      {props.index} -{' '}
                       <Link
                         to={`/user/${
                           // eslint-disable-next-line eqeqeq

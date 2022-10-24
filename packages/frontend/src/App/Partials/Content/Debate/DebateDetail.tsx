@@ -132,20 +132,7 @@ export const DebateDetailBase: FunctionComponent<DebateDetailProps> = ({
             </div>
           </div>
           <section className="section section-debate section-debate-detail">
-            {/* <Route
-              path={encodeLink(`${path}/${debate.title}/:commentId`)}
-              exact={true}
-              render={(props: RouteComponentProps<{ commentId?: string }>) => {
-                return (
-                  <CommentList
-                    debateId={debate.id}
-                    match={props.match}
-                    path={encodeLink(`${path}/${debate.title}`)}
-                  />
-                );
-              }}
-            /> */}
-            <Container>
+            <Container fluid>
               <Row>
                 <Col>
                   <Route

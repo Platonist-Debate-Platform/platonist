@@ -5,7 +5,6 @@ import { Col, Container, Row } from 'reactstrap';
 import { GlobalState, Homepage, PublicRequestKeys } from '@platonist/library';
 import { Navigation } from '../Navbar';
 import { NavigationType } from '../Navbar/Keys';
-import Language from './Language';
 
 interface FooterProps {
   [PublicRequestKeys.Pages]: GlobalState[PublicRequestKeys.Pages];
@@ -40,9 +39,6 @@ export const FooterBase: React.FunctionComponent<FooterProps> = ({
                 toggled={false}
               />
             )}
-          </Col>
-          <Col md={3}>
-            <Language></Language>
           </Col>
         </Row>
       </Container>

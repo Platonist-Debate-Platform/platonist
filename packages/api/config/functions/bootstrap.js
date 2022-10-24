@@ -15,6 +15,15 @@ const socket = require('socket.io');
 const isStaging = process.env.NODE_ENV === 'staging' ? true : false;
 const isProduction = process.env.NODE_ENV === 'production' ? true : false;
 
+const removeTypingUserFromRoom = (io, rooms, room, user, debate) => {
+  const index = room.findIndex((ele) => ele.user.username === user.username);
+  if (index > -1) {
+    room.splice(index, 1);
+    rooms.set(debate.id, room);
+  }
+  io.emit(`debate:${debate.id}`, { typingUsers: room });
+};
+
 module.exports = async () => {
   const debates = await strapi.services.debate.find();
   var io = socket(strapi.server, {
@@ -53,6 +62,10 @@ module.exports = async () => {
     socket.on('typing', (data) => {
       const { user, debate } = data;
       const room = rooms.get(debate.id);
+      if (!data.comment) {
+        removeTypingUserFromRoom(io, rooms, room, user, debate);
+        return;
+      }
       if (data.comment.comment.value.length > 5) {
         if (!room.find((u) => u.user.username === user.username)) {
           room.push(data);
@@ -67,14 +80,7 @@ module.exports = async () => {
         }
         io.emit(`debate:${debate.id}`, { typingUsers: room });
       } else {
-        const index = room.findIndex(
-          (ele) => ele.user.username === user.username,
-        );
-        if (index > -1) {
-          room.splice(index, 1);
-          rooms.set(debate.id, room);
-        }
-        io.emit(`debate:${debate.id}`, { typingUsers: room });
+        removeTypingUserFromRoom(io, rooms, room, user, debate);
       }
     });
   });
