@@ -78,6 +78,9 @@ set +x
 set -x
 yarn workspace @platonist/api run pm2 start ./server.js --name api-"$NODE_ENV" --log pm2.log
 set +x
+set -x
+yarn workspace @platonist/api run pm2 save
+set +x
 # END # ********************************************************************* #
 
 # START - Killig previously running applications # ************************** # 
