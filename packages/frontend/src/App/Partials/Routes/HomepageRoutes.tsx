@@ -56,11 +56,6 @@ const HomepageRoutes: React.FC<Homepage> = (props) => {
                   exact={true}
                   render={() => <HomepageResolver {...props} isAdmin={false} />}
                 />
-                {/* <Route
-                  path="/Blog/:slug"
-                  exact
-                  render={() => <BlogArticlePage {...props}/>}
-                /> */}
                 {routes.map((route, index) => (
                   <Route {...route} key={`main_route_${index}`} />
                 ))}

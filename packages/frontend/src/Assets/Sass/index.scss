@@ -8,12 +8,12 @@
 
 @import './Theme/index.scss';
 
-// .form-group {
-//   .was-validated :invalid ~ .invalid-feedback,
-//   .was-validated :invalid ~ .invalid-tooltip,
-//   .is-invalid ~ .invalid-feedback,
-//   .is-invalid ~ .invalid-tooltip {
-//     display: inline-block;
-//     width: auto;
-//   }
-// }
+.card {
+  border-left: 0px !important;
+  border-right: 0px;
+  border-radius: 0px;
+}
+
+.card:not(:first-child) {
+  border-top: 0px;
+}

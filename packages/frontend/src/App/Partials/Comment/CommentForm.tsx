@@ -7,6 +7,7 @@ import {
   PrivateRequestKeys,
   RequestStatus,
   User,
+  PublicRequestKeys,
 } from '@platonist/library';
 import React, {
   FunctionComponent,
@@ -70,6 +71,15 @@ export const CommentForm: FunctionComponent<CommentFormProps> = ({
     GlobalState,
     GlobalState[PrivateRequestKeys.Role]
   >((state) => state.role);
+  const { result: user } = useSelector<
+    GlobalState,
+    GlobalState[PrivateRequestKeys.User]
+  >((state) => state.user);
+  const { result: debate } = useSelector<
+    GlobalState,
+    GlobalState[PublicRequestKeys.Debate]
+  >((state) => state.debate);
+
   const [isAuthenticated, state] = useAuthentication();
   const [shouldReset, setShouldReset] = useState(false);
   const [socket] = useState(createSocket());
@@ -109,6 +119,12 @@ export const CommentForm: FunctionComponent<CommentFormProps> = ({
         data.parent = parent;
       }
 
+      socket.emit('typing', {
+        comment: null,
+        user: user,
+        debate: debate,
+      });
+
       send({
         data,
         method: defaultData ? 'PUT' : 'POST',
@@ -116,14 +132,17 @@ export const CommentForm: FunctionComponent<CommentFormProps> = ({
       });
     },
     [
-      commentId,
-      debateId,
-      defaultData,
       isAuthenticated,
-      parent,
-      send,
       state,
-      role,
+      parent,
+      debateId,
+      role?.role.type,
+      socket,
+      user,
+      debate,
+      send,
+      defaultData,
+      commentId,
     ],
   );
 

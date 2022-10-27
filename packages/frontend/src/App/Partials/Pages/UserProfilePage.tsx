@@ -91,20 +91,8 @@ export const UserProfilePage: React.FunctionComponent<
               </div>
             </Col>
             <Col md={8}>
-              {/* <div>Bis jetzt noch keine Beiträge.</div> */}
-              {/* <div className="d-flex">
-                <div
-                  className="border border-light rounded bg-light w-75"
-                  style={{ height: 30 }}
-                ></div>
-              </div>
-              <div
-                className="border border-light rounded bg-light mt-3 d-flex justify-content-center align-items-center"
-                style={{ height: 300 }}
-              >
-                <b>Beiträge des Nutzers kommen beim nächsten Update!</b>
-              </div> */}
               {list?.map((comment, id) => {
+                console.log(comment);
                 return (
                   <Card
                     key={`user_${params.username}_comment_${id}`}

@@ -16,6 +16,7 @@ const formatter = buildFormatter(germanStrings);
 
 export interface ModerationPinnedItemProps {
   pinnedComment: Comment;
+  index?: number;
 }
 
 export const ModerationPinnedItem: React.FunctionComponent<
@@ -31,12 +32,6 @@ export const ModerationPinnedItem: React.FunctionComponent<
   if (typeof pinnedComment.moderation === 'number') return null;
 
   if (pinnedComment.moderation) {
-    // const createdAt = new Date(pinnedComment.created_at);
-    // const updatedAt = new Date(pinnedComment.updated_at);
-    // const modCreatedAt = new Date(pinnedComment.moderation.created_at);
-    // const modUpdatedAt = new Date(pinnedComment.moderation.updated_at);
-
-    // TODO: fix here with rendering
     if (user) {
       // eslint-disable-next-line eqeqeq
       const isMe = user?.id == pinnedComment.moderation.moderator;
@@ -52,6 +47,7 @@ export const ModerationPinnedItem: React.FunctionComponent<
                         className="fa fa-exclamation-triangle text-danger"
                         style={{ marginRight: '3px' }}
                       ></i>
+                      {props.index} -{' '}
                       <Link
                         to={`/user/${
                           // eslint-disable-next-line eqeqeq
@@ -111,9 +107,7 @@ export const ModerationPinnedItem: React.FunctionComponent<
                     style={{
                       whiteSpace: 'pre-line',
                     }}
-                  >
-                    -
-                  </p>
+                  ></p>
                 </div>
               )}
               <div className="moderation-debate-reply">
@@ -211,9 +205,7 @@ export const ModerationPinnedItem: React.FunctionComponent<
                   style={{
                     whiteSpace: 'pre-line',
                   }}
-                >
-                  -
-                </p>
+                ></p>
               </div>
             )}
             <div className="moderation-debate-reply">

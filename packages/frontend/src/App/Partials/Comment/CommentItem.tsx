@@ -29,6 +29,8 @@ export interface CommentItemProps {
   handleSuccess: () => void;
   item: Comment;
   user?: User;
+  index?: number;
+  isModerationPanel?: boolean;
 }
 
 export const CommentItem: FunctionComponent<CommentItemProps> = ({
@@ -37,6 +39,8 @@ export const CommentItem: FunctionComponent<CommentItemProps> = ({
   handleSuccess,
   item,
   user,
+  index,
+  isModerationPanel,
 }) => {
   const author = item.user as User;
   const { location } = useSelector<
@@ -53,8 +57,11 @@ export const CommentItem: FunctionComponent<CommentItemProps> = ({
       <>
         <CardSubtitle>
           <small>
+            {isModerationPanel && <>{index} - </>}
             {author && (
-              <Link to={`/user/${user?.id === author?.id ? 'me' : author.username}`}>
+              <Link
+                to={`/user/${user?.id === author?.id ? 'me' : author.username}`}
+              >
                 {isMe ? 'Du' : <>{author.username}</>}
               </Link>
             )}{' '}

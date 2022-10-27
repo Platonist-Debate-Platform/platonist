@@ -99,7 +99,7 @@ export const ModerationPanel: React.FunctionComponent<ModerationPanelProps> = (
 
     return (
       <>
-        <div>
+        <div className="moderation-panel-root">
           <div className="moderation-panel-parent">
             <div className="moderation-container">
               {sortedComments.length < 1 && (
@@ -110,7 +110,12 @@ export const ModerationPanel: React.FunctionComponent<ModerationPanelProps> = (
               {sortedComments &&
                 sortedComments.map((comment, index) => {
                   if (comment.moderation) {
-                    return <ModerationPinnedItem pinnedComment={comment} />;
+                    return (
+                      <ModerationPinnedItem
+                        index={index + 1}
+                        pinnedComment={comment}
+                      />
+                    );
                   }
                   if (
                     comment.replies &&
@@ -119,6 +124,7 @@ export const ModerationPanel: React.FunctionComponent<ModerationPanelProps> = (
                   ) {
                     return (
                       <ModerationReplyItem
+                        index={index + 1}
                         comment={comment.replies[0]}
                         modReply={comment}
                         mod={comment.moderator}
@@ -129,6 +135,7 @@ export const ModerationPanel: React.FunctionComponent<ModerationPanelProps> = (
                   if (comment.moderator) {
                     return (
                       <CommentListItem
+                        index={index + 1}
                         canEdit={true}
                         debateId={debateId}
                         isDisputed={false}
@@ -137,6 +144,7 @@ export const ModerationPanel: React.FunctionComponent<ModerationPanelProps> = (
                         match={match}
                         onSubmit={onSubmit}
                         path={path}
+                        isModerator
                         {...comment}
                       />
                     );
@@ -147,20 +155,6 @@ export const ModerationPanel: React.FunctionComponent<ModerationPanelProps> = (
           </div>
           {role?.role.type === 'admin' && (
             <div className="moderation-panel-participation">
-              {/* <Form
-                                asForm
-                            >
-                                <div className="text-right">
-                                    <SubmitButton
-                                        className={classNames('btn-success')}
-                                        preventDefault
-                                        type="submit"
-                                    >
-                                        Save Comment <i className="fa fa-cloud-upload-alt" />
-                                    </SubmitButton>
-    
-                                </div>
-                            </Form> */}
               {debate && <CommentForm debateId={debate.id} />}
             </div>
           )}

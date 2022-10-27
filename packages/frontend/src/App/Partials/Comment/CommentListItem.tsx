@@ -39,6 +39,8 @@ export interface CommentListItemProps extends Comment {
   match?: Match<{ commentId?: string }>;
   onSubmit?: () => void;
   path: string;
+  isModerator?: boolean;
+  index?: number;
 }
 
 export const CommentListItem: FunctionComponent<CommentListItemProps> = ({
@@ -50,6 +52,8 @@ export const CommentListItem: FunctionComponent<CommentListItemProps> = ({
   match,
   onSubmit,
   path,
+  isModerator,
+  index,
   ...props
 }) => {
   const author = props.user as User;
@@ -193,11 +197,13 @@ export const CommentListItem: FunctionComponent<CommentListItemProps> = ({
           <Card>
             <CardBody>
               <CommentItem
+                index={index}
                 debateId={debateId}
                 editQuery={editQuery}
                 handleSuccess={handleSuccess}
                 item={props}
                 user={user}
+                isModerationPanel={isModerator}
               />
               <div className="comment-list-item-settings">
                 <Row>
@@ -205,17 +211,8 @@ export const CommentListItem: FunctionComponent<CommentListItemProps> = ({
                     {!props.parent && (
                       <div
                         onClick={handleReplies}
-                        // to={
-                        //   isDetail
-                        //     ? `${path}/${props.id}`
-                        //     : (location.pathname + location.search).indexOf(
-                        //         location.pathname + viewReplyQuery,
-                        //       ) > -1
-                        //     ? location.pathname
-                        //     : location.pathname + viewReplyQuery
-                        // }
                         className="p-0 mr-3 btn btn-none btn-sm"
-                        title="Show replies"
+                        title="Zeige Antworten"
                       >
                         <Badge>{props.replyCount}</Badge>{' '}
                         {GERMAN.comments.comments}{' '}
@@ -251,7 +248,7 @@ export const CommentListItem: FunctionComponent<CommentListItemProps> = ({
                           <i className="fa fa-edit" /> {GERMAN.comments._edit}
                         </Link>
                       )}
-                    {canModerate && (
+                    {!isModerator && canModerate && (
                       <Link
                         to={
                           isDetail
