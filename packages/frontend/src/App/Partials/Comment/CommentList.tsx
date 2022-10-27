@@ -93,7 +93,7 @@ export const CommentList: FunctionComponent<CommentListProps> = ({
   const isSticky = (e: Event) => {
     const sidebarEl = document.querySelector('.moderation-sidebar') as Element;
     const scrollTop = window.scrollY as number;
-    if (sidebarTop && scrollTop >= sidebarTop - 10) {
+    if (sidebarTop && scrollTop >= sidebarTop - 100) {
       sidebarEl.classList.add('sticky');
     } else {
       sidebarEl.classList.remove('sticky');
@@ -189,7 +189,7 @@ export const CommentList: FunctionComponent<CommentListProps> = ({
         <Col md={4} className="moderation-column">
           <div className="sticky-parent">
             <div className="moderation-sidebar" style={{ width: sidebarWidth }}>
-              <h3>Moderation</h3>
+              <h3 className="pl-3 pt-2">Moderation</h3>
               <ModerationPanel
                 comments={comments}
                 canEdit={canWrite}

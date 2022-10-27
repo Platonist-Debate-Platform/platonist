@@ -99,7 +99,7 @@ export const ModerationPanel: React.FunctionComponent<ModerationPanelProps> = (
 
     return (
       <>
-        <div>
+        <div className="moderation-panel-root">
           <div className="moderation-panel-parent">
             <div className="moderation-container">
               {sortedComments.length < 1 && (
