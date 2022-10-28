@@ -86,6 +86,7 @@ export const DebateDetailBase: FunctionComponent<DebateDetailProps> = ({
     routeProps.location.pathname,
     routeProps.match,
     status,
+    debate,
   ]);
 
   useUnmount(() => {
@@ -94,9 +95,11 @@ export const DebateDetailBase: FunctionComponent<DebateDetailProps> = ({
     }
   });
 
+  console.log(path, debate);
+
   return (
     <>
-      {debate && (
+      {debate && path && (
         <>
           <TypingUsersItem debateId={debate.id} />
           <div className="jumbotron-fullscreen jumbotron jumbotron-debate jumbotron-fluid">
@@ -136,7 +139,10 @@ export const DebateDetailBase: FunctionComponent<DebateDetailProps> = ({
               <Row>
                 <Col>
                   <Route
-                    path={encodeLink(`${path}/${debate.title}`)}
+                    path={encodeLink(`${path}/${debate.title}`).replace(
+                      '?',
+                      '',
+                    )}
                     exact={true}
                     render={(
                       props: RouteComponentProps<{ commentId?: string }>,
