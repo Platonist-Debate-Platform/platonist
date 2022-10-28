@@ -6,6 +6,10 @@
  */
 
 const { sanitizeEntity, parseMultipartData } = require('strapi-utils');
+const qs = require('qs');
+const PORT = process.env.API_PORT || 1337;
+
+const axios = require('axios');
 
 const { getModel, getService } = require('../../../lib/utils');
 
@@ -15,7 +19,7 @@ const articleSetting = require('../../article/models/article.settings.json');
 const modelName = settings.info.name.toLowerCase();
 const articleModelName = articleSetting.info.name.toLowerCase();
 
-const formatError = error => [
+const formatError = (error) => [
   { messages: [{ id: error.id, message: error.message, field: error.field }] },
 ];
 
@@ -56,12 +60,14 @@ module.exports = {
     const count = await service.count({ title: ctx.request.body.title });
 
     if (count > 0) {
-      return ctx.badRequest(`Title "${ctx.request.body.title}"  already taken, please choose another!`);
+      return ctx.badRequest(
+        `Title "${ctx.request.body.title}"  already taken, please choose another!`,
+      );
     }
 
     try {
       if (ctx.is('multipart')) {
-        const { data, files } = parseMultipartData(ctx);  
+        const { data, files } = parseMultipartData(ctx);
         entity = await service.create(data, { files });
       } else {
         entity = await service.create(ctx.request.body);
@@ -77,8 +83,21 @@ module.exports = {
     const service = getService(strapi, modelName);
     const model = getModel(strapi, modelName);
     const { title } = ctx.params;
-    const entity = await service.findOne({ title });
-    return sanitizeEntity(entity, { model });
+
+    try {
+      const query = qs.stringify({
+        _where: [{ title_contains: title }],
+      });
+      const res = await axios.get(`http://localhost:${PORT}/debates?${query}`);
+
+      if (res.status === 200) {
+        const debate = res.data[0];
+        return sanitizeEntity(debate, { model });
+      }
+    } catch (error) {
+      console.error(error);
+      return ctx.badRequest(error);
+    }
   },
 
   findComments: async (ctx) => {
@@ -112,11 +131,16 @@ module.exports = {
 
     let articleA;
     try {
-      const oldArticleA = await articleService.findOne({ id: entity.articleA.id });
-      articleA = await articleService.update({ id: entity.articleA.id }, {
-        ...oldArticleA,
-        ...body.articleA,
+      const oldArticleA = await articleService.findOne({
+        id: entity.articleA.id,
       });
+      articleA = await articleService.update(
+        { id: entity.articleA.id },
+        {
+          ...oldArticleA,
+          ...body.articleA,
+        },
+      );
     } catch (error) {
       return ctx.badRequest(formatError(error));
     }
@@ -127,11 +151,16 @@ module.exports = {
 
     let articleB;
     try {
-      const oldArticleB = await articleService.findOne({ id: entity.articleB.id });
-      articleB = await articleService.update({ id: entity.articleB.id }, {
-        ...oldArticleB,
-        ...body.articleB,
+      const oldArticleB = await articleService.findOne({
+        id: entity.articleB.id,
       });
+      articleB = await articleService.update(
+        { id: entity.articleB.id },
+        {
+          ...oldArticleB,
+          ...body.articleB,
+        },
+      );
     } catch (error) {
       return ctx.badRequest(formatError(error));
     }
@@ -165,18 +194,18 @@ module.exports = {
     });
 
     return sanitizeEntity(debate, {
-      model
+      model,
     });
   },
 
   /**
-   * 
-   * @param {*} ctx 
+   *
+   * @param {*} ctx
    */
   find: async (ctx) => {
     const service = getService(strapi, modelName);
     const model = getModel(strapi, modelName);
-   
+
     const user = ctx.state && ctx.state.user;
 
     if (user && user.role && user.role.type) {
@@ -186,13 +215,13 @@ module.exports = {
           break;
         default:
           Object.assign(ctx.query, {
-            published: true
+            published: true,
           });
           break;
       }
     } else {
       Object.assign(ctx.query, {
-        published: true
+        published: true,
       });
     }
 
@@ -206,11 +235,13 @@ module.exports = {
     } else {
       entities = await service.find(ctx.query);
     }
-    
-    const result = entities.map(entity => {
+
+    const result = entities.map((entity) => {
       if (entity.comments && entity.comments.length) {
         const comments = entity.comments;
-        entity.comments = comments.filter(comment => comment.blocked !== true);
+        entity.comments = comments.filter(
+          (comment) => comment.blocked !== true,
+        );
       }
       return sanitizeEntity(entity, { model });
     });
@@ -227,7 +258,7 @@ module.exports = {
         if (ctx.query._q) {
           count = await service.countSearch(query);
         }
-        
+
         count = await service.count(query);
       } catch (error) {
         return ctx.badRequest(error);
@@ -241,21 +272,27 @@ module.exports = {
         _limit: limit,
         _start: start,
       },
-      next: start + limit <= count - 1 ? {
-        _limit, 
-        _start: start + limit,
-      } : null,
-      prev: start + limit >= count - 1 ? {
-        _limit,
-        _start: start - limit < 0 ? 0 : start - limit,
-      } : null,
+      next:
+        start + limit <= count - 1
+          ? {
+              _limit,
+              _start: start + limit,
+            }
+          : null,
+      prev:
+        start + limit >= count - 1
+          ? {
+              _limit,
+              _start: start - limit < 0 ? 0 : start - limit,
+            }
+          : null,
       value: result,
     };
   },
 
   /**
-   * 
-   * @param {*} ctx 
+   *
+   * @param {*} ctx
    */
   findOne: async (ctx) => {
     const service = getService(strapi, modelName);
@@ -276,13 +313,13 @@ module.exports = {
           break;
         default:
           Object.assign(params, {
-            published: true
+            published: true,
           });
           break;
       }
     } else {
       Object.assign(params, {
-        published: true
+        published: true,
       });
     }
 
@@ -290,14 +327,14 @@ module.exports = {
     if (entity.comments && entity.comments.length) {
       const comments = entity.comments;
       delete entity.comments;
-      entity.comments = comments.filter(comment => comment.blocked === false);
+      entity.comments = comments.filter((comment) => comment.blocked === false);
     }
-    return sanitizeEntity(entity, {model});
+    return sanitizeEntity(entity, { model });
   },
-  
+
   count: async (ctx) => {
     const service = getService(strapi, modelName);
-    
+
     const user = ctx.state && ctx.state.user;
 
     if (user && user.role && user.role.type) {
@@ -307,20 +344,20 @@ module.exports = {
           break;
         default:
           Object.assign(ctx.query, {
-            published: true
+            published: true,
           });
           break;
       }
     } else {
       Object.assign(ctx.query, {
-        published: true
+        published: true,
       });
     }
 
     if (ctx.query._q) {
       return service.countSearch(ctx.query);
     }
-    
+
     return service.count(ctx.query);
-  }
+  },
 };
